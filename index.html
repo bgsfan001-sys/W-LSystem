@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sistema W/L</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f2f2f2;
+            padding: 20px;
+        }
+
+        #total {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 20px;
+        }
+
+        #lista {
+            display: none;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 300px;
+            margin: auto;
+        }
+
+        .jugador {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 6px 0;
+            border: none;
+            border-radius: 8px;
+            background: #eeeeee;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .jugador:hover {
+            background: #dddddd;
+        }
+
+        #botonMas {
+            font-size: 25px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+        }
+
+        #seleccionados {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>W/L</h2>
+
+    <div id="total">
+        Total: 0
+    </div>
+
+    <button id="botonMas" onclick="abrirLista()">+</button>
+
+    <div id="lista">
+
+        <button class="jugador" onclick="agregarJugador('Messi', 10)">
+            Messi — +10
+        </button>
+
+        <button class="jugador" onclick="agregarJugador('Ronaldo', 8)">
+            Ronaldo — +8
+        </button>
+
+        <button class="jugador" onclick="agregarJugador('Mbappé', 6)">
+            Mbappé — +6
+        </button>
+
+        <button class="jugador" onclick="agregarJugador('Neymar', 5)">
+            Neymar — +5
+        </button>
+
+    </div>
+
+    <div id="seleccionados"></div>
+
+
+    <script>
+
+        // Acá se guarda el total ACTUAL.
+        let total = 0;
+
+
+        // Esta función abre o cierra la lista.
+        function abrirLista() {
+
+            const lista = document.getElementById("lista");
+
+            if (lista.style.display === "none") {
+
+                lista.style.display = "block";
+
+            } else {
+
+                lista.style.display = "none";
+
+            }
+        }
+
+
+        // Esta función se ejecuta cuando tocás un jugador.
+        function agregarJugador(nombre, value) {
+
+            // Suma el value del jugador al total.
+            total = total + value;
+
+
+            // Actualiza el número que aparece en "Total".
+            document.getElementById("total").textContent =
+                "Total: " + total;
+
+
+            // Muestra qué jugador agregaste.
+            document.getElementById("seleccionados").innerHTML +=
+                "<p>" + nombre + " +" + value + "</p>";
+        }
+
+    </script>
+
+</body>
+</html>
