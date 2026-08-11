@@ -5,13 +5,9 @@
 
 <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>W/L System</title>
-
 
 <style>
 
@@ -19,345 +15,183 @@
     box-sizing: border-box;
 }
 
-
 body {
-
     margin: 0;
-
     padding: 20px;
-
     background: #eeeeee;
-
     font-family: Arial, sans-serif;
-
 }
-
 
 .gui {
-
     width: 100%;
-
     max-width: 950px;
-
     margin: auto;
-
     padding: 20px;
-
     background: white;
-
     border-radius: 16px;
-
-    box-shadow:
-        0 4px 15px rgba(0,0,0,0.15);
-
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
     text-align: center;
-
 }
-
 
 .title {
-
     margin-top: 0;
-
     margin-bottom: 20px;
-
 }
-
 
 .players {
-
     display: flex;
-
     gap: 15px;
-
 }
-
 
 .player-box {
-
     width: 50%;
-
     padding: 15px;
-
     border: 2px solid #dddddd;
-
     border-radius: 12px;
-
     background: #fafafa;
-
 }
-
 
 .player-title {
-
     font-size: 20px;
-
     font-weight: bold;
-
 }
-
 
 .total {
-
     margin: 10px;
-
     font-size: 28px;
-
     font-weight: bold;
-
 }
-
 
 .add-button {
-
     width: 50px;
-
     height: 50px;
-
     border: none;
-
     border-radius: 50%;
-
     background: #eeeeee;
-
     font-size: 30px;
-
     cursor: pointer;
-
 }
-
 
 .add-button:hover {
-
     background: #dddddd;
-
 }
-
-
-/* PET LIST */
 
 .pet-list {
-
     display: none;
-
     margin-top: 15px;
-
 }
-
 
 .search {
-
     width: 100%;
-
     padding: 10px;
-
     margin-bottom: 12px;
-
     border: 1px solid #cccccc;
-
     border-radius: 8px;
-
     font-size: 15px;
-
     outline: none;
-
 }
-
 
 .player-options {
-
     display: flex;
-
     flex-wrap: wrap;
-
     gap: 8px;
-
     justify-content: center;
-
 }
-
 
 .player-option {
-
     display: flex;
-
     align-items: center;
-
     gap: 8px;
-
     min-width: 135px;
-
     padding: 8px 12px;
-
     border: none;
-
     border-radius: 10px;
-
     background: #eeeeee;
-
     font-size: 14px;
-
     cursor: pointer;
-
 }
-
 
 .player-option:hover {
-
     background: #dddddd;
-
 }
-
 
 .player-image {
-
     width: 42px;
-
     height: 42px;
-
     object-fit: cover;
-
     border-radius: 8px;
-
 }
-
 
 .player-info {
-
     display: flex;
-
     flex-direction: column;
-
     align-items: flex-start;
-
 }
-
 
 .player-name {
-
     font-weight: bold;
-
 }
-
 
 .player-value {
-
     font-size: 13px;
-
     opacity: 0.7;
-
 }
-
-
-/* HISTORY */
 
 .history {
-
     margin-top: 15px;
-
     max-height: 180px;
-
     overflow-y: auto;
-
     text-align: left;
-
 }
-
 
 .history-item {
-
     display: flex;
-
     align-items: center;
-
     gap: 8px;
-
     margin: 5px 0;
-
     padding: 8px;
-
     border-radius: 7px;
-
     background: #eeeeee;
-
     font-size: 14px;
-
 }
-
 
 .history-image {
-
     width: 30px;
-
     height: 30px;
-
     object-fit: cover;
-
     border-radius: 6px;
-
 }
-
-
-/* RESULT */
 
 .result {
-
     margin-top: 20px;
-
     padding: 12px;
-
     border-radius: 10px;
-
     background: #eeeeee;
-
     font-size: 20px;
-
     font-weight: bold;
-
 }
-
-
-/* RESET */
 
 .reset-button {
-
     margin-top: 15px;
-
     padding: 10px 20px;
-
     border: none;
-
     border-radius: 8px;
-
     background: #eeeeee;
-
     cursor: pointer;
-
 }
-
 
 .reset-button:hover {
-
     background: #dddddd;
-
 }
-
-
-/* MOBILE */
 
 @media (max-width: 550px) {
 
     .players {
-
         flex-direction: column;
-
     }
 
-
     .player-box {
-
         width: 100%;
-
     }
 
 }
@@ -372,7 +206,6 @@ body {
 
 <div class="gui">
 
-
     <h2 class="title">
         W / L
     </h2>
@@ -385,11 +218,9 @@ body {
 
         <div class="player-box">
 
-
             <div class="player-title">
                 Player 1
             </div>
-
 
             <div
                 id="total1"
@@ -398,7 +229,6 @@ body {
                 0
             </div>
 
-
             <button
                 class="add-button"
                 onclick="openPetList(1)"
@@ -406,12 +236,10 @@ body {
                 +
             </button>
 
-
             <div
                 id="petList1"
                 class="pet-list"
             >
-
 
                 <input
                     id="search1"
@@ -421,23 +249,17 @@ body {
                     oninput="searchPets(1)"
                 >
 
-
                 <div
                     id="players1"
                     class="player-options"
-                >
-                </div>
-
+                ></div>
 
             </div>
-
 
             <div
                 id="history1"
                 class="history"
-            >
-            </div>
-
+            ></div>
 
         </div>
 
@@ -447,11 +269,9 @@ body {
 
         <div class="player-box">
 
-
             <div class="player-title">
                 Player 2
             </div>
-
 
             <div
                 id="total2"
@@ -460,7 +280,6 @@ body {
                 0
             </div>
 
-
             <button
                 class="add-button"
                 onclick="openPetList(2)"
@@ -468,12 +287,10 @@ body {
                 +
             </button>
 
-
             <div
                 id="petList2"
                 class="pet-list"
             >
-
 
                 <input
                     id="search2"
@@ -483,32 +300,22 @@ body {
                     oninput="searchPets(2)"
                 >
 
-
                 <div
                     id="players2"
                     class="player-options"
-                >
-                </div>
-
+                ></div>
 
             </div>
-
 
             <div
                 id="history2"
                 class="history"
-            >
-            </div>
-
+            ></div>
 
         </div>
 
-
     </div>
 
-
-
-    <!-- RESULT -->
 
     <div
         id="result"
@@ -518,14 +325,12 @@ body {
     </div>
 
 
-
     <button
         class="reset-button"
         onclick="resetGame()"
     >
         Reset
     </button>
-
 
 </div>
 
@@ -538,34 +343,43 @@ body {
 ====================================================
 PET LIST
 
-WRITE PETS LIKE THIS:
+FORMAT:
 
-Name,Value,Image
+Name,value,image
 
-Example:
+The order below is the order shown in the GUI.
 
-Kharvoth,60,images/Kharvoth.png
-Nythrael,30,images/Nythrael.png
-
-NO brackets.
-NO parentheses.
-NO objects.
-
-The order here is the order shown in the GUI.
+Kharvoth and Nythrael are intentionally LAST.
 ====================================================
 */
 
 const petData = `
 
-Hellish Pumpkin,?,images/Pumpkin_V2.png
-Infernal Luminance,?,images/DRadiance.png
-Pyraminfernal,?,images/Pyramfernal.png
-Apocalyptic Trident,?,images/Tridente.png
-Bloody Eye,?,images/Blood_eye.png
-Lunatic Eye,?,images/Ojo_lunatico.png
-Cursed Guardian,?,images/Demonic_Cursed.png
-Ommeviathan,?,images/Omegaa.png
-Pyramighost,?,images/Pyramghost.png
+Hellish Pumpkin,0,images/Pumpkin_V2.png
+Infernal Luminance,0,images/DRadiance.png
+Pyramifernal,0,images/Pyramfernal.png
+Apocalyptic Trident,0,images/Tridente.png
+Bloody Eye,0,images/Blood_eye.png
+Lunatic Eye,0,images/Ojo_lunatico.png
+Cursed Guardian,0,images/Demonic_Cursed.png
+Ommeviathan,0,images/Omegaa.png
+Primordial Sinister,0,images/SINISTERr.png
+Demonic Marshmellow,0,images/unnamed (6).png
+Supernova,0,images/Supernova.png
+Dark Radiance,0,images/Dark_Radiance.png
+Sinister Lord,0,images/unnamed (4).png
+Pyramighost,0,images/Pyramghost.png
+Radiance,0,images/unnamed (5).png
+Nocturnal Skull,0,images/Noctur_Skull_V2-1.png
+Shadow Skull,0,images/Shadow_Skull_V2-1.png
+Ying Yang Skull,0,images/Ying_Yang_Skull-1.png
+Diabolical Skull,0,images/Diabolical_Skull-1.png
+Angelic Skull,0,images/Skull_V2-1.png
+Queen Skull,0,images/Queen_Skull-1.png
+Zombie Skull,0,images/Zombie_Skull-1.png
+Krakena,0,images/Krakena-1.png
+Kharvoth,0,images/Kharvoth.png
+Nythrael,0,images/Nythrael.png
 
 `;
 
@@ -573,44 +387,35 @@ Pyramighost,?,images/Pyramghost.png
 
 /*
 ====================================================
-CONVERT TEXT INTO PET DATA
+CONVERT TEXT TO PETS
 ====================================================
 */
 
 const pets = [];
 
-
 petData
     .trim()
-    .split("\n")
-    .forEach(function(line) {
+    .split(/\r?\n/)
+    .map(line => line.trim())
+    .filter(line => line.length > 0)
+    .forEach(line => {
 
+        const parts = line.split(",");
 
-        line = line.trim();
-
-
-        if (!line) {
+        if (parts.length < 3) {
             return;
         }
 
+        const name = parts[0].trim();
 
-        const parts =
-            line.split(",");
+        const value = Number(
+            parts[1].trim()
+        );
 
-
-        const name =
-            parts[0].trim();
-
-
-        const value =
-            Number(parts[1].trim());
-
-
-        const image =
-            parts.slice(2)
-                .join(",")
-                .trim();
-
+        const image = parts
+            .slice(2)
+            .join(",")
+            .trim();
 
         if (
             name &&
@@ -619,13 +424,9 @@ petData
         ) {
 
             pets.push({
-
                 name: name,
-
                 value: value,
-
                 image: image
-
             });
 
         }
@@ -641,7 +442,6 @@ PLAYER VALUES
 */
 
 let total1 = 0;
-
 let total2 = 0;
 
 
@@ -654,12 +454,10 @@ OPEN PET LIST
 
 function openPetList(player) {
 
-
     const list =
         document.getElementById(
             "petList" + player
         );
-
 
     if (
         list.style.display === "block"
@@ -667,9 +465,7 @@ function openPetList(player) {
 
         list.style.display = "none";
 
-    }
-
-    else {
+    } else {
 
         list.style.display = "block";
 
@@ -689,94 +485,49 @@ CREATE PET BUTTONS
 
 function createPetButtons(player) {
 
-
     const container =
         document.getElementById(
             "players" + player
         );
 
-
     container.innerHTML = "";
 
-
-    if (pets.length === 0) {
-
-
-        const empty =
-            document.createElement(
-                "div"
-            );
-
-
-        empty.textContent =
-            "No pets available yet.";
-
-
-        container.appendChild(
-            empty
-        );
-
-
-        return;
-
-    }
-
-
-
     pets.forEach(function(pet) {
-
 
         const button =
             document.createElement(
                 "button"
             );
 
-
         button.className =
             "player-option";
-
 
         button.dataset.name =
             pet.name.toLowerCase();
 
-
-
-        /*
-        IMAGE
-        */
 
         const image =
             document.createElement(
                 "img"
             );
 
-
         image.className =
             "player-image";
-
 
         image.src =
             pet.image;
 
-
         image.alt =
             pet.name;
 
-
-
-        /*
-        INFO
-        */
 
         const info =
             document.createElement(
                 "div"
             );
 
-
         info.className =
             "player-info";
-
 
 
         const name =
@@ -784,14 +535,11 @@ function createPetButtons(player) {
                 "div"
             );
 
-
         name.className =
             "player-name";
 
-
         name.textContent =
             pet.name;
-
 
 
         const value =
@@ -799,58 +547,40 @@ function createPetButtons(player) {
                 "div"
             );
 
-
         value.className =
             "player-value";
 
-
         value.textContent =
             "+" + pet.value;
-
 
 
         info.appendChild(name);
 
         info.appendChild(value);
 
-
         button.appendChild(image);
 
         button.appendChild(info);
 
 
-
         /*
-        ADD PET
-
-        Clicking the same pet multiple times
-        adds it multiple times.
+        The same pet can be selected
+        multiple times.
         */
 
-        button.onclick =
-            function() {
+        button.onclick = function() {
+
+            addPet(
+                player,
+                pet.name,
+                pet.value,
+                pet.image
+            );
+
+        };
 
 
-                addPet(
-
-                    player,
-
-                    pet.name,
-
-                    pet.value,
-
-                    pet.image
-
-                );
-
-            };
-
-
-
-        container.appendChild(
-            button
-        );
-
+        container.appendChild(button);
 
     });
 
@@ -866,12 +596,10 @@ SEARCH
 
 function searchPets(player) {
 
-
     const search =
         document.getElementById(
             "search" + player
         );
-
 
     const text =
         search.value.toLowerCase();
@@ -887,33 +615,18 @@ function searchPets(player) {
             );
 
 
-    buttons.forEach(
-        function(button) {
+    buttons.forEach(function(button) {
+
+        const name =
+            button.dataset.name;
 
 
-            const name =
-                button.dataset.name;
+        button.style.display =
+            name.includes(text)
+                ? "flex"
+                : "none";
 
-
-            if (
-                name.includes(text)
-            ) {
-
-                button.style.display =
-                    "flex";
-
-            }
-
-            else {
-
-                button.style.display =
-                    "none";
-
-            }
-
-
-        }
-    );
+    });
 
 }
 
@@ -932,58 +645,35 @@ function addPet(
     image
 ) {
 
-
     if (player === 1) {
-
 
         total1 += value;
 
-
         document.getElementById(
             "total1"
-        ).textContent =
-            total1;
-
+        ).textContent = total1;
 
         addHistory(
-
             1,
-
             name,
-
             value,
-
             image
-
         );
 
-
-    }
-
-    else {
-
+    } else {
 
         total2 += value;
 
-
         document.getElementById(
             "total2"
-        ).textContent =
-            total2;
-
+        ).textContent = total2;
 
         addHistory(
-
             2,
-
             name,
-
             value,
-
             image
-
         );
-
 
     }
 
@@ -1007,7 +697,6 @@ function addHistory(
     image
 ) {
 
-
     const history =
         document.getElementById(
             "history" + player
@@ -1019,10 +708,8 @@ function addHistory(
             "div"
         );
 
-
     item.className =
         "history-item";
-
 
 
     const imageElement =
@@ -1030,18 +717,14 @@ function addHistory(
             "img"
         );
 
-
     imageElement.className =
         "history-image";
-
 
     imageElement.src =
         image;
 
-
     imageElement.alt =
         name;
-
 
 
     const text =
@@ -1049,16 +732,13 @@ function addHistory(
             "span"
         );
 
-
     text.textContent =
         name + " +" + value;
-
 
 
     item.appendChild(
         imageElement
     );
-
 
     item.appendChild(
         text
@@ -1083,31 +763,16 @@ TRADE CALCULATION
 
 Player 1 = YOU
 
-Player 1 value = what YOU GIVE.
+Player 1 = what you give.
+Player 2 = what you receive.
 
-Player 2 value = what YOU RECEIVE.
-
-Example:
-
-P1 = 0
-P2 = 60
-
-You win 60.
-
-P1 = 60
-P2 = 0
-
-You are losing 60.
-
-P1 = 60
-P2 = 60
-
-Balanced Trade.
+P2 > P1 = W Trade
+P1 > P2 = L Trade
+P1 = P2 = Balanced Trade
 ====================================================
 */
 
 function checkTrade() {
-
 
     const result =
         document.getElementById(
@@ -1115,82 +780,48 @@ function checkTrade() {
         );
 
 
-
     if (
         total1 === 0 &&
         total2 === 0
     ) {
 
-
         result.textContent =
             "Waiting for players...";
-
 
         return;
 
     }
 
 
-
-    /*
-    YOU RECEIVE MORE
-    */
-
-    if (
-        total2 > total1
-    ) {
-
+    if (total2 > total1) {
 
         const difference =
             total2 - total1;
 
-
         result.textContent =
-
             "You win " +
-
             difference +
-
             " value! [W Trade]";
-
 
         return;
 
     }
 
 
-
-    /*
-    YOU GIVE MORE
-    */
-
-    if (
-        total1 > total2
-    ) {
-
+    if (total1 > total2) {
 
         const difference =
             total1 - total2;
 
-
         result.textContent =
-
             "You are losing " +
-
             difference +
-
             " value! [L Trade]";
-
 
         return;
 
     }
 
-
-
-    /*
-    SAME VALUE
-    */
 
     result.textContent =
         "Balanced Trade! [B Trade]";
@@ -1207,44 +838,35 @@ RESET
 
 function resetGame() {
 
-
     total1 = 0;
 
     total2 = 0;
 
 
-
     document.getElementById(
         "total1"
-    ).textContent =
-        "0";
+    ).textContent = "0";
 
 
     document.getElementById(
         "total2"
-    ).textContent =
-        "0";
-
+    ).textContent = "0";
 
 
     document.getElementById(
         "history1"
-    ).innerHTML =
-        "";
+    ).innerHTML = "";
 
 
     document.getElementById(
         "history2"
-    ).innerHTML =
-        "";
-
+    ).innerHTML = "";
 
 
     document.getElementById(
         "result"
     ).textContent =
         "Waiting for players...";
-
 
 
     document.getElementById(
@@ -1261,19 +883,16 @@ function resetGame() {
 
     document.getElementById(
         "search1"
-    ).value =
-        "";
+    ).value = "";
 
 
     document.getElementById(
         "search2"
-    ).value =
-        "";
+    ).value = "";
 
 }
 
 </script>
-
 
 </body>
 
