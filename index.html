@@ -97,6 +97,7 @@ body {
 .category-container {
     display: flex;
     flex-wrap: wrap;
+
     gap: 10px;
 
     justify-content: center;
@@ -115,21 +116,17 @@ body {
     font-weight: bold;
 
     cursor: pointer;
+
+    transition: transform 0.15s;
 }
 
 .category-button:hover {
     transform: scale(1.03);
 }
 
-
-/* LIMITED SECRETS */
-
 .limited-button {
     background: #d62828;
 }
-
-
-/* ROBUX PETS */
 
 .robux-button {
     background: #22a447;
@@ -208,6 +205,8 @@ body {
     font-size: 14px;
 
     cursor: pointer;
+
+    transition: background 0.15s;
 }
 
 .player-option:hover {
@@ -403,7 +402,7 @@ body {
             </button>
 
 
-            <!-- PET MENU -->
+            <!-- CATEGORY MENU -->
 
             <div
                 id="petMenu1"
@@ -465,6 +464,8 @@ body {
             </div>
 
 
+            <!-- HISTORY -->
+
             <div
                 id="history1"
                 class="history"
@@ -502,7 +503,7 @@ body {
             </button>
 
 
-            <!-- PET MENU -->
+            <!-- CATEGORY MENU -->
 
             <div
                 id="petMenu2"
@@ -564,6 +565,8 @@ body {
             </div>
 
 
+            <!-- HISTORY -->
+
             <div
                 id="history2"
                 class="history"
@@ -574,6 +577,8 @@ body {
 
     </div>
 
+
+    <!-- TRADE RESULT -->
 
     <div
         id="result"
@@ -600,37 +605,57 @@ body {
 /*
 =================================================
 PET DATA
+=================================================
 
-FORMAT:
+To add a pet:
 
-Name,Value,ImagePath
+{
+    name: "PetName",
+    value: 100,
+    image: "images/PetName.png"
+}
+
+The image must be inside the "images" folder.
 =================================================
 */
 
 const pets = {
 
-    limited: [
 
-        /*
-        Limited Secrets is empty for now.
-        Add pets here later.
-        */
+    /*
+    =============================================
+    LIMITED SECRETS
+    =============================================
+
+    Empty for now.
+    Add pets here later.
+    */
+
+    limited: [
 
     ],
 
 
+
+    /*
+    =============================================
+    ROBUX PETS
+    =============================================
+    */
+
     robux: [
 
         {
-            name: "Kharvoth",
-            value: 6500,
-            image: "images/Kharvoth.png"
+            name: "Nythrael",
+            value: 30,
+            image: "images/Nythrael.png"
         },
 
+
         {
-            name: "Nythrael",
-            value: 3500,
-            image: "images/Nythrael.png"
+            name: "Kharvoth",
+            value: 50,
+            image: "images/Kharvoth.png"
         }
 
     ]
@@ -652,7 +677,7 @@ let total2 = 0;
 
 /*
 =================================================
-CURRENT CATEGORY
+CURRENT CATEGORIES
 =================================================
 */
 
@@ -681,13 +706,18 @@ function openPetMenu(player) {
         );
 
 
-    if (menu.style.display === "block") {
+    if (
+        menu.style.display === "block" ||
+        list.style.display === "block"
+    ) {
 
         menu.style.display = "none";
 
         list.style.display = "none";
 
-    } else {
+    }
+
+    else {
 
         menu.style.display = "block";
 
@@ -712,13 +742,13 @@ function openCategory(
 
     if (player === 1) {
 
-        currentCategory1 =
-            category;
+        currentCategory1 = category;
 
-    } else {
+    }
 
-        currentCategory2 =
-            category;
+    else {
+
+        currentCategory2 = category;
 
     }
 
@@ -749,7 +779,7 @@ function openCategory(
 
 /*
 =================================================
-BACK TO CATEGORIES
+BACK TO CATEGORY MENU
 =================================================
 */
 
@@ -807,7 +837,9 @@ function createPetButtons(
     ) {
 
         const empty =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         empty.className =
@@ -830,7 +862,7 @@ function createPetButtons(
 
 
     /*
-    CREATE BUTTONS
+    CREATE PET BUTTONS
     */
 
     categoryPets.forEach(
@@ -852,7 +884,7 @@ function createPetButtons(
 
 
             /*
-            IMAGE
+            PET IMAGE
             */
 
             const image =
@@ -875,7 +907,7 @@ function createPetButtons(
 
 
             /*
-            INFORMATION
+            PET INFORMATION
             */
 
             const info =
@@ -941,7 +973,9 @@ function createPetButtons(
 
 
             /*
-            CLICK
+            CLICK PET
+
+            The list stays open.
             */
 
             button.onclick =
@@ -970,7 +1004,7 @@ function createPetButtons(
 
 /*
 =================================================
-SEARCH PETS
+SEARCH
 =================================================
 */
 
@@ -1010,7 +1044,9 @@ function searchPets(player) {
                 button.style.display =
                     "flex";
 
-            } else {
+            }
+
+            else {
 
                 button.style.display =
                     "none";
@@ -1055,20 +1091,9 @@ function addPet(
             image
         );
 
+    }
 
-        document.getElementById(
-            "petList1"
-        ).style.display =
-            "none";
-
-
-        document.getElementById(
-            "petMenu1"
-        ).style.display =
-            "none";
-
-
-    } else {
+    else {
 
         total2 += value;
 
@@ -1086,22 +1111,15 @@ function addPet(
             image
         );
 
-
-        document.getElementById(
-            "petList2"
-        ).style.display =
-            "none";
-
-
-        document.getElementById(
-            "petMenu2"
-        ).style.display =
-            "none";
-
     }
 
 
-    checkWinner();
+    /*
+    Recalculate the trade
+    every time a pet is added.
+    */
+
+    checkTrade();
 
 }
 
@@ -1136,6 +1154,7 @@ function addHistory(
         "history-item";
 
 
+
     const imageElement =
         document.createElement(
             "img"
@@ -1154,6 +1173,7 @@ function addHistory(
         name;
 
 
+
     const text =
         document.createElement(
             "span"
@@ -1162,6 +1182,7 @@ function addHistory(
 
     text.textContent =
         name + " +" + value;
+
 
 
     item.appendChild(
@@ -1188,17 +1209,21 @@ function addHistory(
 
 /*
 =================================================
-CHECK WINNER
+TRADE RESULT
 =================================================
 */
 
-function checkWinner() {
+function checkTrade() {
 
     const result =
         document.getElementById(
             "result"
         );
 
+
+    /*
+    Nothing added yet.
+    */
 
     if (
         total1 === 0 &&
@@ -1208,32 +1233,60 @@ function checkWinner() {
         result.textContent =
             "Waiting for players...";
 
+        return;
+
     }
 
-    else if (
-        total1 > total2
-    ) {
+
+
+    /*
+    Player 1 has more value.
+    */
+
+    if (total1 > total2) {
+
+        const difference =
+            total1 - total2;
+
 
         result.textContent =
-            "🏆 Player 1 wins";
+            "You win " +
+            difference +
+            " value! [W Trade]";
+
+        return;
 
     }
 
-    else if (
-        total2 > total1
-    ) {
+
+
+    /*
+    Player 2 has more value.
+    */
+
+    if (total2 > total1) {
+
+        const difference =
+            total2 - total1;
+
 
         result.textContent =
-            "🏆 Player 2 wins";
+            "You are losing " +
+            difference +
+            " value! [L Trade]";
+
+        return;
 
     }
 
-    else {
 
-        result.textContent =
-            "🤝 Draw";
 
-    }
+    /*
+    Same value.
+    */
+
+    result.textContent =
+        "Balanced Trade! [B Trade]";
 
 }
 
@@ -1255,30 +1308,38 @@ function resetGame() {
     currentCategory2 = null;
 
 
+
     document.getElementById(
         "total1"
-    ).textContent = "0";
+    ).textContent =
+        "0";
 
 
     document.getElementById(
         "total2"
-    ).textContent = "0";
+    ).textContent =
+        "0";
+
 
 
     document.getElementById(
         "history1"
-    ).innerHTML = "";
+    ).innerHTML =
+        "";
 
 
     document.getElementById(
         "history2"
-    ).innerHTML = "";
+    ).innerHTML =
+        "";
+
 
 
     document.getElementById(
         "result"
     ).textContent =
         "Waiting for players...";
+
 
 
     document.getElementById(
@@ -1305,14 +1366,17 @@ function resetGame() {
         "none";
 
 
+
     document.getElementById(
         "search1"
-    ).value = "";
+    ).value =
+        "";
 
 
     document.getElementById(
         "search2"
-    ).value = "";
+    ).value =
+        "";
 
 }
 
@@ -1320,5 +1384,4 @@ function resetGame() {
 
 
 </body>
-
 </html>
