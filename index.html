@@ -22,15 +22,12 @@ body {
 
 .gui {
     width: 100%;
-    max-width: 800px;
+    max-width: 850px;
     margin: auto;
     padding: 20px;
-
     background: white;
     border-radius: 16px;
-
     box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-
     text-align: center;
 }
 
@@ -47,10 +44,8 @@ body {
 .player-box {
     width: 50%;
     padding: 15px;
-
     border: 2px solid #dddddd;
     border-radius: 12px;
-
     background: #fafafa;
 }
 
@@ -61,7 +56,6 @@ body {
 
 .total {
     margin: 10px;
-
     font-size: 28px;
     font-weight: bold;
 }
@@ -69,14 +63,10 @@ body {
 .add-button {
     width: 50px;
     height: 50px;
-
     border: none;
     border-radius: 50%;
-
     background: #eeeeee;
-
     font-size: 30px;
-
     cursor: pointer;
 }
 
@@ -91,7 +81,6 @@ body {
 
 .search {
     width: 100%;
-
     padding: 10px;
     margin-bottom: 12px;
 
@@ -106,22 +95,23 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-
     justify-content: center;
 }
 
 .player-option {
-    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
-    padding: 10px 14px;
+    min-width: 120px;
+    padding: 8px 12px;
 
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
 
     background: #eeeeee;
 
     font-size: 14px;
-
     cursor: pointer;
 }
 
@@ -129,35 +119,67 @@ body {
     background: #dddddd;
 }
 
+.player-image {
+    width: 42px;
+    height: 42px;
+
+    object-fit: cover;
+
+    border-radius: 8px;
+}
+
+.player-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.player-name {
+    font-weight: bold;
+}
+
+.player-value {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
 .history {
     margin-top: 15px;
 
     max-height: 180px;
-
     overflow-y: auto;
 
     text-align: left;
 }
 
 .history-item {
-    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
+    margin: 5px 0;
     padding: 8px;
 
     border-radius: 7px;
-
     background: #eeeeee;
 
     font-size: 14px;
 }
 
+.history-image {
+    width: 30px;
+    height: 30px;
+
+    object-fit: cover;
+
+    border-radius: 6px;
+}
+
 .result {
     margin-top: 20px;
-
     padding: 12px;
 
     border-radius: 10px;
-
     background: #eeeeee;
 
     font-size: 20px;
@@ -226,14 +248,12 @@ body {
                 0
             </div>
 
-
             <button
                 class="add-button"
                 onclick="openList(1)"
             >
                 +
             </button>
-
 
             <div
                 id="list1"
@@ -248,7 +268,6 @@ body {
                     oninput="searchPlayers(1)"
                 >
 
-
                 <div
                     id="players1"
                     class="player-options"
@@ -256,7 +275,6 @@ body {
                 </div>
 
             </div>
-
 
             <div
                 id="history1"
@@ -283,14 +301,12 @@ body {
                 0
             </div>
 
-
             <button
                 class="add-button"
                 onclick="openList(2)"
             >
                 +
             </button>
-
 
             <div
                 id="list2"
@@ -305,7 +321,6 @@ body {
                     oninput="searchPlayers(2)"
                 >
 
-
                 <div
                     id="players2"
                     class="player-options"
@@ -314,7 +329,6 @@ body {
 
             </div>
 
-
             <div
                 id="history2"
                 class="history"
@@ -322,7 +336,6 @@ body {
             </div>
 
         </div>
-
 
     </div>
 
@@ -342,7 +355,6 @@ body {
         Reset
     </button>
 
-
 </div>
 
 
@@ -350,59 +362,67 @@ body {
 <script>
 
 
-/* =========================================
-   PLAYER LIST
+/*
+=================================================
+PLAYER DATA
 
-   ONLY EDIT THIS PART
-========================================= */
+FORMAT:
+
+Name,Value,ImageURL
+=================================================
+*/
 
 const playerData = `
 
-Messi,1000
-Neymar,5000
-Ronaldo,2300
-Mbappe,20
-Vinicius,15
-Salah,12
-Haaland,25
-Bellingham,18
+Kharvoth,50,https://raw.githubusercontent.com/bgsfan001-sys/W-LSystem/main/Kharvoth.png
+Messi,10,https://raw.githubusercontent.com/bgsfan001-sys/W-LSystem/main/bgs.png
+Neymar,50,https://raw.githubusercontent.com/bgsfan001-sys/W-LSystem/main/bgs.png
+Ronaldo,30,https://raw.githubusercontent.com/bgsfan001-sys/W-LSystem/main/bgs.png
 
 `;
 
 
 
-/* =========================================
-   CONVERT PLAYER LIST INTO DATA
-========================================= */
+/*
+=================================================
+CONVERT DATA
+=================================================
+*/
 
 const players = playerData
     .trim()
     .split("\n")
+    .filter(line => line.trim() !== "")
     .map(line => {
 
         const parts = line.split(",");
 
         return {
             name: parts[0].trim(),
-            value: Number(parts[1].trim())
+            value: Number(parts[1].trim()),
+            image: parts.slice(2).join(",").trim()
         };
 
     });
 
 
 
-/* =========================================
-   TOTALS
-========================================= */
+/*
+=================================================
+TOTALS
+=================================================
+*/
 
 let total1 = 0;
 let total2 = 0;
 
 
 
-/* =========================================
-   CREATE PLAYER BUTTONS
-========================================= */
+/*
+=================================================
+CREATE BUTTONS
+=================================================
+*/
 
 function createPlayerButtons(player) {
 
@@ -417,7 +437,6 @@ function createPlayerButtons(player) {
 
     players.forEach(function(data) {
 
-
         const button =
             document.createElement("button");
 
@@ -426,15 +445,74 @@ function createPlayerButtons(player) {
             "player-option";
 
 
-        button.textContent =
-            data.name +
-            " +" +
-            data.value;
-
-
         button.dataset.name =
             data.name.toLowerCase();
 
+
+
+        /*
+        IMAGE
+        */
+
+        const image =
+            document.createElement("img");
+
+        image.className =
+            "player-image";
+
+        image.src =
+            data.image;
+
+        image.alt =
+            data.name;
+
+
+
+        /*
+        INFORMATION
+        */
+
+        const info =
+            document.createElement("div");
+
+        info.className =
+            "player-info";
+
+
+        const name =
+            document.createElement("div");
+
+        name.className =
+            "player-name";
+
+        name.textContent =
+            data.name;
+
+
+
+        const value =
+            document.createElement("div");
+
+        value.className =
+            "player-value";
+
+        value.textContent =
+            "+" + data.value;
+
+
+
+        info.appendChild(name);
+        info.appendChild(value);
+
+
+        button.appendChild(image);
+        button.appendChild(info);
+
+
+
+        /*
+        CLICK
+        */
 
         button.onclick =
             function() {
@@ -442,7 +520,8 @@ function createPlayerButtons(player) {
                 addPlayer(
                     player,
                     data.name,
-                    data.value
+                    data.value,
+                    data.image
                 );
 
             };
@@ -456,18 +535,22 @@ function createPlayerButtons(player) {
 
 
 
-/* =========================================
-   CREATE BOTH LISTS
-========================================= */
+/*
+=================================================
+CREATE PLAYER 1 AND PLAYER 2
+=================================================
+*/
 
 createPlayerButtons(1);
 createPlayerButtons(2);
 
 
 
-/* =========================================
-   OPEN LIST
-========================================= */
+/*
+=================================================
+OPEN LIST
+=================================================
+*/
 
 function openList(player) {
 
@@ -496,9 +579,11 @@ function openList(player) {
 
 
 
-/* =========================================
-   SEARCH
-========================================= */
+/*
+=================================================
+SEARCH
+=================================================
+*/
 
 function searchPlayers(player) {
 
@@ -531,7 +616,7 @@ function searchPlayers(player) {
         if (name.includes(text)) {
 
             button.style.display =
-                "block";
+                "flex";
 
         } else {
 
@@ -546,15 +631,21 @@ function searchPlayers(player) {
 
 
 
-/* =========================================
-   ADD ONE PLAYER
-========================================= */
+/*
+=================================================
+ADD PLAYER
+=================================================
+*/
 
-function addPlayer(player, name, value) {
+function addPlayer(
+    player,
+    name,
+    value,
+    image
+) {
 
 
     if (player === 1) {
-
 
         total1 += value;
 
@@ -564,14 +655,12 @@ function addPlayer(player, name, value) {
         ).textContent = total1;
 
 
-        document.getElementById(
-            "history1"
-        ).innerHTML +=
-            '<div class="history-item">' +
-            name +
-            ' +' +
-            value +
-            '</div>';
+        addHistory(
+            1,
+            name,
+            value,
+            image
+        );
 
 
         document.getElementById(
@@ -581,7 +670,6 @@ function addPlayer(player, name, value) {
 
     } else {
 
-
         total2 += value;
 
 
@@ -590,14 +678,12 @@ function addPlayer(player, name, value) {
         ).textContent = total2;
 
 
-        document.getElementById(
-            "history2"
-        ).innerHTML +=
-            '<div class="history-item">' +
-            name +
-            ' +' +
-            value +
-            '</div>';
+        addHistory(
+            2,
+            name,
+            value,
+            image
+        );
 
 
         document.getElementById(
@@ -613,9 +699,84 @@ function addPlayer(player, name, value) {
 
 
 
-/* =========================================
-   CHECK WINNER
-========================================= */
+/*
+=================================================
+HISTORY
+=================================================
+*/
+
+function addHistory(
+    player,
+    name,
+    value,
+    image
+) {
+
+    const history =
+        document.getElementById(
+            "history" + player
+        );
+
+
+    const item =
+        document.createElement("div");
+
+
+    item.className =
+        "history-item";
+
+
+    const imageElement =
+        document.createElement("img");
+
+
+    imageElement.className =
+        "history-image";
+
+
+    imageElement.src =
+        image;
+
+
+    imageElement.alt =
+        name;
+
+
+    const text =
+        document.createElement("span");
+
+
+    text.textContent =
+        name + " +" + value;
+
+
+    item.appendChild(
+        imageElement
+    );
+
+
+    item.appendChild(
+        text
+    );
+
+
+    history.appendChild(
+        item
+    );
+
+
+    history.scrollTop =
+        history.scrollHeight;
+
+}
+
+
+
+/*
+=================================================
+CHECK WINNER
+=================================================
+*/
 
 function checkWinner() {
 
@@ -638,21 +799,21 @@ function checkWinner() {
     else if (total1 > total2) {
 
         result.textContent =
-            "You win value.";
+            "🏆 Player 1 wins";
 
     }
 
     else if (total2 > total1) {
 
         result.textContent =
-            "You are losing value.";
+            "🏆 Player 2 wins";
 
     }
 
     else {
 
         result.textContent =
-            "Draw";
+            "🤝 Draw";
 
     }
 
@@ -660,9 +821,11 @@ function checkWinner() {
 
 
 
-/* =========================================
-   RESET
-========================================= */
+/*
+=================================================
+RESET
+=================================================
+*/
 
 function resetGame() {
 
@@ -723,7 +886,5 @@ function resetGame() {
 
 </script>
 
-
 </body>
-
 </html>
