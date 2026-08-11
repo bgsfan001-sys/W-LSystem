@@ -2,193 +2,177 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>W/L System</title>
+    <title>W/L System</title>
 
-<style>
+    <style>
 
-* {
-    box-sizing: border-box;
-}
+        * {
+            box-sizing: border-box;
+        }
 
-body {
-    margin: 0;
-    padding: 20px;
-    background: #eeeeee;
-    font-family: Arial, sans-serif;
-}
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #eeeeee;
+            font-family: Arial, sans-serif;
+        }
 
-.gui {
-    width: 100%;
-    max-width: 700px;
-    margin: auto;
-    padding: 20px;
+        .gui {
+            width: 100%;
+            max-width: 700px;
+            margin: auto;
+            padding: 20px;
 
-    background: white;
-    border-radius: 16px;
+            background: white;
+            border-radius: 16px;
 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 
-    text-align: center;
-}
+            text-align: center;
+        }
 
-.title {
-    margin-top: 0;
-}
+        .title {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
 
-.players {
-    display: flex;
-    gap: 15px;
-}
+        .players {
+            display: flex;
+            gap: 15px;
+        }
 
-.player-box {
-    width: 50%;
+        .player-box {
+            width: 50%;
+            padding: 15px;
 
-    padding: 15px;
+            border: 2px solid #dddddd;
+            border-radius: 12px;
 
-    border: 2px solid #dddddd;
-    border-radius: 12px;
+            background: #fafafa;
+        }
 
-    background: #fafafa;
-}
+        .player-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-.player-title {
-    font-size: 20px;
-    font-weight: bold;
-}
+        .total {
+            margin: 10px;
 
-.total {
-    margin: 10px;
+            font-size: 28px;
+            font-weight: bold;
+        }
 
-    font-size: 28px;
-    font-weight: bold;
-}
+        .add-button {
+            width: 50px;
+            height: 50px;
 
-.add-button {
-    width: 50px;
-    height: 50px;
+            border: none;
+            border-radius: 50%;
 
-    border: none;
-    border-radius: 50%;
+            background: #eeeeee;
 
-    background: #eeeeee;
+            font-size: 30px;
 
-    font-size: 30px;
+            cursor: pointer;
+        }
 
-    cursor: pointer;
-}
+        .add-button:hover {
+            background: #dddddd;
+        }
 
-.add-button:hover {
-    background: #dddddd;
-}
+        .player-list {
+            display: none;
+            margin-top: 15px;
+        }
 
-.player-list {
-    display: none;
+        .player-option {
+            display: block;
 
-    margin-top: 15px;
-}
+            width: 100%;
 
-.player-card {
-    margin-bottom: 12px;
-    padding: 10px;
+            margin: 6px 0;
+            padding: 11px;
 
-    background: white;
+            border: none;
+            border-radius: 8px;
 
-    border-radius: 10px;
+            background: #eeeeee;
 
-    border: 1px solid #dddddd;
-}
+            font-size: 15px;
 
-.player-name {
-    font-weight: bold;
-    margin-bottom: 8px;
-}
+            cursor: pointer;
+        }
 
-.amount-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 5px;
-}
+        .player-option:hover {
+            background: #dddddd;
+        }
 
-.amount-button {
-    padding: 8px 12px;
+        .history {
+            margin-top: 15px;
 
-    border: none;
-    border-radius: 7px;
+            max-height: 180px;
+            overflow-y: auto;
 
-    background: #eeeeee;
+            text-align: left;
+        }
 
-    cursor: pointer;
-}
+        .history-item {
+            margin: 5px 0;
+            padding: 8px;
 
-.amount-button:hover {
-    background: #dddddd;
-}
+            border-radius: 7px;
 
-.history {
-    margin-top: 15px;
+            background: #eeeeee;
 
-    max-height: 180px;
+            font-size: 14px;
+        }
 
-    overflow-y: auto;
+        .result {
+            margin-top: 20px;
+            padding: 12px;
 
-    text-align: left;
-}
+            border-radius: 10px;
 
-.history-item {
-    margin: 5px 0;
+            background: #eeeeee;
 
-    padding: 8px;
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-    border-radius: 7px;
+        .reset-button {
+            margin-top: 15px;
 
-    background: #eeeeee;
+            padding: 10px 20px;
 
-    font-size: 14px;
-}
+            border: none;
+            border-radius: 8px;
 
-.result {
-    margin-top: 20px;
+            background: #eeeeee;
 
-    padding: 12px;
+            cursor: pointer;
+        }
 
-    border-radius: 10px;
+        .reset-button:hover {
+            background: #dddddd;
+        }
 
-    background: #eeeeee;
+        @media (max-width: 550px) {
 
-    font-size: 20px;
-    font-weight: bold;
-}
+            .players {
+                flex-direction: column;
+            }
 
-.reset-button {
-    margin-top: 15px;
+            .player-box {
+                width: 100%;
+            }
 
-    padding: 10px 20px;
+        }
 
-    border: none;
-    border-radius: 8px;
-
-    background: #eeeeee;
-
-    cursor: pointer;
-}
-
-@media (max-width: 550px) {
-
-    .players {
-        flex-direction: column;
-    }
-
-    .player-box {
-        width: 100%;
-    }
-
-}
-
-</style>
+    </style>
 
 </head>
 
@@ -235,156 +219,33 @@ body {
                 class="player-list"
             >
 
+                <button
+                    class="player-option"
+                    onclick="addPlayer(1, 'Messi', 10)"
+                >
+                    Messi +10
+                </button>
 
-                <!-- MESSI -->
+                <button
+                    class="player-option"
+                    onclick="addPlayer(1, 'Ronaldo', 8)"
+                >
+                    Ronaldo +8
+                </button>
 
-                <div class="player-card">
+                <button
+                    class="player-option"
+                    onclick="addPlayer(1, 'Mbappe', 6)"
+                >
+                    Mbappe +6
+                </button>
 
-                    <div class="player-name">
-                        Messi — Value 10
-                    </div>
-
-                    <div class="amount-buttons">
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(1, 'Messi', 10, 1)"
-                        >
-                            ×1
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(1, 'Messi', 10, 2)"
-                        >
-                            ×2
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(1, 'Messi', 10, 3)"
-                        >
-                            ×3
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(1, 'Messi', 10, 4)"
-                        >
-                            ×4
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(1, 'Messi', 10, 5)"
-                        >
-                            ×5
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <!-- RONALDO -->
-
-                <div class="player-card">
-
-                    <div class="player-name">
-                        Ronaldo — Value 8
-                    </div>
-
-                    <div class="amount-buttons">
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(1, 'Ronaldo', 8, 1)"
-                        >
-                            ×1
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(1, 'Ronaldo', 8, 2)"
-                        >
-                            ×2
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(1, 'Ronaldo', 8, 3)"
-                        >
-                            ×3
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(1, 'Ronaldo', 8, 4)"
-                        >
-                            ×4
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(1, 'Ronaldo', 8, 5)"
-                        >
-                            ×5
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <!-- MBAPPE -->
-
-                <div class="player-card">
-
-                    <div class="player-name">
-                        Mbappe — Value 6
-                    </div>
-
-                    <div class="amount-buttons">
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(1, 'Mbappe', 6, 1)"
-                        >
-                            ×1
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(1, 'Mbappe', 6, 2)"
-                        >
-                            ×2
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(1, 'Mbappe', 6, 3)"
-                        >
-                            ×3
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(1, 'Mbappe', 6, 4)"
-                        >
-                            ×4
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(1, 'Mbappe', 6, 5)"
-                        >
-                            ×5
-                        </button>
-
-                    </div>
-
-                </div>
-
+                <button
+                    class="player-option"
+                    onclick="addPlayer(1, 'Neymar', 5)"
+                >
+                    Neymar +5
+                </button>
 
             </div>
 
@@ -392,7 +253,8 @@ body {
             <div
                 id="history1"
                 class="history"
-            ></div>
+            >
+            </div>
 
         </div>
 
@@ -427,156 +289,33 @@ body {
                 class="player-list"
             >
 
+                <button
+                    class="player-option"
+                    onclick="addPlayer(2, 'Messi', 10)"
+                >
+                    Messi +10
+                </button>
 
-                <!-- MESSI -->
+                <button
+                    class="player-option"
+                    onclick="addPlayer(2, 'Ronaldo', 8)"
+                >
+                    Ronaldo +8
+                </button>
 
-                <div class="player-card">
+                <button
+                    class="player-option"
+                    onclick="addPlayer(2, 'Mbappe', 6)"
+                >
+                    Mbappe +6
+                </button>
 
-                    <div class="player-name">
-                        Messi — Value 10
-                    </div>
-
-                    <div class="amount-buttons">
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(2, 'Messi', 10, 1)"
-                        >
-                            ×1
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(2, 'Messi', 10, 2)"
-                        >
-                            ×2
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(2, 'Messi', 10, 3)"
-                        >
-                            ×3
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(2, 'Messi', 10, 4)"
-                        >
-                            ×4
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(2, 'Messi', 10, 5)"
-                        >
-                            ×5
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <!-- RONALDO -->
-
-                <div class="player-card">
-
-                    <div class="player-name">
-                        Ronaldo — Value 8
-                    </div>
-
-                    <div class="amount-buttons">
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(2, 'Ronaldo', 8, 1)"
-                        >
-                            ×1
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(2, 'Ronaldo', 8, 2)"
-                        >
-                            ×2
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(2, 'Ronaldo', 8, 3)"
-                        >
-                            ×3
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(2, 'Ronaldo', 8, 4)"
-                        >
-                            ×4
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(2, 'Ronaldo', 8, 5)"
-                        >
-                            ×5
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <!-- MBAPPE -->
-
-                <div class="player-card">
-
-                    <div class="player-name">
-                        Mbappe — Value 6
-                    </div>
-
-                    <div class="amount-buttons">
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(2, 'Mbappe', 6, 1)"
-                        >
-                            ×1
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(2, 'Mbappe', 6, 2)"
-                        >
-                            ×2
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(2, 'Mbappe', 6, 3)"
-                        >
-                            ×3
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(2, 'Mbappe', 6, 4)"
-                        >
-                            ×4
-                        </button>
-
-                        <button
-                            class="amount-button"
-                            onclick="addPlayer(2, 'Mbappe', 6, 5)"
-                        >
-                            ×5
-                        </button>
-
-                    </div>
-
-                </div>
-
+                <button
+                    class="player-option"
+                    onclick="addPlayer(2, 'Neymar', 5)"
+                >
+                    Neymar +5
+                </button>
 
             </div>
 
@@ -584,7 +323,8 @@ body {
             <div
                 id="history2"
                 class="history"
-            ></div>
+            >
+            </div>
 
         </div>
 
@@ -615,10 +355,14 @@ body {
 <script>
 
 
+/* PLAYER TOTALS */
+
 let total1 = 0;
 let total2 = 0;
 
 
+
+/* OPEN PLAYER LIST */
 
 function openList(player) {
 
@@ -640,32 +384,36 @@ function openList(player) {
 
 
 
-function addPlayer(player, name, value, amount) {
+/* ADD ONE UNIT */
 
-
-    const addedValue =
-        value * amount;
+function addPlayer(player, name, value) {
 
 
     if (player === 1) {
 
-        total1 += addedValue;
+        // Add exactly ONE unit
 
+        total1 += value;
+
+
+        // Update total
 
         document.getElementById("total1")
             .textContent = total1;
 
 
+        // Add to history
+
         document.getElementById("history1")
             .innerHTML +=
             '<div class="history-item">' +
             name +
-            ' ×' +
-            amount +
-            ' = +' +
-            addedValue +
+            ' +' +
+            value +
             '</div>';
 
+
+        // Close list
 
         document.getElementById("list1")
             .style.display = "none";
@@ -673,23 +421,30 @@ function addPlayer(player, name, value, amount) {
 
     } else {
 
-        total2 += addedValue;
 
+        // Add exactly ONE unit
+
+        total2 += value;
+
+
+        // Update total
 
         document.getElementById("total2")
             .textContent = total2;
 
 
+        // Add to history
+
         document.getElementById("history2")
             .innerHTML +=
             '<div class="history-item">' +
             name +
-            ' ×' +
-            amount +
-            ' = +' +
-            addedValue +
+            ' +' +
+            value +
             '</div>';
 
+
+        // Close list
 
         document.getElementById("list2")
             .style.display = "none";
@@ -697,11 +452,15 @@ function addPlayer(player, name, value, amount) {
     }
 
 
+    // Check winner
+
     checkWinner();
 
 }
 
 
+
+/* CHECK WINNER */
 
 function checkWinner() {
 
@@ -740,6 +499,8 @@ function checkWinner() {
 }
 
 
+
+/* RESET */
 
 function resetGame() {
 
@@ -781,4 +542,5 @@ function resetGame() {
 
 
 </body>
+
 </html>
