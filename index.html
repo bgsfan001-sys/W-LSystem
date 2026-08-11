@@ -1,80 +1,87 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>W/L</title>
+<title>W/L System</title>
 
 <style>
-    body {
-        margin: 0;
-        background: #eeeeee;
-        font-family: Arial, sans-serif;
-    }
+body {
+    margin: 0;
+    background: #eeeeee;
+    font-family: Arial, sans-serif;
+}
 
-    .gui {
-        width: 90%;
-        max-width: 500px;
-        margin: 30px auto;
-        padding: 20px;
-        background: white;
-        border-radius: 15px;
-        text-align: center;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-    }
+.gui {
+    width: 90%;
+    max-width: 550px;
+    margin: 30px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
 
-    .jugadores {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-    }
+.players {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
 
-    .espacio {
-        width: 45%;
-        padding: 15px;
-        border: 2px solid #ddd;
-        border-radius: 12px;
-    }
+.player-box {
+    width: 45%;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+}
 
-    .nombre {
-        font-size: 18px;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
+.player-title {
+    font-size: 18px;
+    font-weight: bold;
+}
 
-    .value {
-        margin-bottom: 10px;
-    }
+.player-name {
+    margin-top: 8px;
+}
 
-    .mas {
-        width: 50px;
-        height: 50px;
-        border: none;
-        border-radius: 50%;
-        font-size: 30px;
-        cursor: pointer;
-    }
+.total {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px;
+}
 
-    .lista {
-        display: none;
-        margin-top: 10px;
-    }
+.add-button {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    font-size: 30px;
+    cursor: pointer;
+}
 
-    .jugador {
-        display: block;
-        width: 100%;
-        padding: 10px;
-        margin: 5px 0;
-        border: none;
-        border-radius: 8px;
-        background: #eeeeee;
-        cursor: pointer;
-    }
+.player-list {
+    display: none;
+    margin-top: 10px;
+}
 
-    .jugador:hover {
-        background: #dddddd;
-    }
+.player-option {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 8px;
+    background: #eeeeee;
+    cursor: pointer;
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
 </style>
 </head>
 
@@ -84,25 +91,196 @@
 
     <h2>W / L</h2>
 
-    <div class="jugadores">
+    <div class="players">
 
-        <!-- PRIMER COSO -->
-        <div class="espacio">
+        <!-- PLAYER 1 -->
+        <div class="player-box">
 
-            <div id="nombre1" class="nombre">
-                Persona 1
+            <div class="player-title">
+                Player 1
             </div>
 
-            <div id="value1" class="value">
-                Value: 0
+            <div id="playerName1" class="player-name">
+                —
             </div>
 
-            <button class="mas" onclick="abrirLista(1)">
+            <div id="total1" class="total">
+                0
+            </div>
+
+            <button class="add-button" onclick="openList(1)">
                 +
             </button>
 
-            <div id="lista1" class="lista">
+            <div id="list1" class="player-list">
 
+                <button class="player-option"
+                    onclick="addValue(1, 'Messi', 10)">
+                    Messi +10
+                </button>
+
+                <button class="player-option"
+                    onclick="addValue(1, 'Ronaldo', 8)">
+                    Ronaldo +8
+                </button>
+
+                <button class="player-option"
+                    onclick="addValue(1, 'Mbappe', 6)">
+                    Mbappe +6
+                </button>
+
+                <button class="player-option"
+                    onclick="addValue(1, 'Neymar', 5)">
+                    Neymar +5
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PLAYER 2 -->
+        <div class="player-box">
+
+            <div class="player-title">
+                Player 2
+            </div>
+
+            <div id="playerName2" class="player-name">
+                —
+            </div>
+
+            <div id="total2" class="total">
+                0
+            </div>
+
+            <button class="add-button" onclick="openList(2)">
+                +
+            </button>
+
+            <div id="list2" class="player-list">
+
+                <button class="player-option"
+                    onclick="addValue(2, 'Messi', 10)">
+                    Messi +10
+                </button>
+
+                <button class="player-option"
+                    onclick="addValue(2, 'Ronaldo', 8)">
+                    Ronaldo +8
+                </button>
+
+                <button class="player-option"
+                    onclick="addValue(2, 'Mbappe', 6)">
+                    Mbappe +6
+                </button>
+
+                <button class="player-option"
+                    onclick="addValue(2, 'Neymar', 5)">
+                    Neymar +5
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="result" class="result">
+        Waiting for players...
+    </div>
+
+</div>
+
+
+<script>
+
+let total1 = 0;
+let total2 = 0;
+
+let playerName1 = "";
+let playerName2 = "";
+
+
+function openList(player) {
+
+    const list = document.getElementById("list" + player);
+
+    if (list.style.display === "block") {
+        list.style.display = "none";
+    } else {
+        list.style.display = "block";
+    }
+}
+
+
+function addValue(player, name, value) {
+
+    if (player === 1) {
+
+        playerName1 = name;
+
+        total1 += value;
+
+        document.getElementById("playerName1").textContent =
+            playerName1;
+
+        document.getElementById("total1").textContent =
+            total1;
+
+        document.getElementById("list1").style.display =
+            "none";
+
+    } else {
+
+        playerName2 = name;
+
+        total2 += value;
+
+        document.getElementById("playerName2").textContent =
+            playerName2;
+
+        document.getElementById("total2").textContent =
+            total2;
+
+        document.getElementById("list2").style.display =
+            "none";
+    }
+
+    checkWinner();
+}
+
+
+function checkWinner() {
+
+    const result = document.getElementById("result");
+
+    if (total1 === 0 && total2 === 0) {
+
+        result.textContent =
+            "Waiting for players...";
+
+    } else if (total1 > total2) {
+
+        result.textContent =
+            "🏆 Player 1 wins";
+
+    } else if (total2 > total1) {
+
+        result.textContent =
+            "🏆 Player 2 wins";
+
+    } else {
+
+        result.textContent =
+            "🤝 Draw";
+    }
+}
+
+</script>
+
+</body>
+</html>
                 <button class="jugador"
                     onclick="elegir(1, 'Messi', 10)">
                     Messi (+10)
