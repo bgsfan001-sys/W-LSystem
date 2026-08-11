@@ -86,7 +86,7 @@ body {
 
 
 /* =========================
-   PET MENU
+   CATEGORY MENU
 ========================= */
 
 .pet-menu {
@@ -297,7 +297,7 @@ body {
 
 
 /* =========================
-   RESULT
+   TRADE RESULT
 ========================= */
 
 .result {
@@ -377,6 +377,7 @@ body {
 
         <!-- =========================
              PLAYER 1
+             YOU
         ========================== -->
 
         <div class="player-box">
@@ -401,8 +402,6 @@ body {
                 +
             </button>
 
-
-            <!-- CATEGORY MENU -->
 
             <div
                 id="petMenu1"
@@ -430,8 +429,6 @@ body {
 
             </div>
 
-
-            <!-- PET LIST -->
 
             <div
                 id="petList1"
@@ -463,8 +460,6 @@ body {
 
             </div>
 
-
-            <!-- HISTORY -->
 
             <div
                 id="history1"
@@ -503,8 +498,6 @@ body {
             </button>
 
 
-            <!-- CATEGORY MENU -->
-
             <div
                 id="petMenu2"
                 class="pet-menu"
@@ -531,8 +524,6 @@ body {
 
             </div>
 
-
-            <!-- PET LIST -->
 
             <div
                 id="petList2"
@@ -565,8 +556,6 @@ body {
             </div>
 
 
-            <!-- HISTORY -->
-
             <div
                 id="history2"
                 class="history"
@@ -578,7 +567,9 @@ body {
     </div>
 
 
-    <!-- TRADE RESULT -->
+    <!-- =========================
+         TRADE RESULT
+    ========================== -->
 
     <div
         id="result"
@@ -606,41 +597,34 @@ body {
 =================================================
 PET DATA
 =================================================
-
-To add a pet:
-
-{
-    name: "PetName",
-    value: 100,
-    image: "images/PetName.png"
-}
-
-The image must be inside the "images" folder.
-=================================================
 */
 
 const pets = {
 
-
     /*
-    =============================================
     LIMITED SECRETS
-    =============================================
-
-    Empty for now.
-    Add pets here later.
     */
 
     limited: [
 
+        /*
+        Add Limited Secrets here.
+
+        Example:
+
+        {
+            name: "Example",
+            value: 100,
+            image: "images/Example.png"
+        }
+
+        */
+
     ],
 
 
-
     /*
-    =============================================
     ROBUX PETS
-    =============================================
     */
 
     robux: [
@@ -650,7 +634,6 @@ const pets = {
             value: 30,
             image: "images/Nythrael.png"
         },
-
 
         {
             name: "Kharvoth",
@@ -666,7 +649,7 @@ const pets = {
 
 /*
 =================================================
-TOTALS
+PLAYER VALUES
 =================================================
 */
 
@@ -779,7 +762,7 @@ function openCategory(
 
 /*
 =================================================
-BACK TO CATEGORY MENU
+BACK
 =================================================
 */
 
@@ -883,10 +866,6 @@ function createPetButtons(
 
 
 
-            /*
-            PET IMAGE
-            */
-
             const image =
                 document.createElement(
                     "img"
@@ -905,10 +884,6 @@ function createPetButtons(
                 data.name;
 
 
-
-            /*
-            PET INFORMATION
-            */
 
             const info =
                 document.createElement(
@@ -973,9 +948,8 @@ function createPetButtons(
 
 
             /*
-            CLICK PET
-
-            The list stays open.
+            CLICKING A PET DOES NOT
+            CLOSE THE CURRENT SECTION.
             */
 
             button.onclick =
@@ -1114,11 +1088,6 @@ function addPet(
     }
 
 
-    /*
-    Recalculate the trade
-    every time a pet is added.
-    */
-
     checkTrade();
 
 }
@@ -1127,7 +1096,7 @@ function addPet(
 
 /*
 =================================================
-ADD HISTORY
+HISTORY
 =================================================
 */
 
@@ -1154,7 +1123,6 @@ function addHistory(
         "history-item";
 
 
-
     const imageElement =
         document.createElement(
             "img"
@@ -1173,7 +1141,6 @@ function addHistory(
         name;
 
 
-
     const text =
         document.createElement(
             "span"
@@ -1182,7 +1149,6 @@ function addHistory(
 
     text.textContent =
         name + " +" + value;
-
 
 
     item.appendChild(
@@ -1209,7 +1175,21 @@ function addHistory(
 
 /*
 =================================================
-TRADE RESULT
+TRADE CALCULATION
+=================================================
+
+PLAYER 1 = YOU
+
+You receive Player 2's value.
+You give Player 1's value.
+
+Net result:
+
+Player 2 value - Player 1 value
+
+Positive = W Trade
+Negative = L Trade
+Zero = Balanced Trade
 =================================================
 */
 
@@ -1222,7 +1202,7 @@ function checkTrade() {
 
 
     /*
-    Nothing added yet.
+    NOTHING ADDED
     */
 
     if (
@@ -1240,28 +1220,8 @@ function checkTrade() {
 
 
     /*
-    Player 1 has more value.
-    */
-
-    if (total1 > total2) {
-
-        const difference =
-            total1 - total2;
-
-
-        result.textContent =
-            "You win " +
-            difference +
-            " value! [W Trade]";
-
-        return;
-
-    }
-
-
-
-    /*
-    Player 2 has more value.
+    PLAYER 2 OFFERS MORE
+    YOU WIN
     */
 
     if (total2 > total1) {
@@ -1271,9 +1231,10 @@ function checkTrade() {
 
 
         result.textContent =
-            "You are losing " +
+            "You win " +
             difference +
-            " value! [L Trade]";
+            " value! [W Trade]";
+
 
         return;
 
@@ -1282,7 +1243,30 @@ function checkTrade() {
 
 
     /*
-    Same value.
+    PLAYER 1 OFFERS MORE
+    YOU ARE LOSING
+    */
+
+    if (total1 > total2) {
+
+        const difference =
+            total1 - total2;
+
+
+        result.textContent =
+            "You are losing " +
+            difference +
+            " value! [L Trade]";
+
+
+        return;
+
+    }
+
+
+
+    /*
+    SAME VALUE
     */
 
     result.textContent =
@@ -1366,7 +1350,6 @@ function resetGame() {
         "none";
 
 
-
     document.getElementById(
         "search1"
     ).value =
@@ -1384,4 +1367,5 @@ function resetGame() {
 
 
 </body>
-</html>
+
+    </html>
