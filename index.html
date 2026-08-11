@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,6 @@
     <title>W/L System</title>
 
     <style>
-
         * {
             box-sizing: border-box;
         }
@@ -25,18 +23,14 @@
             max-width: 700px;
             margin: auto;
             padding: 20px;
-
             background: white;
             border-radius: 16px;
-
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
             text-align: center;
         }
 
         .title {
             margin-top: 0;
-            margin-bottom: 20px;
         }
 
         .players {
@@ -47,10 +41,8 @@
         .player-box {
             width: 50%;
             padding: 15px;
-
             border: 2px solid #dddddd;
             border-radius: 12px;
-
             background: #fafafa;
         }
 
@@ -61,7 +53,6 @@
 
         .total {
             margin: 10px;
-
             font-size: 28px;
             font-weight: bold;
         }
@@ -69,14 +60,10 @@
         .add-button {
             width: 50px;
             height: 50px;
-
             border: none;
             border-radius: 50%;
-
             background: #eeeeee;
-
             font-size: 30px;
-
             cursor: pointer;
         }
 
@@ -91,19 +78,13 @@
 
         .player-option {
             display: block;
-
             width: 100%;
-
             margin: 6px 0;
             padding: 11px;
-
             border: none;
             border-radius: 8px;
-
             background: #eeeeee;
-
             font-size: 15px;
-
             cursor: pointer;
         }
 
@@ -113,46 +94,34 @@
 
         .history {
             margin-top: 15px;
-
             max-height: 180px;
             overflow-y: auto;
-
             text-align: left;
         }
 
         .history-item {
             margin: 5px 0;
             padding: 8px;
-
             border-radius: 7px;
-
             background: #eeeeee;
-
             font-size: 14px;
         }
 
         .result {
             margin-top: 20px;
             padding: 12px;
-
             border-radius: 10px;
-
             background: #eeeeee;
-
             font-size: 20px;
             font-weight: bold;
         }
 
         .reset-button {
             margin-top: 15px;
-
             padding: 10px 20px;
-
             border: none;
             border-radius: 8px;
-
             background: #eeeeee;
-
             cursor: pointer;
         }
 
@@ -161,7 +130,6 @@
         }
 
         @media (max-width: 550px) {
-
             .players {
                 flex-direction: column;
             }
@@ -169,42 +137,28 @@
             .player-box {
                 width: 100%;
             }
-
         }
-
     </style>
-
 </head>
-
 
 <body>
 
-
 <div class="gui">
 
-    <h2 class="title">
-        W / L
-    </h2>
-
+    <h2 class="title">W / L</h2>
 
     <div class="players">
 
-
         <!-- PLAYER 1 -->
-
         <div class="player-box">
 
             <div class="player-title">
                 Player 1
             </div>
 
-            <div
-                id="total1"
-                class="total"
-            >
+            <div id="total1" class="total">
                 0
             </div>
-
 
             <button
                 class="add-button"
@@ -213,11 +167,7 @@
                 +
             </button>
 
-
-            <div
-                id="list1"
-                class="player-list"
-            >
+            <div id="list1" class="player-list">
 
                 <button
                     class="player-option"
@@ -249,32 +199,21 @@
 
             </div>
 
-
-            <div
-                id="history1"
-                class="history"
-            >
-            </div>
+            <div id="history1" class="history"></div>
 
         </div>
 
 
-
         <!-- PLAYER 2 -->
-
         <div class="player-box">
 
             <div class="player-title">
                 Player 2
             </div>
 
-            <div
-                id="total2"
-                class="total"
-            >
+            <div id="total2" class="total">
                 0
             </div>
-
 
             <button
                 class="add-button"
@@ -283,11 +222,7 @@
                 +
             </button>
 
-
-            <div
-                id="list2"
-                class="player-list"
-            >
+            <div id="list2" class="player-list">
 
                 <button
                     class="player-option"
@@ -319,23 +254,14 @@
 
             </div>
 
-
-            <div
-                id="history2"
-                class="history"
-            >
-            </div>
+            <div id="history2" class="history"></div>
 
         </div>
-
 
     </div>
 
 
-    <div
-        id="result"
-        class="result"
-    >
+    <div id="result" class="result">
         Waiting for players...
     </div>
 
@@ -347,62 +273,37 @@
         Reset
     </button>
 
-
 </div>
 
 
-
 <script>
-
-
-/* PLAYER TOTALS */
 
 let total1 = 0;
 let total2 = 0;
 
 
-
-/* OPEN PLAYER LIST */
-
 function openList(player) {
 
-    const list =
-        document.getElementById("list" + player);
-
+    const list = document.getElementById(
+        "list" + player
+    );
 
     if (list.style.display === "block") {
-
         list.style.display = "none";
-
     } else {
-
         list.style.display = "block";
-
     }
-
 }
 
 
-
-/* ADD ONE UNIT */
-
 function addPlayer(player, name, value) {
-
 
     if (player === 1) {
 
-        // Add exactly ONE unit
-
-        total1 += value;
-
-
-        // Update total
+        total1 = total1 + value;
 
         document.getElementById("total1")
             .textContent = total1;
-
-
-        // Add to history
 
         document.getElementById("history1")
             .innerHTML +=
@@ -412,28 +313,15 @@ function addPlayer(player, name, value) {
             value +
             '</div>';
 
-
-        // Close list
-
         document.getElementById("list1")
             .style.display = "none";
 
-
     } else {
 
-
-        // Add exactly ONE unit
-
-        total2 += value;
-
-
-        // Update total
+        total2 = total2 + value;
 
         document.getElementById("total2")
             .textContent = total2;
-
-
-        // Add to history
 
         document.getElementById("history2")
             .innerHTML +=
@@ -443,104 +331,71 @@ function addPlayer(player, name, value) {
             value +
             '</div>';
 
-
-        // Close list
-
         document.getElementById("list2")
             .style.display = "none";
-
     }
 
-
-    // Check winner
-
     checkWinner();
-
 }
 
-
-
-/* CHECK WINNER */
 
 function checkWinner() {
 
     const result =
         document.getElementById("result");
 
-
     if (total1 === 0 && total2 === 0) {
 
         result.textContent =
             "Waiting for players...";
 
-    }
-
-    else if (total1 > total2) {
+    } else if (total1 > total2) {
 
         result.textContent =
             "🏆 Player 1 wins";
 
-    }
-
-    else if (total2 > total1) {
+    } else if (total2 > total1) {
 
         result.textContent =
             "🏆 Player 2 wins";
 
-    }
-
-    else {
+    } else {
 
         result.textContent =
             "🤝 Draw";
-
     }
-
 }
 
-
-
-/* RESET */
 
 function resetGame() {
 
     total1 = 0;
     total2 = 0;
 
-
     document.getElementById("total1")
         .textContent = "0";
-
 
     document.getElementById("total2")
         .textContent = "0";
 
-
     document.getElementById("history1")
         .innerHTML = "";
 
-
     document.getElementById("history2")
         .innerHTML = "";
-
 
     document.getElementById("result")
         .textContent =
             "Waiting for players...";
 
-
     document.getElementById("list1")
         .style.display = "none";
 
-
     document.getElementById("list2")
         .style.display = "none";
-
 }
 
 </script>
 
-
 </body>
-
 </html>
