@@ -2,10 +2,16 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>W/L System</title>
+
 
 <style>
 
@@ -13,64 +19,103 @@
     box-sizing: border-box;
 }
 
+
 body {
+
     margin: 0;
+
     padding: 20px;
+
     background: #eeeeee;
+
     font-family: Arial, sans-serif;
+
 }
 
+
 .gui {
+
     width: 100%;
-    max-width: 900px;
+
+    max-width: 950px;
+
     margin: auto;
+
     padding: 20px;
 
     background: white;
+
     border-radius: 16px;
 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.15);
 
     text-align: center;
+
 }
+
 
 .title {
+
     margin-top: 0;
+
     margin-bottom: 20px;
+
 }
+
 
 .players {
+
     display: flex;
+
     gap: 15px;
+
 }
 
+
 .player-box {
+
     width: 50%;
+
     padding: 15px;
 
     border: 2px solid #dddddd;
+
     border-radius: 12px;
 
     background: #fafafa;
+
 }
+
 
 .player-title {
+
     font-size: 20px;
+
     font-weight: bold;
+
 }
 
+
 .total {
+
     margin: 10px;
 
     font-size: 28px;
+
     font-weight: bold;
+
 }
 
+
 .add-button {
+
     width: 50px;
+
     height: 50px;
 
     border: none;
+
     border-radius: 50%;
 
     background: #eeeeee;
@@ -78,126 +123,74 @@ body {
     font-size: 30px;
 
     cursor: pointer;
+
 }
+
 
 .add-button:hover {
+
     background: #dddddd;
+
 }
 
 
-/* =========================
-   CATEGORY MENU
-========================= */
-
-.pet-menu {
-    display: none;
-    margin-top: 15px;
-}
-
-.category-container {
-    display: flex;
-    flex-wrap: wrap;
-
-    gap: 10px;
-
-    justify-content: center;
-}
-
-.category-button {
-    width: 180px;
-    min-height: 70px;
-
-    border: none;
-    border-radius: 12px;
-
-    color: white;
-
-    font-size: 16px;
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: transform 0.15s;
-}
-
-.category-button:hover {
-    transform: scale(1.03);
-}
-
-.limited-button {
-    background: #d62828;
-}
-
-.robux-button {
-    background: #22a447;
-}
-
-
-/* =========================
-   PET LIST
-========================= */
+/* PET LIST */
 
 .pet-list {
+
     display: none;
+
     margin-top: 15px;
+
 }
 
-.back-button {
-    width: 100%;
-
-    padding: 10px;
-    margin-bottom: 12px;
-
-    border: none;
-    border-radius: 8px;
-
-    background: #eeeeee;
-
-    font-size: 15px;
-    font-weight: bold;
-
-    cursor: pointer;
-}
-
-.back-button:hover {
-    background: #dddddd;
-}
 
 .search {
+
     width: 100%;
 
     padding: 10px;
+
     margin-bottom: 12px;
 
     border: 1px solid #cccccc;
+
     border-radius: 8px;
 
     font-size: 15px;
 
     outline: none;
+
 }
 
+
 .player-options {
+
     display: flex;
+
     flex-wrap: wrap;
 
     gap: 8px;
 
     justify-content: center;
+
 }
 
+
 .player-option {
+
     display: flex;
 
     align-items: center;
 
     gap: 8px;
 
-    min-width: 125px;
+    min-width: 135px;
 
     padding: 8px 12px;
 
     border: none;
+
     border-radius: 10px;
 
     background: #eeeeee;
@@ -206,59 +199,60 @@ body {
 
     cursor: pointer;
 
-    transition: background 0.15s;
 }
+
 
 .player-option:hover {
+
     background: #dddddd;
+
 }
 
+
 .player-image {
+
     width: 42px;
+
     height: 42px;
 
     object-fit: cover;
 
     border-radius: 8px;
+
 }
 
+
 .player-info {
+
     display: flex;
 
     flex-direction: column;
 
     align-items: flex-start;
+
 }
+
 
 .player-name {
+
     font-weight: bold;
+
 }
 
+
 .player-value {
+
     font-size: 13px;
 
     opacity: 0.7;
+
 }
 
 
-/* =========================
-   EMPTY CATEGORY
-========================= */
-
-.empty-message {
-    padding: 20px;
-
-    color: #777777;
-
-    font-size: 14px;
-}
-
-
-/* =========================
-   HISTORY
-========================= */
+/* HISTORY */
 
 .history {
+
     margin-top: 15px;
 
     max-height: 180px;
@@ -266,9 +260,12 @@ body {
     overflow-y: auto;
 
     text-align: left;
+
 }
 
+
 .history-item {
+
     display: flex;
 
     align-items: center;
@@ -284,23 +281,27 @@ body {
     background: #eeeeee;
 
     font-size: 14px;
+
 }
 
+
 .history-image {
+
     width: 30px;
+
     height: 30px;
 
     object-fit: cover;
 
     border-radius: 6px;
+
 }
 
 
-/* =========================
-   TRADE RESULT
-========================= */
+/* RESULT */
 
 .result {
+
     margin-top: 20px;
 
     padding: 12px;
@@ -312,47 +313,51 @@ body {
     font-size: 20px;
 
     font-weight: bold;
+
 }
 
 
-/* =========================
-   RESET
-========================= */
+/* RESET */
 
 .reset-button {
+
     margin-top: 15px;
 
     padding: 10px 20px;
 
     border: none;
+
     border-radius: 8px;
 
     background: #eeeeee;
 
     cursor: pointer;
+
 }
+
 
 .reset-button:hover {
+
     background: #dddddd;
+
 }
 
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media (max-width: 550px) {
 
     .players {
+
         flex-direction: column;
+
     }
+
 
     .player-box {
-        width: 100%;
-    }
 
-    .category-button {
         width: 100%;
+
     }
 
 }
@@ -367,6 +372,7 @@ body {
 
 <div class="gui">
 
+
     <h2 class="title">
         W / L
     </h2>
@@ -375,12 +381,10 @@ body {
     <div class="players">
 
 
-        <!-- =========================
-             PLAYER 1
-             YOU
-        ========================== -->
+        <!-- PLAYER 1 -->
 
         <div class="player-box">
+
 
             <div class="player-title">
                 Player 1
@@ -397,50 +401,16 @@ body {
 
             <button
                 class="add-button"
-                onclick="openPetMenu(1)"
+                onclick="openPetList(1)"
             >
                 +
             </button>
 
 
             <div
-                id="petMenu1"
-                class="pet-menu"
-            >
-
-                <div class="category-container">
-
-                    <button
-                        class="category-button limited-button"
-                        onclick="openCategory(1, 'limited')"
-                    >
-                        Limited Secrets
-                    </button>
-
-
-                    <button
-                        class="category-button robux-button"
-                        onclick="openCategory(1, 'robux')"
-                    >
-                        Robux Pets
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div
                 id="petList1"
                 class="pet-list"
             >
-
-                <button
-                    class="back-button"
-                    onclick="backToCategories(1)"
-                >
-                    ← Back
-                </button>
 
 
                 <input
@@ -458,6 +428,7 @@ body {
                 >
                 </div>
 
+
             </div>
 
 
@@ -467,15 +438,15 @@ body {
             >
             </div>
 
+
         </div>
 
 
 
-        <!-- =========================
-             PLAYER 2
-        ========================== -->
+        <!-- PLAYER 2 -->
 
         <div class="player-box">
+
 
             <div class="player-title">
                 Player 2
@@ -492,50 +463,16 @@ body {
 
             <button
                 class="add-button"
-                onclick="openPetMenu(2)"
+                onclick="openPetList(2)"
             >
                 +
             </button>
 
 
             <div
-                id="petMenu2"
-                class="pet-menu"
-            >
-
-                <div class="category-container">
-
-                    <button
-                        class="category-button limited-button"
-                        onclick="openCategory(2, 'limited')"
-                    >
-                        Limited Secrets
-                    </button>
-
-
-                    <button
-                        class="category-button robux-button"
-                        onclick="openCategory(2, 'robux')"
-                    >
-                        Robux Pets
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div
                 id="petList2"
                 class="pet-list"
             >
-
-                <button
-                    class="back-button"
-                    onclick="backToCategories(2)"
-                >
-                    ← Back
-                </button>
 
 
                 <input
@@ -553,6 +490,7 @@ body {
                 >
                 </div>
 
+
             </div>
 
 
@@ -562,14 +500,15 @@ body {
             >
             </div>
 
+
         </div>
+
 
     </div>
 
 
-    <!-- =========================
-         TRADE RESULT
-    ========================== -->
+
+    <!-- RESULT -->
 
     <div
         id="result"
@@ -579,12 +518,14 @@ body {
     </div>
 
 
+
     <button
         class="reset-button"
         onclick="resetGame()"
     >
         Reset
     </button>
+
 
 </div>
 
@@ -594,93 +535,117 @@ body {
 
 
 /*
-=================================================
-PET DATA
-=================================================
+====================================================
+PET LIST
+
+WRITE PETS LIKE THIS:
+
+Name,Value,Image
+
+Example:
+
+Kharvoth,60,images/Kharvoth.png
+Nythrael,30,images/Nythrael.png
+
+NO brackets.
+NO parentheses.
+NO objects.
+
+The order here is the order shown in the GUI.
+====================================================
 */
 
-const pets = {
+const petData = `
 
-    /*
-    LIMITED SECRETS
-    */
+Kharvoth,60,images/Kharvoth.png
+Nythrael,30,images/Nythrael.png
 
-    limited: [
-
-        /*
-        Add Limited Secrets here.
-
-        Example:
-
-        {
-            name: "Example",
-            value: 100,
-            image: "images/Example.png"
-        }
-
-        */
-
-    ],
-
-
-    /*
-    ROBUX PETS
-    */
-
-    robux: [
-
-        {
-            name: "Nythrael",
-            value: 30,
-            image: "images/Nythrael.png"
-        },
-
-        {
-            name: "Kharvoth",
-            value: 50,
-            image: "images/Kharvoth.png"
-        }
-
-    ]
-
-};
+`;
 
 
 
 /*
-=================================================
+====================================================
+CONVERT TEXT INTO PET DATA
+====================================================
+*/
+
+const pets = [];
+
+
+petData
+    .trim()
+    .split("\n")
+    .forEach(function(line) {
+
+
+        line = line.trim();
+
+
+        if (!line) {
+            return;
+        }
+
+
+        const parts =
+            line.split(",");
+
+
+        const name =
+            parts[0].trim();
+
+
+        const value =
+            Number(parts[1].trim());
+
+
+        const image =
+            parts.slice(2)
+                .join(",")
+                .trim();
+
+
+        if (
+            name &&
+            !isNaN(value) &&
+            image
+        ) {
+
+            pets.push({
+
+                name: name,
+
+                value: value,
+
+                image: image
+
+            });
+
+        }
+
+    });
+
+
+
+/*
+====================================================
 PLAYER VALUES
-=================================================
+====================================================
 */
 
 let total1 = 0;
+
 let total2 = 0;
 
 
 
 /*
-=================================================
-CURRENT CATEGORIES
-=================================================
+====================================================
+OPEN PET LIST
+====================================================
 */
 
-let currentCategory1 = null;
-let currentCategory2 = null;
-
-
-
-/*
-=================================================
-OPEN PET MENU
-=================================================
-*/
-
-function openPetMenu(player) {
-
-    const menu =
-        document.getElementById(
-            "petMenu" + player
-        );
+function openPetList(player) {
 
 
     const list =
@@ -690,21 +655,18 @@ function openPetMenu(player) {
 
 
     if (
-        menu.style.display === "block" ||
         list.style.display === "block"
     ) {
 
-        menu.style.display = "none";
-
         list.style.display = "none";
 
     }
 
     else {
 
-        menu.style.display = "block";
+        list.style.display = "block";
 
-        list.style.display = "none";
+        createPetButtons(player);
 
     }
 
@@ -713,89 +675,13 @@ function openPetMenu(player) {
 
 
 /*
-=================================================
-OPEN CATEGORY
-=================================================
-*/
-
-function openCategory(
-    player,
-    category
-) {
-
-    if (player === 1) {
-
-        currentCategory1 = category;
-
-    }
-
-    else {
-
-        currentCategory2 = category;
-
-    }
-
-
-    document.getElementById(
-        "petMenu" + player
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "petList" + player
-    ).style.display = "block";
-
-
-    document.getElementById(
-        "search" + player
-    ).value = "";
-
-
-    createPetButtons(
-        player,
-        category
-    );
-
-}
-
-
-
-/*
-=================================================
-BACK
-=================================================
-*/
-
-function backToCategories(player) {
-
-    document.getElementById(
-        "petList" + player
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "petMenu" + player
-    ).style.display = "block";
-
-
-    document.getElementById(
-        "search" + player
-    ).value = "";
-
-}
-
-
-
-/*
-=================================================
+====================================================
 CREATE PET BUTTONS
-=================================================
+====================================================
 */
 
-function createPetButtons(
-    player,
-    category
-) {
+function createPetButtons(player) {
+
 
     const container =
         document.getElementById(
@@ -806,27 +692,13 @@ function createPetButtons(
     container.innerHTML = "";
 
 
-    const categoryPets =
-        pets[category];
+    if (pets.length === 0) {
 
-
-    /*
-    EMPTY CATEGORY
-    */
-
-    if (
-        !categoryPets ||
-        categoryPets.length === 0
-    ) {
 
         const empty =
             document.createElement(
                 "div"
             );
-
-
-        empty.className =
-            "empty-message";
 
 
         empty.textContent =
@@ -844,145 +716,149 @@ function createPetButtons(
 
 
 
-    /*
-    CREATE PET BUTTONS
-    */
-
-    categoryPets.forEach(
-        function(data) {
-
-            const button =
-                document.createElement(
-                    "button"
-                );
+    pets.forEach(function(pet) {
 
 
-            button.className =
-                "player-option";
-
-
-            button.dataset.name =
-                data.name.toLowerCase();
-
-
-
-            const image =
-                document.createElement(
-                    "img"
-                );
-
-
-            image.className =
-                "player-image";
-
-
-            image.src =
-                data.image;
-
-
-            image.alt =
-                data.name;
-
-
-
-            const info =
-                document.createElement(
-                    "div"
-                );
-
-
-            info.className =
-                "player-info";
-
-
-
-            const name =
-                document.createElement(
-                    "div"
-                );
-
-
-            name.className =
-                "player-name";
-
-
-            name.textContent =
-                data.name;
-
-
-
-            const value =
-                document.createElement(
-                    "div"
-                );
-
-
-            value.className =
-                "player-value";
-
-
-            value.textContent =
-                "+" + data.value;
-
-
-
-            info.appendChild(
-                name
+        const button =
+            document.createElement(
+                "button"
             );
 
 
-            info.appendChild(
-                value
+        button.className =
+            "player-option";
+
+
+        button.dataset.name =
+            pet.name.toLowerCase();
+
+
+
+        /*
+        IMAGE
+        */
+
+        const image =
+            document.createElement(
+                "img"
             );
 
 
-            button.appendChild(
-                image
+        image.className =
+            "player-image";
+
+
+        image.src =
+            pet.image;
+
+
+        image.alt =
+            pet.name;
+
+
+
+        /*
+        INFO
+        */
+
+        const info =
+            document.createElement(
+                "div"
             );
 
 
-            button.appendChild(
-                info
+        info.className =
+            "player-info";
+
+
+
+        const name =
+            document.createElement(
+                "div"
             );
 
 
-
-            /*
-            CLICKING A PET DOES NOT
-            CLOSE THE CURRENT SECTION.
-            */
-
-            button.onclick =
-                function() {
-
-                    addPet(
-                        player,
-                        data.name,
-                        data.value,
-                        data.image
-                    );
-
-                };
+        name.className =
+            "player-name";
 
 
-            container.appendChild(
-                button
+        name.textContent =
+            pet.name;
+
+
+
+        const value =
+            document.createElement(
+                "div"
             );
 
-        }
-    );
+
+        value.className =
+            "player-value";
+
+
+        value.textContent =
+            "+" + pet.value;
+
+
+
+        info.appendChild(name);
+
+        info.appendChild(value);
+
+
+        button.appendChild(image);
+
+        button.appendChild(info);
+
+
+
+        /*
+        ADD PET
+
+        Clicking the same pet multiple times
+        adds it multiple times.
+        */
+
+        button.onclick =
+            function() {
+
+
+                addPet(
+
+                    player,
+
+                    pet.name,
+
+                    pet.value,
+
+                    pet.image
+
+                );
+
+            };
+
+
+
+        container.appendChild(
+            button
+        );
+
+
+    });
 
 }
 
 
 
 /*
-=================================================
+====================================================
 SEARCH
-=================================================
+====================================================
 */
 
 function searchPets(player) {
+
 
     const search =
         document.getElementById(
@@ -1007,6 +883,7 @@ function searchPets(player) {
     buttons.forEach(
         function(button) {
 
+
             const name =
                 button.dataset.name;
 
@@ -1027,6 +904,7 @@ function searchPets(player) {
 
             }
 
+
         }
     );
 
@@ -1035,9 +913,9 @@ function searchPets(player) {
 
 
 /*
-=================================================
+====================================================
 ADD PET
-=================================================
+====================================================
 */
 
 function addPet(
@@ -1047,7 +925,9 @@ function addPet(
     image
 ) {
 
+
     if (player === 1) {
+
 
         total1 += value;
 
@@ -1059,15 +939,22 @@ function addPet(
 
 
         addHistory(
+
             1,
+
             name,
+
             value,
+
             image
+
         );
+
 
     }
 
     else {
+
 
         total2 += value;
 
@@ -1079,11 +966,17 @@ function addPet(
 
 
         addHistory(
+
             2,
+
             name,
+
             value,
+
             image
+
         );
+
 
     }
 
@@ -1095,9 +988,9 @@ function addPet(
 
 
 /*
-=================================================
+====================================================
 HISTORY
-=================================================
+====================================================
 */
 
 function addHistory(
@@ -1106,6 +999,7 @@ function addHistory(
     value,
     image
 ) {
+
 
     const history =
         document.getElementById(
@@ -1121,6 +1015,7 @@ function addHistory(
 
     item.className =
         "history-item";
+
 
 
     const imageElement =
@@ -1141,6 +1036,7 @@ function addHistory(
         name;
 
 
+
     const text =
         document.createElement(
             "span"
@@ -1149,6 +1045,7 @@ function addHistory(
 
     text.textContent =
         name + " +" + value;
+
 
 
     item.appendChild(
@@ -1174,26 +1071,36 @@ function addHistory(
 
 
 /*
-=================================================
+====================================================
 TRADE CALCULATION
-=================================================
 
-PLAYER 1 = YOU
+Player 1 = YOU
 
-You receive Player 2's value.
-You give Player 1's value.
+Player 1 value = what YOU GIVE.
 
-Net result:
+Player 2 value = what YOU RECEIVE.
 
-Player 2 value - Player 1 value
+Example:
 
-Positive = W Trade
-Negative = L Trade
-Zero = Balanced Trade
-=================================================
+P1 = 0
+P2 = 60
+
+You win 60.
+
+P1 = 60
+P2 = 0
+
+You are losing 60.
+
+P1 = 60
+P2 = 60
+
+Balanced Trade.
+====================================================
 */
 
 function checkTrade() {
+
 
     const result =
         document.getElementById(
@@ -1201,17 +1108,16 @@ function checkTrade() {
         );
 
 
-    /*
-    NOTHING ADDED
-    */
 
     if (
         total1 === 0 &&
         total2 === 0
     ) {
 
+
         result.textContent =
             "Waiting for players...";
+
 
         return;
 
@@ -1220,19 +1126,24 @@ function checkTrade() {
 
 
     /*
-    PLAYER 2 OFFERS MORE
-    YOU WIN
+    YOU RECEIVE MORE
     */
 
-    if (total2 > total1) {
+    if (
+        total2 > total1
+    ) {
+
 
         const difference =
             total2 - total1;
 
 
         result.textContent =
+
             "You win " +
+
             difference +
+
             " value! [W Trade]";
 
 
@@ -1243,19 +1154,24 @@ function checkTrade() {
 
 
     /*
-    PLAYER 1 OFFERS MORE
-    YOU ARE LOSING
+    YOU GIVE MORE
     */
 
-    if (total1 > total2) {
+    if (
+        total1 > total2
+    ) {
+
 
         const difference =
             total1 - total2;
 
 
         result.textContent =
+
             "You are losing " +
+
             difference +
+
             " value! [L Trade]";
 
 
@@ -1277,19 +1193,17 @@ function checkTrade() {
 
 
 /*
-=================================================
+====================================================
 RESET
-=================================================
+====================================================
 */
 
 function resetGame() {
 
+
     total1 = 0;
+
     total2 = 0;
-
-
-    currentCategory1 = null;
-    currentCategory2 = null;
 
 
 
@@ -1327,18 +1241,6 @@ function resetGame() {
 
 
     document.getElementById(
-        "petMenu1"
-    ).style.display =
-        "none";
-
-
-    document.getElementById(
-        "petMenu2"
-    ).style.display =
-        "none";
-
-
-    document.getElementById(
         "petList1"
     ).style.display =
         "none";
@@ -1368,4 +1270,4 @@ function resetGame() {
 
 </body>
 
-    </html>
+</html>
