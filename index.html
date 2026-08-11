@@ -1,170 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>W/L System</title>
+<title>W/L System</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<style>
 
-        body {
-            margin: 0;
-            padding: 20px;
-            background: #eeeeee;
-            font-family: Arial, sans-serif;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        .gui {
-            width: 100%;
-            max-width: 700px;
-            margin: auto;
-            padding: 20px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            text-align: center;
-        }
+body {
+    margin: 0;
+    padding: 20px;
+    background: #eeeeee;
+    font-family: Arial, sans-serif;
+}
 
-        .title {
-            margin-top: 0;
-        }
+.gui {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
 
-        .players {
-            display: flex;
-            gap: 15px;
-        }
+    background: white;
+    border-radius: 16px;
 
-        .player-box {
-            width: 50%;
-            padding: 15px;
-            border: 2px solid #dddddd;
-            border-radius: 12px;
-            background: #fafafa;
-        }
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 
-        .player-title {
-            font-size: 20px;
-            font-weight: bold;
-        }
+    text-align: center;
+}
 
-        .total {
-            margin: 10px;
-            font-size: 28px;
-            font-weight: bold;
-        }
+.title {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
 
-        .add-button {
-            width: 50px;
-            height: 50px;
-            border: none;
-            border-radius: 50%;
-            background: #eeeeee;
-            font-size: 30px;
-            cursor: pointer;
-        }
+.players {
+    display: flex;
+    gap: 15px;
+}
 
-        .add-button:hover {
-            background: #dddddd;
-        }
+.player-box {
+    width: 50%;
+    padding: 15px;
 
-        .player-list {
-            display: none;
-            margin-top: 15px;
-        }
+    border: 2px solid #dddddd;
+    border-radius: 12px;
 
-        .search {
-            width: 100%;
-            padding: 10px;
+    background: #fafafa;
+}
 
-            margin-bottom: 10px;
+.player-title {
+    font-size: 20px;
+    font-weight: bold;
+}
 
-            border: 1px solid #cccccc;
-            border-radius: 8px;
+.total {
+    margin: 10px;
 
-            font-size: 15px;
+    font-size: 28px;
+    font-weight: bold;
+}
 
-            outline: none;
-        }
+.add-button {
+    width: 50px;
+    height: 50px;
 
-        .search:focus {
-            border-color: #999999;
-        }
+    border: none;
+    border-radius: 50%;
 
-        .player-option {
-            display: block;
+    background: #eeeeee;
 
-            width: 100%;
+    font-size: 30px;
 
-            margin: 6px 0;
-            padding: 11px;
+    cursor: pointer;
+}
 
-            border: none;
-            border-radius: 8px;
+.add-button:hover {
+    background: #dddddd;
+}
 
-            background: #eeeeee;
+.player-list {
+    display: none;
+    margin-top: 15px;
+}
 
-            font-size: 15px;
+.search {
+    width: 100%;
 
-            cursor: pointer;
-        }
+    padding: 10px;
+    margin-bottom: 12px;
 
-        .player-option:hover {
-            background: #dddddd;
-        }
+    border: 1px solid #cccccc;
+    border-radius: 8px;
 
-        .history {
-            margin-top: 15px;
-            max-height: 180px;
-            overflow-y: auto;
-            text-align: left;
-        }
+    font-size: 15px;
+    outline: none;
+}
 
-        .history-item {
-            margin: 5px 0;
-            padding: 8px;
-            border-radius: 7px;
-            background: #eeeeee;
-            font-size: 14px;
-        }
+.player-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
 
-        .result {
-            margin-top: 20px;
-            padding: 12px;
-            border-radius: 10px;
-            background: #eeeeee;
-            font-size: 20px;
-            font-weight: bold;
-        }
+    justify-content: center;
+}
 
-        .reset-button {
-            margin-top: 15px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            background: #eeeeee;
-            cursor: pointer;
-        }
+.player-option {
+    flex: 0 0 auto;
 
-        .reset-button:hover {
-            background: #dddddd;
-        }
+    padding: 10px 14px;
 
-        @media (max-width: 550px) {
+    border: none;
+    border-radius: 8px;
 
-            .players {
-                flex-direction: column;
-            }
+    background: #eeeeee;
 
-            .player-box {
-                width: 100%;
-            }
+    font-size: 14px;
 
-        }
-    </style>
+    cursor: pointer;
+}
+
+.player-option:hover {
+    background: #dddddd;
+}
+
+.history {
+    margin-top: 15px;
+
+    max-height: 180px;
+
+    overflow-y: auto;
+
+    text-align: left;
+}
+
+.history-item {
+    margin: 5px 0;
+
+    padding: 8px;
+
+    border-radius: 7px;
+
+    background: #eeeeee;
+
+    font-size: 14px;
+}
+
+.result {
+    margin-top: 20px;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    background: #eeeeee;
+
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.reset-button {
+    margin-top: 15px;
+
+    padding: 10px 20px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #eeeeee;
+
+    cursor: pointer;
+}
+
+.reset-button:hover {
+    background: #dddddd;
+}
+
+@media (max-width: 550px) {
+
+    .players {
+        flex-direction: column;
+    }
+
+    .player-box {
+        width: 100%;
+    }
+
+}
+
+</style>
+
 </head>
 
 
@@ -189,7 +219,10 @@
                 Player 1
             </div>
 
-            <div id="total1" class="total">
+            <div
+                id="total1"
+                class="total"
+            >
                 0
             </div>
 
@@ -216,40 +249,10 @@
                 >
 
 
-                <div class="player-options">
-
-                    <button
-                        class="player-option"
-                        data-name="Messi"
-                        onclick="addPlayer(1, 'Messi', 100)"
-                    >
-                        Messi +100
-                    </button>
-
-                    <button
-                        class="player-option"
-                        data-name="Ronaldo"
-                        onclick="addPlayer(1, 'Ronaldo', 40)"
-                    >
-                        Ronaldo +40
-                    </button>
-
-                    <button
-                        class="player-option"
-                        data-name="Mbappe"
-                        onclick="addPlayer(1, 'Mbappe', 6)"
-                    >
-                        Mbappe +6
-                    </button>
-
-                    <button
-                        class="player-option"
-                        data-name="Neymar"
-                        onclick="addPlayer(1, 'Neymar', 5)"
-                    >
-                        Neymar +5
-                    </button>
-
+                <div
+                    id="players1"
+                    class="player-options"
+                >
                 </div>
 
             </div>
@@ -273,7 +276,10 @@
                 Player 2
             </div>
 
-            <div id="total2" class="total">
+            <div
+                id="total2"
+                class="total"
+            >
                 0
             </div>
 
@@ -300,40 +306,10 @@
                 >
 
 
-                <div class="player-options">
-
-                    <button
-                        class="player-option"
-                        data-name="Messi"
-                        onclick="addPlayer(2, 'Messi', 10)"
-                    >
-                        Messi +10
-                    </button>
-
-                    <button
-                        class="player-option"
-                        data-name="Ronaldo"
-                        onclick="addPlayer(2, 'Ronaldo', 8)"
-                    >
-                        Ronaldo +8
-                    </button>
-
-                    <button
-                        class="player-option"
-                        data-name="Mbappe"
-                        onclick="addPlayer(2, 'Mbappe', 6)"
-                    >
-                        Mbappe +6
-                    </button>
-
-                    <button
-                        class="player-option"
-                        data-name="Neymar"
-                        onclick="addPlayer(2, 'Neymar', 5)"
-                    >
-                        Neymar +5
-                    </button>
-
+                <div
+                    id="players2"
+                    class="player-options"
+                >
                 </div>
 
             </div>
@@ -373,12 +349,125 @@
 
 <script>
 
+
+/* =========================================
+   PLAYER LIST
+
+   ONLY EDIT THIS PART
+========================================= */
+
+const playerData = `
+
+Messi,1000
+Neymar,5000
+Ronaldo,30
+Mbappe,20
+Vinicius,15
+Salah,12
+Haaland,25
+Bellingham,18
+
+`;
+
+
+
+/* =========================================
+   CONVERT PLAYER LIST INTO DATA
+========================================= */
+
+const players = playerData
+    .trim()
+    .split("\n")
+    .map(line => {
+
+        const parts = line.split(",");
+
+        return {
+            name: parts[0].trim(),
+            value: Number(parts[1].trim())
+        };
+
+    });
+
+
+
+/* =========================================
+   TOTALS
+========================================= */
+
 let total1 = 0;
 let total2 = 0;
 
 
 
-/* OPEN LIST */
+/* =========================================
+   CREATE PLAYER BUTTONS
+========================================= */
+
+function createPlayerButtons(player) {
+
+    const container =
+        document.getElementById(
+            "players" + player
+        );
+
+
+    container.innerHTML = "";
+
+
+    players.forEach(function(data) {
+
+
+        const button =
+            document.createElement("button");
+
+
+        button.className =
+            "player-option";
+
+
+        button.textContent =
+            data.name +
+            " +" +
+            data.value;
+
+
+        button.dataset.name =
+            data.name.toLowerCase();
+
+
+        button.onclick =
+            function() {
+
+                addPlayer(
+                    player,
+                    data.name,
+                    data.value
+                );
+
+            };
+
+
+        container.appendChild(button);
+
+    });
+
+}
+
+
+
+/* =========================================
+   CREATE BOTH LISTS
+========================================= */
+
+createPlayerButtons(1);
+createPlayerButtons(2);
+
+
+
+/* =========================================
+   OPEN LIST
+========================================= */
 
 function openList(player) {
 
@@ -396,6 +485,7 @@ function openList(player) {
 
         list.style.display = "block";
 
+
         document.getElementById(
             "search" + player
         ).focus();
@@ -406,7 +496,9 @@ function openList(player) {
 
 
 
-/* SEARCH PLAYERS */
+/* =========================================
+   SEARCH
+========================================= */
 
 function searchPlayers(player) {
 
@@ -415,28 +507,25 @@ function searchPlayers(player) {
             "search" + player
         );
 
+
     const text =
         search.value.toLowerCase();
 
 
-    const list =
-        document.getElementById(
-            "list" + player
-        );
-
-
     const buttons =
-        list.querySelectorAll(
-            ".player-option"
-        );
+        document
+            .getElementById(
+                "players" + player
+            )
+            .querySelectorAll(
+                ".player-option"
+            );
 
 
     buttons.forEach(function(button) {
 
         const name =
-            button
-                .getAttribute("data-name")
-                .toLowerCase();
+            button.dataset.name;
 
 
         if (name.includes(text)) {
@@ -457,12 +546,15 @@ function searchPlayers(player) {
 
 
 
-/* ADD PLAYER */
+/* =========================================
+   ADD ONE PLAYER
+========================================= */
 
 function addPlayer(player, name, value) {
 
 
     if (player === 1) {
+
 
         total1 += value;
 
@@ -488,6 +580,7 @@ function addPlayer(player, name, value) {
 
 
     } else {
+
 
         total2 += value;
 
@@ -520,7 +613,9 @@ function addPlayer(player, name, value) {
 
 
 
-/* CHECK WINNER */
+/* =========================================
+   CHECK WINNER
+========================================= */
 
 function checkWinner() {
 
@@ -530,7 +625,10 @@ function checkWinner() {
         );
 
 
-    if (total1 === 0 && total2 === 0) {
+    if (
+        total1 === 0 &&
+        total2 === 0
+    ) {
 
         result.textContent =
             "Waiting for players...";
@@ -540,14 +638,14 @@ function checkWinner() {
     else if (total1 > total2) {
 
         result.textContent =
-            "You win value";
+            "🏆 Player 1 wins";
 
     }
 
     else if (total2 > total1) {
 
         result.textContent =
-            "You are losing value";
+            "🏆 Player 2 wins";
 
     }
 
@@ -562,7 +660,9 @@ function checkWinner() {
 
 
 
-/* RESET */
+/* =========================================
+   RESET
+========================================= */
 
 function resetGame() {
 
@@ -625,4 +725,5 @@ function resetGame() {
 
 
 </body>
+
 </html>
