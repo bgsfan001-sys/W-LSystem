@@ -76,6 +76,9 @@ body {
     background: #dddddd;
 }
 
+
+/* PET MENU */
+
 .pet-list {
     display: none;
     margin-top: 15px;
@@ -91,98 +94,177 @@ body {
     outline: none;
 }
 
+
+/* TWO PETS PER ROW */
+
 .player-options {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
     gap: 8px;
-    justify-content: center;
+
+    width: 100%;
 }
+
 
 .player-option {
     display: flex;
+
     align-items: center;
+
     gap: 8px;
-    min-width: 135px;
-    padding: 8px 12px;
+
+    width: 100%;
+
+    min-width: 0;
+
+    padding: 8px;
+
     border: none;
+
     border-radius: 10px;
+
     background: #eeeeee;
+
     font-size: 14px;
+
     cursor: pointer;
+
+    text-align: left;
 }
+
 
 .player-option:hover {
     background: #dddddd;
 }
 
+
 .player-image {
     width: 42px;
     height: 42px;
+
+    flex-shrink: 0;
+
     object-fit: cover;
+
     border-radius: 8px;
 }
 
+
 .player-info {
+    min-width: 0;
+
     display: flex;
+
     flex-direction: column;
+
     align-items: flex-start;
 }
 
+
 .player-name {
     font-weight: bold;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    max-width: 100%;
 }
+
 
 .player-value {
     font-size: 13px;
+
     opacity: 0.7;
 }
 
+
+/* HISTORY */
+
 .history {
     margin-top: 15px;
+
     max-height: 180px;
+
     overflow-y: auto;
+
     text-align: left;
 }
 
+
 .history-item {
     display: flex;
+
     align-items: center;
+
     gap: 8px;
+
     margin: 5px 0;
+
     padding: 8px;
+
     border-radius: 7px;
+
     background: #eeeeee;
+
     font-size: 14px;
 }
+
 
 .history-image {
     width: 30px;
     height: 30px;
+
     object-fit: cover;
+
     border-radius: 6px;
 }
 
+
+/* RESULT */
+
 .result {
     margin-top: 20px;
+
     padding: 12px;
+
     border-radius: 10px;
+
     background: #eeeeee;
+
     font-size: 20px;
+
     font-weight: bold;
 }
 
+
+/* RESET */
+
 .reset-button {
     margin-top: 15px;
+
     padding: 10px 20px;
+
     border: none;
+
     border-radius: 8px;
+
     background: #eeeeee;
+
     cursor: pointer;
 }
+
 
 .reset-button:hover {
     background: #dddddd;
 }
+
+
+/* MOBILE */
 
 @media (max-width: 550px) {
 
@@ -206,6 +288,7 @@ body {
 
 <div class="gui">
 
+
     <h2 class="title">
         W / L
     </h2>
@@ -222,6 +305,7 @@ body {
                 Player 1
             </div>
 
+
             <div
                 id="total1"
                 class="total"
@@ -229,12 +313,14 @@ body {
                 0
             </div>
 
+
             <button
                 class="add-button"
                 onclick="openPetList(1)"
             >
                 +
             </button>
+
 
             <div
                 id="petList1"
@@ -249,12 +335,14 @@ body {
                     oninput="searchPets(1)"
                 >
 
+
                 <div
                     id="players1"
                     class="player-options"
                 ></div>
 
             </div>
+
 
             <div
                 id="history1"
@@ -273,6 +361,7 @@ body {
                 Player 2
             </div>
 
+
             <div
                 id="total2"
                 class="total"
@@ -280,12 +369,14 @@ body {
                 0
             </div>
 
+
             <button
                 class="add-button"
                 onclick="openPetList(2)"
             >
                 +
             </button>
+
 
             <div
                 id="petList2"
@@ -300,12 +391,14 @@ body {
                     oninput="searchPets(2)"
                 >
 
+
                 <div
                     id="players2"
                     class="player-options"
                 ></div>
 
             </div>
+
 
             <div
                 id="history2"
@@ -315,6 +408,7 @@ body {
         </div>
 
     </div>
+
 
 
     <div
@@ -332,6 +426,7 @@ body {
         Reset
     </button>
 
+
 </div>
 
 
@@ -345,39 +440,86 @@ PET LIST
 
 FORMAT:
 
-Name,value,image
+Name,Value,Image
 
-The order below is the order shown in the GUI.
+Every Shiny uses the same image
+as its normal version.
 
-Kharvoth and Nythrael are intentionally LAST.
+The order is preserved.
 ====================================================
 */
 
 const petData = `
 
 Hellish Pumpkin,0,images/Pumpkin_V2.png
+Shiny Hellish Pumpkin,0,images/Pumpkin_V2.png
+
 Infernal Luminance,0,images/DRadiance.png
+Shiny Infernal Luminance,0,images/DRadiance.png
+
 Pyramifernal,0,images/Pyramfernal.png
+Shiny Pyramifernal,0,images/Pyramfernal.png
+
 Apocalyptic Trident,0,images/Tridente.png
+Shiny Apocalyptic Trident,0,images/Tridente.png
+
 Bloody Eye,0,images/Blood_eye.png
+Shiny Bloody Eye,0,images/Blood_eye.png
+
 Lunatic Eye,0,images/Ojo_lunatico.png
+Shiny Lunatic Eye,0,images/Ojo_lunatico.png
+
 Cursed Guardian,0,images/Demonic_Cursed.png
+Shiny Cursed Guardian,0,images/Demonic_Cursed.png
+
 Ommeviathan,0,images/Omegaa.png
+Shiny Ommeviathan,0,images/Omegaa.png
+
 Primordial Sinister,0,images/SINISTERr.png
+Shiny Primordial Sinister,0,images/SINISTERr.png
+
 Demonic Marshmellow,0,images/unnamed (6).png
+Shiny Demonic Marshmellow,0,images/unnamed (6).png
+
 Supernova,0,images/Supernova.png
+Shiny Supernova,0,images/Supernova.png
+
 Dark Radiance,0,images/Dark_Radiance.png
+Shiny Dark Radiance,0,images/Dark_Radiance.png
+
 Sinister Lord,0,images/unnamed (4).png
+Shiny Sinister Lord,0,images/unnamed (4).png
+
 Pyramighost,0,images/Pyramghost.png
+Shiny Pyramighost,0,images/Pyramghost.png
+
 Radiance,0,images/unnamed (5).png
+Shiny Radiance,0,images/unnamed (5).png
+
 Nocturnal Skull,0,images/Noctur_Skull_V2-1.png
+Shiny Nocturnal Skull,0,images/Noctur_Skull_V2-1.png
+
 Shadow Skull,0,images/Shadow_Skull_V2-1.png
+Shiny Shadow Skull,0,images/Shadow_Skull_V2-1.png
+
 Ying Yang Skull,0,images/Ying_Yang_Skull-1.png
+Shiny Ying Yang Skull,0,images/Ying_Yang_Skull-1.png
+
 Diabolical Skull,0,images/Diabolical_Skull-1.png
+Shiny Diabolical Skull,0,images/Diabolical_Skull-1.png
+
 Angelic Skull,0,images/Skull_V2-1.png
+Shiny Angelic Skull,0,images/Skull_V2-1.png
+
 Queen Skull,0,images/Queen_Skull-1.png
+Shiny Queen Skull,0,images/Queen_Skull-1.png
+
 Zombie Skull,0,images/Zombie_Skull-1.png
+Shiny Zombie Skull,0,images/Zombie_Skull-1.png
+
 Krakena,0,images/Krakena-1.png
+Shiny Krakena,0,images/Krakena-1.png
+
 Kharvoth,0,images/Kharvoth.png
 Nythrael,0,images/Nythrael.png
 
@@ -387,51 +529,73 @@ Nythrael,0,images/Nythrael.png
 
 /*
 ====================================================
-CONVERT TEXT TO PETS
+PARSE PET LIST
 ====================================================
 */
 
 const pets = [];
 
+
 petData
     .trim()
     .split(/\r?\n/)
-    .map(line => line.trim())
-    .filter(line => line.length > 0)
-    .forEach(line => {
+    .map(
+        line => line.trim()
+    )
+    .filter(
+        line => line.length > 0
+    )
+    .forEach(
+        line => {
 
-        const parts = line.split(",");
+            const parts =
+                line.split(",");
 
-        if (parts.length < 3) {
-            return;
+
+            if (
+                parts.length < 3
+            ) {
+                return;
+            }
+
+
+            const name =
+                parts[0].trim();
+
+
+            const value =
+                Number(
+                    parts[1].trim()
+                );
+
+
+            const image =
+                parts
+                    .slice(2)
+                    .join(",")
+                    .trim();
+
+
+            if (
+                name &&
+                !isNaN(value) &&
+                image
+            ) {
+
+                pets.push({
+
+                    name: name,
+
+                    value: value,
+
+                    image: image
+
+                });
+
+            }
+
         }
-
-        const name = parts[0].trim();
-
-        const value = Number(
-            parts[1].trim()
-        );
-
-        const image = parts
-            .slice(2)
-            .join(",")
-            .trim();
-
-        if (
-            name &&
-            !isNaN(value) &&
-            image
-        ) {
-
-            pets.push({
-                name: name,
-                value: value,
-                image: image
-            });
-
-        }
-
-    });
+    );
 
 
 
@@ -442,6 +606,7 @@ PLAYER VALUES
 */
 
 let total1 = 0;
+
 let total2 = 0;
 
 
@@ -459,15 +624,20 @@ function openPetList(player) {
             "petList" + player
         );
 
+
     if (
         list.style.display === "block"
     ) {
 
-        list.style.display = "none";
+        list.style.display =
+            "none";
 
-    } else {
+    }
 
-        list.style.display = "block";
+    else {
+
+        list.style.display =
+            "block";
 
         createPetButtons(player);
 
@@ -490,99 +660,139 @@ function createPetButtons(player) {
             "players" + player
         );
 
+
     container.innerHTML = "";
 
-    pets.forEach(function(pet) {
 
-        const button =
-            document.createElement(
-                "button"
+    pets.forEach(
+        function(pet) {
+
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.className =
+                "player-option";
+
+
+            button.dataset.name =
+                pet.name.toLowerCase();
+
+
+
+            const image =
+                document.createElement(
+                    "img"
+                );
+
+
+            image.className =
+                "player-image";
+
+
+            image.src =
+                pet.image;
+
+
+            image.alt =
+                pet.name;
+
+
+
+            const info =
+                document.createElement(
+                    "div"
+                );
+
+
+            info.className =
+                "player-info";
+
+
+
+            const name =
+                document.createElement(
+                    "div"
+                );
+
+
+            name.className =
+                "player-name";
+
+
+            name.textContent =
+                pet.name;
+
+
+
+            const value =
+                document.createElement(
+                    "div"
+                );
+
+
+            value.className =
+                "player-value";
+
+
+            value.textContent =
+                "+" + pet.value;
+
+
+
+            info.appendChild(
+                name
             );
 
-        button.className =
-            "player-option";
 
-        button.dataset.name =
-            pet.name.toLowerCase();
-
-
-        const image =
-            document.createElement(
-                "img"
+            info.appendChild(
+                value
             );
 
-        image.className =
-            "player-image";
 
-        image.src =
-            pet.image;
-
-        image.alt =
-            pet.name;
-
-
-        const info =
-            document.createElement(
-                "div"
+            button.appendChild(
+                image
             );
 
-        info.className =
-            "player-info";
 
-
-        const name =
-            document.createElement(
-                "div"
+            button.appendChild(
+                info
             );
 
-        name.className =
-            "player-name";
-
-        name.textContent =
-            pet.name;
 
 
-        const value =
-            document.createElement(
-                "div"
+            /*
+            Same pet can be selected
+            multiple times.
+            */
+
+            button.onclick =
+                function() {
+
+                    addPet(
+
+                        player,
+
+                        pet.name,
+
+                        pet.value,
+
+                        pet.image
+
+                    );
+
+                };
+
+
+            container.appendChild(
+                button
             );
 
-        value.className =
-            "player-value";
-
-        value.textContent =
-            "+" + pet.value;
-
-
-        info.appendChild(name);
-
-        info.appendChild(value);
-
-        button.appendChild(image);
-
-        button.appendChild(info);
-
-
-        /*
-        The same pet can be selected
-        multiple times.
-        */
-
-        button.onclick = function() {
-
-            addPet(
-                player,
-                pet.name,
-                pet.value,
-                pet.image
-            );
-
-        };
-
-
-        container.appendChild(button);
-
-    });
+        }
+    );
 
 }
 
@@ -601,6 +811,7 @@ function searchPets(player) {
             "search" + player
         );
 
+
     const text =
         search.value.toLowerCase();
 
@@ -615,18 +826,20 @@ function searchPets(player) {
             );
 
 
-    buttons.forEach(function(button) {
+    buttons.forEach(
+        function(button) {
 
-        const name =
-            button.dataset.name;
+            const name =
+                button.dataset.name;
 
 
-        button.style.display =
-            name.includes(text)
-                ? "flex"
-                : "none";
+            button.style.display =
+                name.includes(text)
+                    ? "flex"
+                    : "none";
 
-    });
+        }
+    );
 
 }
 
@@ -645,13 +858,19 @@ function addPet(
     image
 ) {
 
-    if (player === 1) {
+
+    if (
+        player === 1
+    ) {
 
         total1 += value;
 
+
         document.getElementById(
             "total1"
-        ).textContent = total1;
+        ).textContent =
+            total1;
+
 
         addHistory(
             1,
@@ -660,13 +879,18 @@ function addPet(
             image
         );
 
-    } else {
+    }
+
+    else {
 
         total2 += value;
 
+
         document.getElementById(
             "total2"
-        ).textContent = total2;
+        ).textContent =
+            total2;
+
 
         addHistory(
             2,
@@ -708,6 +932,7 @@ function addHistory(
             "div"
         );
 
+
     item.className =
         "history-item";
 
@@ -717,14 +942,18 @@ function addHistory(
             "img"
         );
 
+
     imageElement.className =
         "history-image";
+
 
     imageElement.src =
         image;
 
+
     imageElement.alt =
         name;
+
 
 
     const text =
@@ -732,13 +961,16 @@ function addHistory(
             "span"
         );
 
+
     text.textContent =
         name + " +" + value;
+
 
 
     item.appendChild(
         imageElement
     );
+
 
     item.appendChild(
         text
@@ -759,16 +991,12 @@ function addHistory(
 
 /*
 ====================================================
-TRADE CALCULATION
+TRADE RESULT
 
-Player 1 = YOU
+Player 1 = YOU.
 
 Player 1 = what you give.
 Player 2 = what you receive.
-
-P2 > P1 = W Trade
-P1 > P2 = L Trade
-P1 = P2 = Balanced Trade
 ====================================================
 */
 
@@ -793,30 +1021,38 @@ function checkTrade() {
     }
 
 
-    if (total2 > total1) {
+    if (
+        total2 > total1
+    ) {
 
         const difference =
             total2 - total1;
+
 
         result.textContent =
             "You win " +
             difference +
             " value! [W Trade]";
 
+
         return;
 
     }
 
 
-    if (total1 > total2) {
+    if (
+        total1 > total2
+    ) {
 
         const difference =
             total1 - total2;
+
 
         result.textContent =
             "You are losing " +
             difference +
             " value! [L Trade]";
+
 
         return;
 
@@ -845,22 +1081,26 @@ function resetGame() {
 
     document.getElementById(
         "total1"
-    ).textContent = "0";
+    ).textContent =
+        "0";
 
 
     document.getElementById(
         "total2"
-    ).textContent = "0";
+    ).textContent =
+        "0";
 
 
     document.getElementById(
         "history1"
-    ).innerHTML = "";
+    ).innerHTML =
+        "";
 
 
     document.getElementById(
         "history2"
-    ).innerHTML = "";
+    ).innerHTML =
+        "";
 
 
     document.getElementById(
@@ -883,12 +1123,14 @@ function resetGame() {
 
     document.getElementById(
         "search1"
-    ).value = "";
+    ).value =
+        "";
 
 
     document.getElementById(
         "search2"
-    ).value = "";
+    ).value =
+        "";
 
 }
 
