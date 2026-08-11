@@ -76,15 +76,39 @@
             margin-top: 15px;
         }
 
+        .search {
+            width: 100%;
+            padding: 10px;
+
+            margin-bottom: 10px;
+
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            outline: none;
+        }
+
+        .search:focus {
+            border-color: #999999;
+        }
+
         .player-option {
             display: block;
+
             width: 100%;
+
             margin: 6px 0;
             padding: 11px;
+
             border: none;
             border-radius: 8px;
+
             background: #eeeeee;
+
             font-size: 15px;
+
             cursor: pointer;
         }
 
@@ -130,6 +154,7 @@
         }
 
         @media (max-width: 550px) {
+
             .players {
                 flex-direction: column;
             }
@@ -137,19 +162,27 @@
             .player-box {
                 width: 100%;
             }
+
         }
     </style>
 </head>
 
+
 <body>
+
 
 <div class="gui">
 
-    <h2 class="title">W / L</h2>
+    <h2 class="title">
+        W / L
+    </h2>
+
 
     <div class="players">
 
+
         <!-- PLAYER 1 -->
+
         <div class="player-box">
 
             <div class="player-title">
@@ -160,6 +193,7 @@
                 0
             </div>
 
+
             <button
                 class="add-button"
                 onclick="openList(1)"
@@ -167,44 +201,72 @@
                 +
             </button>
 
-            <div id="list1" class="player-list">
 
-                <button
-                    class="player-option"
-                    onclick="addPlayer(1, 'Messi', 10)"
-                >
-                    Messi +10
-                </button>
+            <div
+                id="list1"
+                class="player-list"
+            >
 
-                <button
-                    class="player-option"
-                    onclick="addPlayer(1, 'Ronaldo', 8)"
+                <input
+                    id="search1"
+                    class="search"
+                    type="text"
+                    placeholder="Search player..."
+                    oninput="searchPlayers(1)"
                 >
-                    Ronaldo +8
-                </button>
 
-                <button
-                    class="player-option"
-                    onclick="addPlayer(1, 'Mbappe', 6)"
-                >
-                    Mbappe +6
-                </button>
 
-                <button
-                    class="player-option"
-                    onclick="addPlayer(1, 'Neymar', 5)"
-                >
-                    Neymar +5
-                </button>
+                <div class="player-options">
+
+                    <button
+                        class="player-option"
+                        data-name="Messi"
+                        onclick="addPlayer(1, 'Messi', 10)"
+                    >
+                        Messi +10
+                    </button>
+
+                    <button
+                        class="player-option"
+                        data-name="Ronaldo"
+                        onclick="addPlayer(1, 'Ronaldo', 40)"
+                    >
+                        Ronaldo +8
+                    </button>
+
+                    <button
+                        class="player-option"
+                        data-name="Mbappe"
+                        onclick="addPlayer(1, 'Mbappe', 6)"
+                    >
+                        Mbappe +6
+                    </button>
+
+                    <button
+                        class="player-option"
+                        data-name="Neymar"
+                        onclick="addPlayer(1, 'Neymar', 5)"
+                    >
+                        Neymar +5
+                    </button>
+
+                </div>
 
             </div>
 
-            <div id="history1" class="history"></div>
+
+            <div
+                id="history1"
+                class="history"
+            >
+            </div>
 
         </div>
 
 
+
         <!-- PLAYER 2 -->
+
         <div class="player-box">
 
             <div class="player-title">
@@ -215,6 +277,7 @@
                 0
             </div>
 
+
             <button
                 class="add-button"
                 onclick="openList(2)"
@@ -222,46 +285,76 @@
                 +
             </button>
 
-            <div id="list2" class="player-list">
 
-                <button
-                    class="player-option"
-                    onclick="addPlayer(2, 'Messi', 10)"
-                >
-                    Messi +10
-                </button>
+            <div
+                id="list2"
+                class="player-list"
+            >
 
-                <button
-                    class="player-option"
-                    onclick="addPlayer(2, 'Ronaldo', 8)"
+                <input
+                    id="search2"
+                    class="search"
+                    type="text"
+                    placeholder="Search player..."
+                    oninput="searchPlayers(2)"
                 >
-                    Ronaldo +8
-                </button>
 
-                <button
-                    class="player-option"
-                    onclick="addPlayer(2, 'Mbappe', 6)"
-                >
-                    Mbappe +6
-                </button>
 
-                <button
-                    class="player-option"
-                    onclick="addPlayer(2, 'Neymar', 5)"
-                >
-                    Neymar +5
-                </button>
+                <div class="player-options">
+
+                    <button
+                        class="player-option"
+                        data-name="Messi"
+                        onclick="addPlayer(2, 'Messi', 10)"
+                    >
+                        Messi +10
+                    </button>
+
+                    <button
+                        class="player-option"
+                        data-name="Ronaldo"
+                        onclick="addPlayer(2, 'Ronaldo', 8)"
+                    >
+                        Ronaldo +8
+                    </button>
+
+                    <button
+                        class="player-option"
+                        data-name="Mbappe"
+                        onclick="addPlayer(2, 'Mbappe', 6)"
+                    >
+                        Mbappe +6
+                    </button>
+
+                    <button
+                        class="player-option"
+                        data-name="Neymar"
+                        onclick="addPlayer(2, 'Neymar', 5)"
+                    >
+                        Neymar +5
+                    </button>
+
+                </div>
 
             </div>
 
-            <div id="history2" class="history"></div>
+
+            <div
+                id="history2"
+                class="history"
+            >
+            </div>
 
         </div>
+
 
     </div>
 
 
-    <div id="result" class="result">
+    <div
+        id="result"
+        class="result"
+    >
         Waiting for players...
     </div>
 
@@ -273,7 +366,9 @@
         Reset
     </button>
 
+
 </div>
+
 
 
 <script>
@@ -282,120 +377,252 @@ let total1 = 0;
 let total2 = 0;
 
 
+
+/* OPEN LIST */
+
 function openList(player) {
 
-    const list = document.getElementById(
-        "list" + player
-    );
+    const list =
+        document.getElementById(
+            "list" + player
+        );
+
 
     if (list.style.display === "block") {
+
         list.style.display = "none";
+
     } else {
+
         list.style.display = "block";
+
+        document.getElementById(
+            "search" + player
+        ).focus();
+
     }
+
 }
 
+
+
+/* SEARCH PLAYERS */
+
+function searchPlayers(player) {
+
+    const search =
+        document.getElementById(
+            "search" + player
+        );
+
+    const text =
+        search.value.toLowerCase();
+
+
+    const list =
+        document.getElementById(
+            "list" + player
+        );
+
+
+    const buttons =
+        list.querySelectorAll(
+            ".player-option"
+        );
+
+
+    buttons.forEach(function(button) {
+
+        const name =
+            button
+                .getAttribute("data-name")
+                .toLowerCase();
+
+
+        if (name.includes(text)) {
+
+            button.style.display =
+                "block";
+
+        } else {
+
+            button.style.display =
+                "none";
+
+        }
+
+    });
+
+}
+
+
+
+/* ADD PLAYER */
 
 function addPlayer(player, name, value) {
 
+
     if (player === 1) {
 
-        total1 = total1 + value;
+        total1 += value;
 
-        document.getElementById("total1")
-            .textContent = total1;
 
-        document.getElementById("history1")
-            .innerHTML +=
+        document.getElementById(
+            "total1"
+        ).textContent = total1;
+
+
+        document.getElementById(
+            "history1"
+        ).innerHTML +=
             '<div class="history-item">' +
             name +
             ' +' +
             value +
             '</div>';
 
-        document.getElementById("list1")
-            .style.display = "none";
+
+        document.getElementById(
+            "list1"
+        ).style.display = "none";
+
 
     } else {
 
-        total2 = total2 + value;
+        total2 += value;
 
-        document.getElementById("total2")
-            .textContent = total2;
 
-        document.getElementById("history2")
-            .innerHTML +=
+        document.getElementById(
+            "total2"
+        ).textContent = total2;
+
+
+        document.getElementById(
+            "history2"
+        ).innerHTML +=
             '<div class="history-item">' +
             name +
             ' +' +
             value +
             '</div>';
 
-        document.getElementById("list2")
-            .style.display = "none";
+
+        document.getElementById(
+            "list2"
+        ).style.display = "none";
+
     }
 
+
     checkWinner();
+
 }
 
+
+
+/* CHECK WINNER */
 
 function checkWinner() {
 
     const result =
-        document.getElementById("result");
+        document.getElementById(
+            "result"
+        );
+
 
     if (total1 === 0 && total2 === 0) {
 
         result.textContent =
             "Waiting for players...";
 
-    } else if (total1 > total2) {
+    }
+
+    else if (total1 > total2) {
 
         result.textContent =
-            "🏆 Player 1 wins";
+            "You win value";
 
-    } else if (total2 > total1) {
+    }
+
+    else if (total2 > total1) {
 
         result.textContent =
-            "🏆 Player 2 wins";
+            "You are losing value";
 
-    } else {
+    }
+
+    else {
 
         result.textContent =
             "🤝 Draw";
+
     }
+
 }
 
+
+
+/* RESET */
 
 function resetGame() {
 
     total1 = 0;
     total2 = 0;
 
-    document.getElementById("total1")
-        .textContent = "0";
 
-    document.getElementById("total2")
-        .textContent = "0";
+    document.getElementById(
+        "total1"
+    ).textContent = "0";
 
-    document.getElementById("history1")
-        .innerHTML = "";
 
-    document.getElementById("history2")
-        .innerHTML = "";
+    document.getElementById(
+        "total2"
+    ).textContent = "0";
 
-    document.getElementById("result")
-        .textContent =
-            "Waiting for players...";
 
-    document.getElementById("list1")
-        .style.display = "none";
+    document.getElementById(
+        "history1"
+    ).innerHTML = "";
 
-    document.getElementById("list2")
-        .style.display = "none";
+
+    document.getElementById(
+        "history2"
+    ).innerHTML = "";
+
+
+    document.getElementById(
+        "result"
+    ).textContent =
+        "Waiting for players...";
+
+
+    document.getElementById(
+        "list1"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "list2"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "search1"
+    ).value = "";
+
+
+    document.getElementById(
+        "search2"
+    ).value = "";
+
+
+    searchPlayers(1);
+    searchPlayers(2);
+
 }
 
 </script>
+
 
 </body>
 </html>
