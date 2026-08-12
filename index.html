@@ -76,9 +76,6 @@ body {
     background: #dddddd;
 }
 
-
-/* PET MENU */
-
 .pet-list {
     display: none;
     margin-top: 15px;
@@ -94,177 +91,115 @@ body {
     outline: none;
 }
 
-
-/* TWO PETS PER ROW */
-
 .player-options {
     display: grid;
-
     grid-template-columns: repeat(2, minmax(0, 1fr));
-
     gap: 8px;
-
     width: 100%;
 }
-
 
 .player-option {
     display: flex;
-
     align-items: center;
-
     gap: 8px;
-
     width: 100%;
-
     min-width: 0;
-
     padding: 8px;
-
     border: none;
-
     border-radius: 10px;
-
     background: #eeeeee;
-
     font-size: 14px;
-
     cursor: pointer;
-
     text-align: left;
 }
-
 
 .player-option:hover {
     background: #dddddd;
 }
 
-
 .player-image {
     width: 42px;
     height: 42px;
-
     flex-shrink: 0;
-
     object-fit: cover;
-
     border-radius: 8px;
 }
 
-
 .player-info {
     min-width: 0;
-
     display: flex;
-
     flex-direction: column;
-
     align-items: flex-start;
 }
 
-
 .player-name {
     font-weight: bold;
-
     overflow: hidden;
-
     text-overflow: ellipsis;
-
     white-space: nowrap;
-
     max-width: 100%;
 }
 
-
 .player-value {
     font-size: 13px;
-
     opacity: 0.7;
 }
 
-
-/* HISTORY */
-
 .history {
     margin-top: 15px;
-
     max-height: 180px;
-
     overflow-y: auto;
-
     text-align: left;
 }
 
-
 .history-item {
     display: flex;
-
     align-items: center;
-
     gap: 8px;
-
+    width: 100%;
     margin: 5px 0;
-
     padding: 8px;
-
+    border: none;
     border-radius: 7px;
-
     background: #eeeeee;
-
     font-size: 14px;
+    cursor: pointer;
+    text-align: left;
 }
 
+.history-item:hover {
+    background: #dddddd;
+}
 
 .history-image {
     width: 30px;
     height: 30px;
-
+    flex-shrink: 0;
     object-fit: cover;
-
     border-radius: 6px;
 }
 
-
-/* RESULT */
-
 .result {
     margin-top: 20px;
-
     padding: 12px;
-
     border-radius: 10px;
-
     background: #eeeeee;
-
     font-size: 20px;
-
     font-weight: bold;
 }
 
-
-/* RESET */
-
 .reset-button {
     margin-top: 15px;
-
     padding: 10px 20px;
-
     border: none;
-
     border-radius: 8px;
-
     background: #eeeeee;
-
     cursor: pointer;
 }
-
 
 .reset-button:hover {
     background: #dddddd;
 }
-
-
-/* MOBILE */
 
 @media (max-width: 550px) {
 
@@ -288,7 +223,6 @@ body {
 
 <div class="gui">
 
-
     <h2 class="title">
         W / L
     </h2>
@@ -305,7 +239,6 @@ body {
                 Player 1
             </div>
 
-
             <div
                 id="total1"
                 class="total"
@@ -313,14 +246,12 @@ body {
                 0
             </div>
 
-
             <button
                 class="add-button"
                 onclick="openPetList(1)"
             >
                 +
             </button>
-
 
             <div
                 id="petList1"
@@ -335,14 +266,12 @@ body {
                     oninput="searchPets(1)"
                 >
 
-
                 <div
                     id="players1"
                     class="player-options"
                 ></div>
 
             </div>
-
 
             <div
                 id="history1"
@@ -361,7 +290,6 @@ body {
                 Player 2
             </div>
 
-
             <div
                 id="total2"
                 class="total"
@@ -369,14 +297,12 @@ body {
                 0
             </div>
 
-
             <button
                 class="add-button"
                 onclick="openPetList(2)"
             >
                 +
             </button>
-
 
             <div
                 id="petList2"
@@ -391,14 +317,12 @@ body {
                     oninput="searchPets(2)"
                 >
 
-
                 <div
                     id="players2"
                     class="player-options"
                 ></div>
 
             </div>
-
 
             <div
                 id="history2"
@@ -408,7 +332,6 @@ body {
         </div>
 
     </div>
-
 
 
     <div
@@ -426,7 +349,6 @@ body {
         Reset
     </button>
 
-
 </div>
 
 
@@ -442,10 +364,25 @@ FORMAT:
 
 Name,Value,Image
 
-Every Shiny uses the same image
-as its normal version.
+Examples:
 
-The order is preserved.
+Normal pet:
+Hellish Pumpkin,3450,images/Pumpkin_V2.png
+
+Unknown value:
+Shiny Hellish Pumpkin,??,images/Pumpkin_V2.png
+
+O/C value:
+Krakena,O/C,images/Krakena-1.png
+
+Special characters such as:
+()
+??
+/
+&
+are completely supported.
+
+The order here is the order shown in the GUI.
 ====================================================
 */
 
@@ -522,6 +459,7 @@ Shiny Krakena,??,images/Krakena-1.png
 
 Kharvoth,5500,images/Kharvoth.png
 Shiny Kharvoth,??,images/Kharvoth.png
+
 Nythrael,5500,images/Nythrael.png
 Shiny Nythrael,??,images/Nythrael.png
 
@@ -531,7 +469,21 @@ Shiny Nythrael,??,images/Nythrael.png
 
 /*
 ====================================================
-PARSE PET LIST
+PARSE PET DATA
+
+Important:
+Values are stored as strings first.
+
+This means:
+3450
+4300
+??
+O/C
+
+are all accepted.
+
+Unknown values are treated as 0
+for W/L calculations.
 ====================================================
 */
 
@@ -541,71 +493,115 @@ const pets = [];
 petData
     .trim()
     .split(/\r?\n/)
-    .map(
-        line => line.trim()
-    )
-    .filter(
-        line => line.length > 0
-    )
-    .forEach(
-        line => {
+    .map(line => line.trim())
+    .filter(line => line.length > 0)
+    .forEach(line => {
 
-            const parts =
-                line.split(",");
+        /*
+        Split only the first two commas.
 
+        This makes names containing special
+        characters completely safe.
+        */
 
-            if (
-                parts.length < 3
-            ) {
-                return;
-            }
+        const firstComma =
+            line.indexOf(",");
 
-
-            const name =
-                parts[0].trim();
+        const secondComma =
+            line.indexOf(
+                ",",
+                firstComma + 1
+            );
 
 
-            const value =
-                Number(
-                    parts[1].trim()
-                );
-
-
-            const image =
-                parts
-                    .slice(2)
-                    .join(",")
-                    .trim();
-
-
-            if (
-                name &&
-                !isNaN(value) &&
-                image
-            ) {
-
-                pets.push({
-
-                    name: name,
-
-                    value: value,
-
-                    image: image
-
-                });
-
-            }
-
+        if (
+            firstComma === -1 ||
+            secondComma === -1
+        ) {
+            return;
         }
-    );
+
+
+        const name =
+            line
+                .slice(
+                    0,
+                    firstComma
+                )
+                .trim();
+
+
+        const valueText =
+            line
+                .slice(
+                    firstComma + 1,
+                    secondComma
+                )
+                .trim();
+
+
+        const image =
+            line
+                .slice(
+                    secondComma + 1
+                )
+                .trim();
+
+
+        if (
+            !name ||
+            !image
+        ) {
+            return;
+        }
+
+
+        const numericValue =
+            Number(
+                valueText
+            );
+
+
+        const value =
+            Number.isFinite(
+                numericValue
+            )
+                ? numericValue
+                : 0;
+
+
+        pets.push({
+
+            name: name,
+
+            value: value,
+
+            valueText: valueText,
+
+            image: image
+
+        });
+
+    });
 
 
 
 /*
 ====================================================
-PLAYER VALUES
+TRADE ARRAYS
+
+Each selected copy gets its own ID.
+
+This allows the same pet to be added
+multiple times and removed individually.
 ====================================================
 */
+
+const player1Pets = [];
+
+const player2Pets = [];
+
+
 
 let total1 = 0;
 
@@ -634,9 +630,7 @@ function openPetList(player) {
         list.style.display =
             "none";
 
-    }
-
-    else {
+    } else {
 
         list.style.display =
             "block";
@@ -667,8 +661,7 @@ function createPetButtons(player) {
 
 
     pets.forEach(
-        function(pet) {
-
+        function(pet, index) {
 
             const button =
                 document.createElement(
@@ -676,13 +669,35 @@ function createPetButtons(player) {
                 );
 
 
+            button.type =
+                "button";
+
+
             button.className =
                 "player-option";
 
 
+            /*
+            We use the INDEX internally.
+
+            The actual pet name is NEVER
+            used as an HTML ID.
+
+            Therefore names like:
+
+            Pet (O/C)
+            Pet ??
+            Pet / Test
+
+            work normally.
+            */
+
+            button.dataset.petIndex =
+                index;
+
+
             button.dataset.name =
                 pet.name.toLowerCase();
-
 
 
             const image =
@@ -714,7 +729,6 @@ function createPetButtons(player) {
                 "player-info";
 
 
-
             const name =
                 document.createElement(
                     "div"
@@ -729,7 +743,6 @@ function createPetButtons(player) {
                 pet.name;
 
 
-
             const value =
                 document.createElement(
                     "div"
@@ -740,9 +753,20 @@ function createPetButtons(player) {
                 "player-value";
 
 
-            value.textContent =
-                "+" + pet.value;
+            /*
+            Display the original text.
 
+            So:
+
+            ??
+            O/C
+            3450
+
+            all appear correctly.
+            */
+
+            value.textContent =
+                pet.valueText;
 
 
             info.appendChild(
@@ -765,25 +789,12 @@ function createPetButtons(player) {
             );
 
 
-
-            /*
-            Same pet can be selected
-            multiple times.
-            */
-
             button.onclick =
                 function() {
 
                     addPet(
-
                         player,
-
-                        pet.name,
-
-                        pet.value,
-
-                        pet.image
-
+                        pet
                     );
 
                 };
@@ -815,7 +826,9 @@ function searchPets(player) {
 
 
     const text =
-        search.value.toLowerCase();
+        search.value
+            .toLowerCase()
+            .trim();
 
 
     const buttons =
@@ -850,58 +863,148 @@ function searchPets(player) {
 /*
 ====================================================
 ADD PET
+
+The same pet can be added unlimited times.
 ====================================================
 */
 
 function addPet(
     player,
-    name,
-    value,
-    image
+    pet
 ) {
+
+    const tradePet = {
+
+        id:
+            Date.now() +
+            Math.random(),
+
+        name:
+            pet.name,
+
+        value:
+            pet.value,
+
+        valueText:
+            pet.valueText,
+
+        image:
+            pet.image
+
+    };
 
 
     if (
         player === 1
     ) {
 
-        total1 += value;
+        player1Pets.push(
+            tradePet
+        );
 
+    } else {
 
-        document.getElementById(
-            "total1"
-        ).textContent =
-            total1;
-
-
-        addHistory(
-            1,
-            name,
-            value,
-            image
+        player2Pets.push(
+            tradePet
         );
 
     }
 
-    else {
 
-        total2 += value;
+    updateTrade();
 
-
-        document.getElementById(
-            "total2"
-        ).textContent =
-            total2;
+}
 
 
-        addHistory(
-            2,
-            name,
-            value,
-            image
+
+/*
+====================================================
+REMOVE ONE PET
+
+Clicking a pet in the trade removes
+only that specific copy.
+====================================================
+*/
+
+function removePet(
+    player,
+    petId
+) {
+
+    const list =
+        player === 1
+            ? player1Pets
+            : player2Pets;
+
+
+    const index =
+        list.findIndex(
+            pet =>
+                pet.id === petId
+        );
+
+
+    if (
+        index !== -1
+    ) {
+
+        list.splice(
+            index,
+            1
         );
 
     }
+
+
+    updateTrade();
+
+}
+
+
+
+/*
+====================================================
+UPDATE TRADE
+====================================================
+*/
+
+function updateTrade() {
+
+
+    total1 =
+        calculateTotal(
+            player1Pets
+        );
+
+
+    total2 =
+        calculateTotal(
+            player2Pets
+        );
+
+
+    document.getElementById(
+        "total1"
+    ).textContent =
+        total1;
+
+
+    document.getElementById(
+        "total2"
+    ).textContent =
+        total2;
+
+
+    renderTradePets(
+        1,
+        player1Pets
+    );
+
+
+    renderTradePets(
+        2,
+        player2Pets
+    );
 
 
     checkTrade();
@@ -912,15 +1015,41 @@ function addPet(
 
 /*
 ====================================================
-HISTORY
+CALCULATE TOTAL
+
+Unknown values such as ?? and O/C
+count as 0 because they cannot be
+calculated yet.
 ====================================================
 */
 
-function addHistory(
+function calculateTotal(
+    list
+) {
+
+    return list.reduce(
+        function(total, pet) {
+
+            return total +
+                pet.value;
+
+        },
+        0
+    );
+
+}
+
+
+
+/*
+====================================================
+RENDER CURRENT TRADE
+====================================================
+*/
+
+function renderTradePets(
     player,
-    name,
-    value,
-    image
+    list
 ) {
 
     const history =
@@ -929,63 +1058,99 @@ function addHistory(
         );
 
 
-    const item =
-        document.createElement(
-            "div"
-        );
+    history.innerHTML = "";
 
 
-    item.className =
-        "history-item";
+    list.forEach(
+        function(pet) {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
 
 
-    const imageElement =
-        document.createElement(
-            "img"
-        );
+            button.type =
+                "button";
 
 
-    imageElement.className =
-        "history-image";
+            button.className =
+                "history-item";
 
 
-    imageElement.src =
-        image;
+            /*
+            Use the unique internal ID.
+
+            The pet name is NOT used
+            as an HTML identifier.
+            */
+
+            button.dataset.petId =
+                pet.id;
 
 
-    imageElement.alt =
-        name;
+            const image =
+                document.createElement(
+                    "img"
+                );
 
 
-
-    const text =
-        document.createElement(
-            "span"
-        );
+            image.className =
+                "history-image";
 
 
-    text.textContent =
-        name + " +" + value;
+            image.src =
+                pet.image;
 
 
+            image.alt =
+                pet.name;
 
-    item.appendChild(
-        imageElement
+
+            const text =
+                document.createElement(
+                    "span"
+                );
+
+
+            text.textContent =
+                pet.name +
+                " +" +
+                pet.valueText;
+
+
+            button.appendChild(
+                image
+            );
+
+
+            button.appendChild(
+                text
+            );
+
+
+            /*
+            Clicking this specific pet
+            removes it from the trade.
+            */
+
+            button.onclick =
+                function() {
+
+                    removePet(
+                        player,
+                        pet.id
+                    );
+
+                };
+
+
+            history.appendChild(
+                button
+            );
+
+        }
     );
-
-
-    item.appendChild(
-        text
-    );
-
-
-    history.appendChild(
-        item
-    );
-
-
-    history.scrollTop =
-        history.scrollHeight;
 
 }
 
@@ -995,10 +1160,21 @@ function addHistory(
 ====================================================
 TRADE RESULT
 
-Player 1 = YOU.
+Player 1 = YOU / what you give.
 
-Player 1 = what you give.
 Player 2 = what you receive.
+
+Player 2 > Player 1:
+You win.
+
+Player 1 > Player 2:
+You lose.
+
+Equal:
+Balanced.
+
+Unknown values are ignored
+until they have a numerical value.
 ====================================================
 */
 
@@ -1011,8 +1187,8 @@ function checkTrade() {
 
 
     if (
-        total1 === 0 &&
-        total2 === 0
+        player1Pets.length === 0 &&
+        player2Pets.length === 0
     ) {
 
         result.textContent =
@@ -1076,68 +1252,20 @@ RESET
 
 function resetGame() {
 
-    total1 = 0;
-
-    total2 = 0;
-
-
-    document.getElementById(
-        "total1"
-    ).textContent =
-        "0";
+    player1Pets.length =
+        0;
 
 
-    document.getElementById(
-        "total2"
-    ).textContent =
-        "0";
+    player2Pets.length =
+        0;
 
 
-    document.getElementById(
-        "history1"
-    ).innerHTML =
-        "";
+    total1 =
+        0;
 
 
-    document.getElementById(
-        "history2"
-    ).innerHTML =
-        "";
+    total2 =
+        0;
 
 
-    document.getElementById(
-        "result"
-    ).textContent =
-        "Waiting for players...";
-
-
-    document.getElementById(
-        "petList1"
-    ).style.display =
-        "none";
-
-
-    document.getElementById(
-        "petList2"
-    ).style.display =
-        "none";
-
-
-    document.getElementById(
-        "search1"
-    ).value =
-        "";
-
-
-    document.getElementById(
-        "search2"
-    ).value =
-        "";
-
-}
-
-</script>
-
-</body>
-
-</html>
+    docume
