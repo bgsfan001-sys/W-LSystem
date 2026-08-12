@@ -199,6 +199,43 @@ body {
 
 .reset-button:hover {
     background: #dddddd;
+
+
+/* O/C VALUE WINDOW */
+
+.value-window {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    padding: 20px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+
+.value-window h3 {
+    margin-top: 0;
+}
+
+.value-window input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.value-window button {
+    padding: 9px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 3px;
 }
 
 @media (max-width: 550px) {
@@ -353,6 +390,42 @@ body {
 
 
 
+<!-- O/C VALUE WINDOW -->
+
+<div
+    id="valueWindow"
+    class="value-window"
+>
+
+    <h3>
+        Enter Pet Value
+    </h3>
+
+    <input
+        id="customValue"
+        type="number"
+        min="0"
+        placeholder="Example: 50000"
+    >
+
+    <br>
+
+    <button
+        onclick="confirmCustomValue()"
+    >
+        Add
+    </button>
+
+    <button
+        onclick="closeValueWindow()"
+    >
+        Cancel
+    </button>
+
+</div>
+
+
+
 <script>
 
 
@@ -360,108 +433,89 @@ body {
 ====================================================
 PET LIST
 
-FORMAT:
+All Shiny pets have value 0.
 
-Name,Value,Image
-
-Examples:
-
-Normal pet:
-Hellish Pumpkin,3450,images/Pumpkin_V2.png
-
-Unknown value:
-Shiny Hellish Pumpkin,??,images/Pumpkin_V2.png
-
-O/C value:
-Krakena,O/C,images/Krakena-1.png
-
-Special characters such as:
-()
-??
-/
-&
-are completely supported.
-
-The order here is the order shown in the GUI.
+Krakena is O/C and opens a custom
+value window when selected.
 ====================================================
 */
 
 const petData = `
 
 Hellish Pumpkin,3450,images/Pumpkin_V2.png
-Shiny Hellish Pumpkin,??,images/Pumpkin_V2.png
+Shiny Hellish Pumpkin,0,images/Pumpkin_V2.png
 
 Infernal Luminance,4300,images/DRadiance.png
-Shiny Infernal Luminance,??,images/DRadiance.png
+Shiny Infernal Luminance,0,images/DRadiance.png
 
 Pyramifernal,8900,images/Pyramfernal.png
-Shiny Pyramifernal,??,images/Pyramfernal.png
+Shiny Pyramifernal,0,images/Pyramfernal.png
 
 Apocalyptic Trident,13500,images/Tridente.png
-Shiny Apocalyptic Trident,??,images/Tridente.png
+Shiny Apocalyptic Trident,0,images/Tridente.png
 
 Bloody Eye,2800,images/Blood_eye.png
-Shiny Bloody Eye,??,images/Blood_eye.png
+Shiny Bloody Eye,0,images/Blood_eye.png
 
 Lunatic Eye,3300,images/Ojo_lunatico.png
-Shiny Lunatic Eye,??,images/Ojo_lunatico.png
+Shiny Lunatic Eye,0,images/Ojo_lunatico.png
 
 Cursed Guardian,4100,images/Demonic_Cursed.png
-Shiny Cursed Guardian,??,images/Demonic_Cursed.png
+Shiny Cursed Guardian,0,images/Demonic_Cursed.png
 
 Ommeviathan,7450,images/Omegaa.png
-Shiny Ommeviathan,??,images/Omegaa.png
+Shiny Ommeviathan,0,images/Omegaa.png
 
 Primordial Sinister,12000,images/SINISTERr.png
-Shiny Primordial Sinister,??,images/SINISTERr.png
+Shiny Primordial Sinister,0,images/SINISTERr.png
 
 Demonic Marshmellow,3100,images/unnamed (6).png
-Shiny Demonic Marshmellow,??,images/unnamed (6).png
+Shiny Demonic Marshmellow,0,images/unnamed (6).png
 
 Supernova,3600,images/Supernova.png
-Shiny Supernova,??,images/Supernova.png
+Shiny Supernova,0,images/Supernova.png
 
 Dark Radiance,4300,images/Dark_Radiance.png
-Shiny Dark Radiance,??,images/Dark_Radiance.png
+Shiny Dark Radiance,0,images/Dark_Radiance.png
 
 Sinister Lord,7800,images/unnamed (4).png
-Shiny Sinister Lord,??,images/unnamed (4).png
+Shiny Sinister Lord,0,images/unnamed (4).png
 
 Pyramighost,14500,images/Pyramghost.png
-Shiny Pyramighost,??,images/Pyramghost.png
+Shiny Pyramighost,0,images/Pyramghost.png
 
 Radiance,4800,images/unnamed (5).png
-Shiny Radiance,??,images/unnamed (5).png
+Shiny Radiance,0,images/unnamed (5).png
 
 Nocturnal Skull,22500,images/Noctur_Skull_V2-1.png
-Shiny Nocturnal Skull,??,images/Noctur_Skull_V2-1.png
+Shiny Nocturnal Skull,0,images/Noctur_Skull_V2-1.png
 
 Shadow Skull,22500,images/Shadow_Skull_V2-1.png
-Shiny Shadow Skull,??,images/Shadow_Skull_V2-1.png
+Shiny Shadow Skull,0,images/Shadow_Skull_V2-1.png
 
 Ying Yang Skull,22500,images/Ying_Yang_Skull-1.png
-Shiny Ying Yang Skull,??,images/Ying_Yang_Skull-1.png
+Shiny Ying Yang Skull,0,images/Ying_Yang_Skull-1.png
 
 Diabolical Skull,22500,images/Diabolical_Skull-1.png
-Shiny Diabolical Skull,??,images/Diabolical_Skull-1.png
+Shiny Diabolical Skull,0,images/Diabolical_Skull-1.png
 
 Angelic Skull,22500,images/Skull_V2-1.png
-Shiny Angelic Skull,??,images/Skull_V2-1.png
+Shiny Angelic Skull,0,images/Skull_V2-1.png
 
 Queen Skull,22500,images/Queen_Skull-1.png
-Shiny Queen Skull,??,images/Queen_Skull-1.png
+Shiny Queen Skull,0,images/Queen_Skull-1.png
 
 Zombie Skull,22500,images/Zombie_Skull-1.png
-Shiny Zombie Skull,??,images/Zombie_Skull-1.png
+Shiny Zombie Skull,0,images/Zombie_Skull-1.png
 
 Krakena,O/C,images/Krakena-1.png
-Shiny Krakena,??,images/Krakena-1.png
+Shiny Krakena,0,images/Krakena-1.png
 
 Kharvoth,5500,images/Kharvoth.png
-Shiny Kharvoth,??,images/Kharvoth.png
+Shiny Kharvoth,0,images/Kharvoth.png
 
 Nythrael,5500,images/Nythrael.png
-Shiny Nythrael,??,images/Nythrael.png
+Shiny Nythrael,0,images/Nythrael.png
 
 `;
 
@@ -469,21 +523,7 @@ Shiny Nythrael,??,images/Nythrael.png
 
 /*
 ====================================================
-PARSE PET DATA
-
-Important:
-Values are stored as strings first.
-
-This means:
-3450
-4300
-??
-O/C
-
-are all accepted.
-
-Unknown values are treated as 0
-for W/L calculations.
+PARSE PETS
 ====================================================
 */
 
@@ -496,13 +536,6 @@ petData
     .map(line => line.trim())
     .filter(line => line.length > 0)
     .forEach(line => {
-
-        /*
-        Split only the first two commas.
-
-        This makes names containing special
-        characters completely safe.
-        */
 
         const firstComma =
             line.indexOf(",");
@@ -523,29 +556,23 @@ petData
 
 
         const name =
-            line
-                .slice(
-                    0,
-                    firstComma
-                )
-                .trim();
+            line.slice(
+                0,
+                firstComma
+            ).trim();
 
 
         const valueText =
-            line
-                .slice(
-                    firstComma + 1,
-                    secondComma
-                )
-                .trim();
+            line.slice(
+                firstComma + 1,
+                secondComma
+            ).trim();
 
 
         const image =
-            line
-                .slice(
-                    secondComma + 1
-                )
-                .trim();
+            line.slice(
+                secondComma + 1
+            ).trim();
 
 
         if (
@@ -556,25 +583,14 @@ petData
         }
 
 
-        const numericValue =
-            Number(
-                valueText
-            );
-
-
-        const value =
-            Number.isFinite(
-                numericValue
-            )
-                ? numericValue
-                : 0;
-
-
         pets.push({
 
             name: name,
 
-            value: value,
+            value:
+                valueText === "O/C"
+                    ? 0
+                    : Number(valueText),
 
             valueText: valueText,
 
@@ -589,11 +605,6 @@ petData
 /*
 ====================================================
 TRADE ARRAYS
-
-Each selected copy gets its own ID.
-
-This allows the same pet to be added
-multiple times and removed individually.
 ====================================================
 */
 
@@ -601,11 +612,19 @@ const player1Pets = [];
 
 const player2Pets = [];
 
-
-
 let total1 = 0;
 
 let total2 = 0;
+
+
+/*
+Current player waiting for
+custom O/C value.
+*/
+
+let customPlayer = null;
+
+let customPet = null;
 
 
 
@@ -672,25 +691,9 @@ function createPetButtons(player) {
             button.type =
                 "button";
 
-
             button.className =
                 "player-option";
 
-
-            /*
-            We use the INDEX internally.
-
-            The actual pet name is NEVER
-            used as an HTML ID.
-
-            Therefore names like:
-
-            Pet (O/C)
-            Pet ??
-            Pet / Test
-
-            work normally.
-            */
 
             button.dataset.petIndex =
                 index;
@@ -716,7 +719,6 @@ function createPetButtons(player) {
 
             image.alt =
                 pet.name;
-
 
 
             const info =
@@ -753,18 +755,6 @@ function createPetButtons(player) {
                 "player-value";
 
 
-            /*
-            Display the original text.
-
-            So:
-
-            ??
-            O/C
-            3450
-
-            all appear correctly.
-            */
-
             value.textContent =
                 pet.valueText;
 
@@ -792,10 +782,27 @@ function createPetButtons(player) {
             button.onclick =
                 function() {
 
-                    addPet(
-                        player,
-                        pet
-                    );
+                    /*
+                    Krakena = custom value
+                    */
+
+                    if (
+                        pet.name === "Krakena"
+                    ) {
+
+                        openValueWindow(
+                            player,
+                            pet
+                        );
+
+                    } else {
+
+                        addPet(
+                            player,
+                            pet
+                        );
+
+                    }
 
                 };
 
@@ -806,6 +813,147 @@ function createPetButtons(player) {
 
         }
     );
+
+}
+
+
+
+/*
+====================================================
+OPEN O/C WINDOW
+====================================================
+*/
+
+function openValueWindow(
+    player,
+    pet
+) {
+
+    customPlayer =
+        player;
+
+    customPet =
+        pet;
+
+
+    const windowElement =
+        document.getElementById(
+            "valueWindow"
+        );
+
+
+    const input =
+        document.getElementById(
+            "customValue"
+        );
+
+
+    input.value = "";
+
+
+    windowElement.style.display =
+        "block";
+
+
+    setTimeout(
+        function() {
+
+            input.focus();
+
+        },
+        50
+    );
+
+}
+
+
+
+/*
+====================================================
+CLOSE O/C WINDOW
+====================================================
+*/
+
+function closeValueWindow() {
+
+    document.getElementById(
+        "valueWindow"
+    ).style.display =
+        "none";
+
+
+    customPlayer =
+        null;
+
+    customPet =
+        null;
+
+}
+
+
+
+/*
+====================================================
+CONFIRM O/C VALUE
+====================================================
+*/
+
+function confirmCustomValue() {
+
+    if (
+        customPlayer === null ||
+        customPet === null
+    ) {
+        return;
+    }
+
+
+    const input =
+        document.getElementById(
+            "customValue"
+        );
+
+
+    const value =
+        Number(
+            input.value
+        );
+
+
+    if (
+        !Number.isFinite(value) ||
+        value < 0
+    ) {
+
+        return;
+
+    }
+
+
+    const customPetCopy = {
+
+        name:
+            customPet.name,
+
+        value:
+            value,
+
+        valueText:
+            value.toString(),
+
+        image:
+            customPet.image
+
+    };
+
+
+    addPet(
+        customPlayer,
+        customPetCopy
+    );
+
+
+    closeValueWindow();
 
 }
 
@@ -863,8 +1011,6 @@ function searchPets(player) {
 /*
 ====================================================
 ADD PET
-
-The same pet can be added unlimited times.
 ====================================================
 */
 
@@ -883,7 +1029,7 @@ function addPet(
             pet.name,
 
         value:
-            pet.value,
+            Number(pet.value) || 0,
 
         valueText:
             pet.valueText,
@@ -919,10 +1065,10 @@ function addPet(
 
 /*
 ====================================================
-REMOVE ONE PET
+REMOVE PET FROM TRADE
 
-Clicking a pet in the trade removes
-only that specific copy.
+Click the pet inside the trade
+to remove that exact copy.
 ====================================================
 */
 
@@ -970,7 +1116,6 @@ UPDATE TRADE
 
 function updateTrade() {
 
-
     total1 =
         calculateTotal(
             player1Pets
@@ -1016,10 +1161,6 @@ function updateTrade() {
 /*
 ====================================================
 CALCULATE TOTAL
-
-Unknown values such as ?? and O/C
-count as 0 because they cannot be
-calculated yet.
 ====================================================
 */
 
@@ -1031,7 +1172,7 @@ function calculateTotal(
         function(total, pet) {
 
             return total +
-                pet.value;
+                (Number(pet.value) || 0);
 
         },
         0
@@ -1043,7 +1184,12 @@ function calculateTotal(
 
 /*
 ====================================================
-RENDER CURRENT TRADE
+RENDER TRADE PETS
+
+These are the pets currently
+inside the trade.
+
+Clicking one removes it.
 ====================================================
 */
 
@@ -1077,13 +1223,6 @@ function renderTradePets(
             button.className =
                 "history-item";
 
-
-            /*
-            Use the unique internal ID.
-
-            The pet name is NOT used
-            as an HTML identifier.
-            */
 
             button.dataset.petId =
                 pet.id;
@@ -1129,143 +1268,8 @@ function renderTradePets(
             );
 
 
-            /*
-            Clicking this specific pet
-            removes it from the trade.
-            */
-
             button.onclick =
                 function() {
 
                     removePet(
-                        player,
-                        pet.id
-                    );
-
-                };
-
-
-            history.appendChild(
-                button
-            );
-
-        }
-    );
-
-}
-
-
-
-/*
-====================================================
-TRADE RESULT
-
-Player 1 = YOU / what you give.
-
-Player 2 = what you receive.
-
-Player 2 > Player 1:
-You win.
-
-Player 1 > Player 2:
-You lose.
-
-Equal:
-Balanced.
-
-Unknown values are ignored
-until they have a numerical value.
-====================================================
-*/
-
-function checkTrade() {
-
-    const result =
-        document.getElementById(
-            "result"
-        );
-
-
-    if (
-        player1Pets.length === 0 &&
-        player2Pets.length === 0
-    ) {
-
-        result.textContent =
-            "Waiting for players...";
-
-        return;
-
-    }
-
-
-    if (
-        total2 > total1
-    ) {
-
-        const difference =
-            total2 - total1;
-
-
-        result.textContent =
-            "You win " +
-            difference +
-            " value! [W Trade]";
-
-
-        return;
-
-    }
-
-
-    if (
-        total1 > total2
-    ) {
-
-        const difference =
-            total1 - total2;
-
-
-        result.textContent =
-            "You are losing " +
-            difference +
-            " value! [L Trade]";
-
-
-        return;
-
-    }
-
-
-    result.textContent =
-        "Balanced Trade! [B Trade]";
-
-}
-
-
-
-/*
-====================================================
-RESET
-====================================================
-*/
-
-function resetGame() {
-
-    player1Pets.length =
-        0;
-
-
-    player2Pets.length =
-        0;
-
-
-    total1 =
-        0;
-
-
-    total2 =
-        0;
-
-
-    docume
+                    
