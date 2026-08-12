@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>W/L System</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -199,47 +194,9 @@ body {
 
 .reset-button:hover {
     background: #dddddd;
-
-
-/* O/C VALUE WINDOW */
-
-.value-window {
-    display: none;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 280px;
-    padding: 20px;
-    background: white;
-    border-radius: 14px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.3);
-    z-index: 1000;
-}
-
-.value-window h3 {
-    margin-top: 0;
-}
-
-.value-window input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #cccccc;
-    border-radius: 8px;
-    font-size: 16px;
-}
-
-.value-window button {
-    padding: 9px 15px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 3px;
 }
 
 @media (max-width: 550px) {
-
     .players {
         flex-direction: column;
     }
@@ -247,16 +204,11 @@ body {
     .player-box {
         width: 100%;
     }
-
 }
-
 </style>
-
 </head>
 
-
 <body>
-
 
 <div class="gui">
 
@@ -264,9 +216,7 @@ body {
         W / L
     </h2>
 
-
     <div class="players">
-
 
         <!-- PLAYER 1 -->
 
@@ -276,10 +226,7 @@ body {
                 Player 1
             </div>
 
-            <div
-                id="total1"
-                class="total"
-            >
+            <div id="total1" class="total">
                 0
             </div>
 
@@ -290,10 +237,7 @@ body {
                 +
             </button>
 
-            <div
-                id="petList1"
-                class="pet-list"
-            >
+            <div id="petList1" class="pet-list">
 
                 <input
                     id="search1"
@@ -318,7 +262,6 @@ body {
         </div>
 
 
-
         <!-- PLAYER 2 -->
 
         <div class="player-box">
@@ -327,10 +270,7 @@ body {
                 Player 2
             </div>
 
-            <div
-                id="total2"
-                class="total"
-            >
+            <div id="total2" class="total">
                 0
             </div>
 
@@ -341,10 +281,7 @@ body {
                 +
             </button>
 
-            <div
-                id="petList2"
-                class="pet-list"
-            >
+            <div id="petList2" class="pet-list">
 
                 <input
                     id="search2"
@@ -389,146 +326,101 @@ body {
 </div>
 
 
-
-<!-- O/C VALUE WINDOW -->
-
-<div
-    id="valueWindow"
-    class="value-window"
->
-
-    <h3>
-        Enter Pet Value
-    </h3>
-
-    <input
-        id="customValue"
-        type="number"
-        min="0"
-        placeholder="Example: 50000"
-    >
-
-    <br>
-
-    <button
-        onclick="confirmCustomValue()"
-    >
-        Add
-    </button>
-
-    <button
-        onclick="closeValueWindow()"
-    >
-        Cancel
-    </button>
-
-</div>
-
-
-
 <script>
-
 
 /*
 ====================================================
-PET LIST
-
-All Shiny pets have value 0.
-
-Krakena is O/C and opens a custom
-value window when selected.
+PET DATA
 ====================================================
 */
 
 const petData = `
 
 Hellish Pumpkin,3450,images/Pumpkin_V2.png
-Shiny Hellish Pumpkin,0,images/Pumpkin_V2.png
+Shiny Hellish Pumpkin,NA,images/Pumpkin_V2.png
 
 Infernal Luminance,4300,images/DRadiance.png
-Shiny Infernal Luminance,0,images/DRadiance.png
+Shiny Infernal Luminance,NA,images/DRadiance.png
 
 Pyramifernal,8900,images/Pyramfernal.png
-Shiny Pyramifernal,0,images/Pyramfernal.png
+Shiny Pyramifernal,NA,images/Pyramfernal.png
 
 Apocalyptic Trident,13500,images/Tridente.png
-Shiny Apocalyptic Trident,0,images/Tridente.png
+Shiny Apocalyptic Trident,NA,images/Tridente.png
 
 Bloody Eye,2800,images/Blood_eye.png
-Shiny Bloody Eye,0,images/Blood_eye.png
+Shiny Bloody Eye,NA,images/Blood_eye.png
 
 Lunatic Eye,3300,images/Ojo_lunatico.png
-Shiny Lunatic Eye,0,images/Ojo_lunatico.png
+Shiny Lunatic Eye,NA,images/Ojo_lunatico.png
 
 Cursed Guardian,4100,images/Demonic_Cursed.png
-Shiny Cursed Guardian,0,images/Demonic_Cursed.png
+Shiny Cursed Guardian,NA,images/Demonic_Cursed.png
 
 Ommeviathan,7450,images/Omegaa.png
-Shiny Ommeviathan,0,images/Omegaa.png
+Shiny Ommeviathan,NA,images/Omegaa.png
 
 Primordial Sinister,12000,images/SINISTERr.png
-Shiny Primordial Sinister,0,images/SINISTERr.png
+Shiny Primordial Sinister,NA,images/SINISTERr.png
 
 Demonic Marshmellow,3100,images/unnamed (6).png
-Shiny Demonic Marshmellow,0,images/unnamed (6).png
+Shiny Demonic Marshmellow,NA,images/unnamed (6).png
 
 Supernova,3600,images/Supernova.png
-Shiny Supernova,0,images/Supernova.png
+Shiny Supernova,NA,images/Supernova.png
 
 Dark Radiance,4300,images/Dark_Radiance.png
-Shiny Dark Radiance,0,images/Dark_Radiance.png
+Shiny Dark Radiance,NA,images/Dark_Radiance.png
 
 Sinister Lord,7800,images/unnamed (4).png
-Shiny Sinister Lord,0,images/unnamed (4).png
+Shiny Sinister Lord,NA,images/unnamed (4).png
 
 Pyramighost,14500,images/Pyramghost.png
-Shiny Pyramighost,0,images/Pyramghost.png
+Shiny Pyramighost,NA,images/Pyramghost.png
 
 Radiance,4800,images/unnamed (5).png
-Shiny Radiance,0,images/unnamed (5).png
+Shiny Radiance,NA,images/unnamed (5).png
 
 Nocturnal Skull,22500,images/Noctur_Skull_V2-1.png
-Shiny Nocturnal Skull,0,images/Noctur_Skull_V2-1.png
+Shiny Nocturnal Skull,NA,images/Noctur_Skull_V2-1.png
 
 Shadow Skull,22500,images/Shadow_Skull_V2-1.png
-Shiny Shadow Skull,0,images/Shadow_Skull_V2-1.png
+Shiny Shadow Skull,NA,images/Shadow_Skull_V2-1.png
 
 Ying Yang Skull,22500,images/Ying_Yang_Skull-1.png
-Shiny Ying Yang Skull,0,images/Ying_Yang_Skull-1.png
+Shiny Ying Yang Skull,NA,images/Ying_Yang_Skull-1.png
 
 Diabolical Skull,22500,images/Diabolical_Skull-1.png
-Shiny Diabolical Skull,0,images/Diabolical_Skull-1.png
+Shiny Diabolical Skull,NA,images/Diabolical_Skull-1.png
 
 Angelic Skull,22500,images/Skull_V2-1.png
-Shiny Angelic Skull,0,images/Skull_V2-1.png
+Shiny Angelic Skull,NA,images/Skull_V2-1.png
 
 Queen Skull,22500,images/Queen_Skull-1.png
-Shiny Queen Skull,0,images/Queen_Skull-1.png
+Shiny Queen Skull,NA,images/Queen_Skull-1.png
 
 Zombie Skull,22500,images/Zombie_Skull-1.png
-Shiny Zombie Skull,0,images/Zombie_Skull-1.png
+Shiny Zombie Skull,NA,images/Zombie_Skull-1.png
 
-Krakena,O/C,images/Krakena-1.png
-Shiny Krakena,0,images/Krakena-1.png
+Krakena,34000,images/Krakena-1.png
+Shiny Krakena,NA,images/Krakena-1.png
 
 Kharvoth,5500,images/Kharvoth.png
-Shiny Kharvoth,0,images/Kharvoth.png
+Shiny Kharvoth,NA,images/Kharvoth.png
 
 Nythrael,5500,images/Nythrael.png
-Shiny Nythrael,0,images/Nythrael.png
+Shiny Nythrael,NA,images/Nythrael.png
 
 `;
 
 
-
 /*
 ====================================================
-PARSE PETS
+PARSE PET LIST
 ====================================================
 */
 
 const pets = [];
-
 
 petData
     .trim()
@@ -546,7 +438,6 @@ petData
                 firstComma + 1
             );
 
-
         if (
             firstComma === -1 ||
             secondComma === -1
@@ -554,13 +445,11 @@ petData
             return;
         }
 
-
         const name =
             line.slice(
                 0,
                 firstComma
             ).trim();
-
 
         const valueText =
             line.slice(
@@ -568,29 +457,38 @@ petData
                 secondComma
             ).trim();
 
-
         const image =
             line.slice(
                 secondComma + 1
             ).trim();
 
+        let value = 0;
+
+        /*
+        NA does NOT count as value.
+        It stays visible as NA.
+        */
 
         if (
-            !name ||
-            !image
+            valueText !== "NA"
         ) {
-            return;
-        }
 
+            const number =
+                Number(valueText);
+
+            if (
+                Number.isFinite(number)
+            ) {
+                value = number;
+            }
+
+        }
 
         pets.push({
 
             name: name,
 
-            value:
-                valueText === "O/C"
-                    ? 0
-                    : Number(valueText),
+            value: value,
 
             valueText: valueText,
 
@@ -601,10 +499,9 @@ petData
     });
 
 
-
 /*
 ====================================================
-TRADE ARRAYS
+TRADE DATA
 ====================================================
 */
 
@@ -615,17 +512,6 @@ const player2Pets = [];
 let total1 = 0;
 
 let total2 = 0;
-
-
-/*
-Current player waiting for
-custom O/C value.
-*/
-
-let customPlayer = null;
-
-let customPet = null;
-
 
 
 /*
@@ -640,7 +526,6 @@ function openPetList(player) {
         document.getElementById(
             "petList" + player
         );
-
 
     if (
         list.style.display === "block"
@@ -661,7 +546,6 @@ function openPetList(player) {
 }
 
 
-
 /*
 ====================================================
 CREATE PET BUTTONS
@@ -675,7 +559,6 @@ function createPetButtons(player) {
             "players" + player
         );
 
-
     container.innerHTML = "";
 
 
@@ -687,17 +570,14 @@ function createPetButtons(player) {
                     "button"
                 );
 
-
             button.type =
                 "button";
 
             button.className =
                 "player-option";
 
-
             button.dataset.petIndex =
                 index;
-
 
             button.dataset.name =
                 pet.name.toLowerCase();
@@ -708,14 +588,11 @@ function createPetButtons(player) {
                     "img"
                 );
 
-
             image.className =
                 "player-image";
 
-
             image.src =
                 pet.image;
-
 
             image.alt =
                 pet.name;
@@ -726,7 +603,6 @@ function createPetButtons(player) {
                     "div"
                 );
 
-
             info.className =
                 "player-info";
 
@@ -736,10 +612,8 @@ function createPetButtons(player) {
                     "div"
                 );
 
-
             name.className =
                 "player-name";
-
 
             name.textContent =
                 pet.name;
@@ -750,59 +624,27 @@ function createPetButtons(player) {
                     "div"
                 );
 
-
             value.className =
                 "player-value";
-
 
             value.textContent =
                 pet.valueText;
 
 
-            info.appendChild(
-                name
-            );
+            info.appendChild(name);
+            info.appendChild(value);
 
-
-            info.appendChild(
-                value
-            );
-
-
-            button.appendChild(
-                image
-            );
-
-
-            button.appendChild(
-                info
-            );
+            button.appendChild(image);
+            button.appendChild(info);
 
 
             button.onclick =
                 function() {
 
-                    /*
-                    Krakena = custom value
-                    */
-
-                    if (
-                        pet.name === "Krakena"
-                    ) {
-
-                        openValueWindow(
-                            player,
-                            pet
-                        );
-
-                    } else {
-
-                        addPet(
-                            player,
-                            pet
-                        );
-
-                    }
+                    addPet(
+                        player,
+                        pet
+                    );
 
                 };
 
@@ -817,148 +659,6 @@ function createPetButtons(player) {
 }
 
 
-
-/*
-====================================================
-OPEN O/C WINDOW
-====================================================
-*/
-
-function openValueWindow(
-    player,
-    pet
-) {
-
-    customPlayer =
-        player;
-
-    customPet =
-        pet;
-
-
-    const windowElement =
-        document.getElementById(
-            "valueWindow"
-        );
-
-
-    const input =
-        document.getElementById(
-            "customValue"
-        );
-
-
-    input.value = "";
-
-
-    windowElement.style.display =
-        "block";
-
-
-    setTimeout(
-        function() {
-
-            input.focus();
-
-        },
-        50
-    );
-
-}
-
-
-
-/*
-====================================================
-CLOSE O/C WINDOW
-====================================================
-*/
-
-function closeValueWindow() {
-
-    document.getElementById(
-        "valueWindow"
-    ).style.display =
-        "none";
-
-
-    customPlayer =
-        null;
-
-    customPet =
-        null;
-
-}
-
-
-
-/*
-====================================================
-CONFIRM O/C VALUE
-====================================================
-*/
-
-function confirmCustomValue() {
-
-    if (
-        customPlayer === null ||
-        customPet === null
-    ) {
-        return;
-    }
-
-
-    const input =
-        document.getElementById(
-            "customValue"
-        );
-
-
-    const value =
-        Number(
-            input.value
-        );
-
-
-    if (
-        !Number.isFinite(value) ||
-        value < 0
-    ) {
-
-        return;
-
-    }
-
-
-    const customPetCopy = {
-
-        name:
-            customPet.name,
-
-        value:
-            value,
-
-        valueText:
-            value.toString(),
-
-        image:
-            customPet.image
-
-    };
-
-
-    addPet(
-        customPlayer,
-        customPetCopy
-    );
-
-
-    closeValueWindow();
-
-}
-
-
-
 /*
 ====================================================
 SEARCH
@@ -971,7 +671,6 @@ function searchPets(player) {
         document.getElementById(
             "search" + player
         );
-
 
     const text =
         search.value
@@ -1007,17 +706,13 @@ function searchPets(player) {
 }
 
 
-
 /*
 ====================================================
 ADD PET
 ====================================================
 */
 
-function addPet(
-    player,
-    pet
-) {
+function addPet(player, pet) {
 
     const tradePet = {
 
@@ -1029,7 +724,7 @@ function addPet(
             pet.name,
 
         value:
-            Number(pet.value) || 0,
+            pet.value,
 
         valueText:
             pet.valueText,
@@ -1062,20 +757,13 @@ function addPet(
 }
 
 
-
 /*
 ====================================================
-REMOVE PET FROM TRADE
-
-Click the pet inside the trade
-to remove that exact copy.
+REMOVE PET
 ====================================================
 */
 
-function removePet(
-    player,
-    petId
-) {
+function removePet(player, petId) {
 
     const list =
         player === 1
@@ -1107,7 +795,6 @@ function removePet(
 }
 
 
-
 /*
 ====================================================
 UPDATE TRADE
@@ -1120,7 +807,6 @@ function updateTrade() {
         calculateTotal(
             player1Pets
         );
-
 
     total2 =
         calculateTotal(
@@ -1157,22 +843,19 @@ function updateTrade() {
 }
 
 
-
 /*
 ====================================================
 CALCULATE TOTAL
 ====================================================
 */
 
-function calculateTotal(
-    list
-) {
+function calculateTotal(list) {
 
     return list.reduce(
         function(total, pet) {
 
             return total +
-                (Number(pet.value) || 0);
+                pet.value;
 
         },
         0
@@ -1181,22 +864,13 @@ function calculateTotal(
 }
 
 
-
 /*
 ====================================================
-RENDER TRADE PETS
-
-These are the pets currently
-inside the trade.
-
-Clicking one removes it.
+SHOW PETS IN TRADE
 ====================================================
 */
 
-function renderTradePets(
-    player,
-    list
-) {
+function renderTradePets(player, list) {
 
     const history =
         document.getElementById(
@@ -1215,17 +889,11 @@ function renderTradePets(
                     "button"
                 );
 
-
             button.type =
                 "button";
 
-
             button.className =
                 "history-item";
-
-
-            button.dataset.petId =
-                pet.id;
 
 
             const image =
@@ -1233,14 +901,11 @@ function renderTradePets(
                     "img"
                 );
 
-
             image.className =
                 "history-image";
 
-
             image.src =
                 pet.image;
-
 
             image.alt =
                 pet.name;
@@ -1250,7 +915,6 @@ function renderTradePets(
                 document.createElement(
                     "span"
                 );
-
 
             text.textContent =
                 pet.name +
@@ -1262,14 +926,192 @@ function renderTradePets(
                 image
             );
 
-
             button.appendChild(
                 text
             );
 
 
+            /*
+            Tap pet = remove pet
+            */
+
             button.onclick =
                 function() {
 
                     removePet(
-                    
+                        player,
+                        pet.id
+                    );
+
+                };
+
+
+            history.appendChild(
+                button
+            );
+
+        }
+    );
+
+}
+
+
+/*
+====================================================
+W / L SYSTEM
+====================================================
+*/
+
+function checkTrade() {
+
+    const result =
+        document.getElementById(
+            "result"
+        );
+
+
+    if (
+        player1Pets.length === 0 &&
+        player2Pets.length === 0
+    ) {
+
+        result.textContent =
+            "Waiting for players...";
+
+        return;
+
+    }
+
+
+    /*
+    Player 2 offers more.
+    Player 1 wins.
+    */
+
+    if (
+        total2 > total1
+    ) {
+
+        const difference =
+            total2 - total1;
+
+
+        result.textContent =
+            "You win " +
+            difference +
+            " value! [W Trade]";
+
+        return;
+
+    }
+
+
+    /*
+    Player 1 offers more.
+    Player 1 loses.
+    */
+
+    if (
+        total1 > total2
+    ) {
+
+        const difference =
+            total1 - total2;
+
+
+        result.textContent =
+            "You are losing " +
+            difference +
+            " value! [L Trade]";
+
+        return;
+
+    }
+
+
+    /*
+    Equal value.
+    */
+
+    result.textContent =
+        "Balanced Trade! [B Trade]";
+
+}
+
+
+/*
+====================================================
+RESET
+====================================================
+*/
+
+function resetGame() {
+
+    player1Pets.length = 0;
+
+    player2Pets.length = 0;
+
+    total1 = 0;
+
+    total2 = 0;
+
+
+    document.getElementById(
+        "total1"
+    ).textContent =
+        "0";
+
+
+    document.getElementById(
+        "total2"
+    ).textContent =
+        "0";
+
+
+    document.getElementById(
+        "history1"
+    ).innerHTML =
+        "";
+
+
+    document.getElementById(
+        "history2"
+    ).innerHTML =
+        "";
+
+
+    document.getElementById(
+        "result"
+    ).textContent =
+        "Waiting for players...";
+
+
+    document.getElementById(
+        "petList1"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "petList2"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "search1"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "search2"
+    ).value =
+        "";
+
+}
+
+</script>
+
+</body>
+</html>
