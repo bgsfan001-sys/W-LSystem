@@ -1,1 +1,1 @@
-# W-LSystem
+# Trading thing
