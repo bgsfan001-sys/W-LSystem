@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,7 @@ body {
 
 .gui {
     width: 100%;
-    max-width: 950px;
+    max-width: 1200px;
     margin: auto;
     padding: 20px;
     background: white;
@@ -31,6 +31,52 @@ body {
 .title {
     margin-top: 0;
     margin-bottom: 20px;
+}
+
+.section-menu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.section-card {
+    border: none;
+    background: #eeeeee;
+    border-radius: 14px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.section-card:hover {
+    background: #dddddd;
+}
+
+.section-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    border-radius: 10px;
+    display: block;
+}
+
+.section-name {
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.trade-screen {
+    display: none;
+}
+
+.back-button {
+    border: none;
+    background: #eeeeee;
+    padding: 9px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 12px;
 }
 
 .players {
@@ -67,10 +113,6 @@ body {
     cursor: pointer;
 }
 
-.add-button:hover {
-    background: #dddddd;
-}
-
 .pet-list {
     display: none;
     margin-top: 15px;
@@ -88,24 +130,24 @@ body {
 
 .player-options {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 8px;
     width: 100%;
 }
 
 .player-option {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 8px;
     width: 100%;
     min-width: 0;
     padding: 8px;
     border: none;
     border-radius: 10px;
     background: #eeeeee;
-    font-size: 14px;
+    font-size: 13px;
     cursor: pointer;
-    text-align: left;
+    text-align: center;
 }
 
 .player-option:hover {
@@ -113,30 +155,29 @@ body {
 }
 
 .player-image {
-    width: 42px;
-    height: 42px;
-    flex-shrink: 0;
-    object-fit: cover;
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
     border-radius: 8px;
-}
-
-.player-info {
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    margin-bottom: 5px;
 }
 
 .player-name {
     font-weight: bold;
+    width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 100%;
 }
 
 .player-value {
-    font-size: 13px;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+.player-hatched {
+    font-size: 12px;
+    margin-top: 2px;
     opacity: 0.7;
 }
 
@@ -162,15 +203,10 @@ body {
     text-align: left;
 }
 
-.history-item:hover {
-    background: #dddddd;
-}
-
 .history-image {
     width: 30px;
     height: 30px;
-    flex-shrink: 0;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 6px;
 }
 
@@ -192,8 +228,14 @@ body {
     cursor: pointer;
 }
 
-.reset-button:hover {
-    background: #dddddd;
+@media (max-width: 800px) {
+    .section-menu {
+        grid-template-columns: 1fr;
+    }
+
+    .player-options {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 550px) {
@@ -212,505 +254,376 @@ body {
 
 <div class="gui">
 
-    <h2 class="title">
-        W / L
-    </h2>
+    <h2 class="title">W / L System</h2>
 
-    <div class="players">
+    <div id="sectionMenu" class="section-menu">
 
-        <!-- PLAYER 1 -->
+        <button class="section-card" onclick="openSection('Limited Secrets')">
+            <img class="section-image" src="images/LimitedSecrets.png">
+            <div class="section-name">Limited Secrets</div>
+        </button>
 
-        <div class="player-box">
+        <button class="section-card" onclick="openSection('Robux Pets')">
+            <img class="section-image" src="images/RobuxPets.png">
+            <div class="section-name">Robux Pets</div>
+        </button>
 
-            <div class="player-title">
-                Player 1
-            </div>
-
-            <div id="total1" class="total">
-                0
-            </div>
-
-            <button
-                class="add-button"
-                onclick="openPetList(1)"
-            >
-                +
-            </button>
-
-            <div id="petList1" class="pet-list">
-
-                <input
-                    id="search1"
-                    class="search"
-                    type="text"
-                    placeholder="Search pet..."
-                    oninput="searchPets(1)"
-                >
-
-                <div
-                    id="players1"
-                    class="player-options"
-                ></div>
-
-            </div>
-
-            <div
-                id="history1"
-                class="history"
-            ></div>
-
-        </div>
-
-
-        <!-- PLAYER 2 -->
-
-        <div class="player-box">
-
-            <div class="player-title">
-                Player 2
-            </div>
-
-            <div id="total2" class="total">
-                0
-            </div>
-
-            <button
-                class="add-button"
-                onclick="openPetList(2)"
-            >
-                +
-            </button>
-
-            <div id="petList2" class="pet-list">
-
-                <input
-                    id="search2"
-                    class="search"
-                    type="text"
-                    placeholder="Search pet..."
-                    oninput="searchPets(2)"
-                >
-
-                <div
-                    id="players2"
-                    class="player-options"
-                ></div>
-
-            </div>
-
-            <div
-                id="history2"
-                class="history"
-            ></div>
-
-        </div>
+        <button class="section-card" onclick="openSection('Perm Secrets')">
+            <img class="section-image" src="images/PermSecrets.png">
+            <div class="section-name">Perm Secrets</div>
+        </button>
 
     </div>
 
+    <div id="tradeScreen" class="trade-screen">
 
-    <div
-        id="result"
-        class="result"
-    >
-        Waiting for players...
+        <button class="back-button" onclick="goBack()">Back</button>
+
+        <h3 id="sectionTitle"></h3>
+
+        <div class="players">
+
+            <div class="player-box">
+
+                <div class="player-title">Player 1</div>
+
+                <div id="total1" class="total">0</div>
+
+                <button class="add-button" onclick="openPetList(1)">+</button>
+
+                <div id="petList1" class="pet-list">
+
+                    <input
+                        id="search1"
+                        class="search"
+                        type="text"
+                        placeholder="Search pet..."
+                        oninput="searchPets(1)"
+                    >
+
+                    <div id="players1" class="player-options"></div>
+
+                </div>
+
+                <div id="history1" class="history"></div>
+
+            </div>
+
+            <div class="player-box">
+
+                <div class="player-title">Player 2</div>
+
+                <div id="total2" class="total">0</div>
+
+                <button class="add-button" onclick="openPetList(2)">+</button>
+
+                <div id="petList2" class="pet-list">
+
+                    <input
+                        id="search2"
+                        class="search"
+                        type="text"
+                        placeholder="Search pet..."
+                        oninput="searchPets(2)"
+                    >
+
+                    <div id="players2" class="player-options"></div>
+
+                </div>
+
+                <div id="history2" class="history"></div>
+
+            </div>
+
+        </div>
+
+        <div id="result" class="result">
+            Waiting for players...
+        </div>
+
+        <button class="reset-button" onclick="resetGame()">
+            Reset
+        </button>
+
     </div>
-
-
-    <button
-        class="reset-button"
-        onclick="resetGame()"
-    >
-        Reset
-    </button>
 
 </div>
 
-
 <script>
-
-/*
-====================================================
-PET DATA
-====================================================
-*/
 
 const petData = `
 
-Electric Basilisk,3450,images/Pumpkin_V2.png
-Shiny Electric Basilisk,NA,images/Pumpkin_V2.png
+Limited Secrets
 
-Infernal Luminance,4300,images/DRadiance.png
-Shiny Infernal Luminance,NA,images/DRadiance.png
+Electric Basilisk,NA,images/Electric_Basilisk.png
+Shiny Electric Basilisk,NA,images/Electric_Basilisk.png
+Mythic Electric Basilisk,NA,images/Electric_Basilisk.png
+Shiny Mythic Electric Basilisk,NA,images/Electric_Basilisk.png
 
-Pyramifernal,8900,images/Pyramfernal.png
-Shiny Pyramifernal,NA,images/Pyramfernal.png
+Air Basilisk,NA,images/Air_Basilisk.png
+Shiny Air Basilisk,NA,images/Air_Basilisk.png
+Mythic Air Basilisk,NA,images/Air_Basilisk.png
+Shiny Mythic Air Basilisk,NA,images/Air_Basilisk.png
 
-Apocalyptic Trident,13500,images/Tridente.png
-Shiny Apocalyptic Trident,NA,images/Tridente.png
+Ice Basilisk,NA,images/Ice_Basilisk.png
+Shiny Ice Basilisk,NA,images/Ice_Basilisk.png
+Mythic Ice Basilisk,NA,images/Ice_Basilisk.png
+Shiny Mythic Ice Basilisk,NA,images/Ice_Basilisk.png
 
-Bloody Eye,2800,images/Blood_eye.png
-Shiny Bloody Eye,NA,images/Blood_eye.png
+Fire Basilisk,NA,images/Fire_Basilisk.png
+Shiny Fire Basilisk,NA,images/Fire_Basilisk.png
+Mythic Fire Basilisk,NA,images/Fire_Basilisk.png
+Shiny Mythic Fire Basilisk,NA,images/Fire_Basilisk.png
 
-Lunatic Eye,3300,images/Ojo_lunatico.png
-Shiny Lunatic Eye,NA,images/Ojo_lunatico.png
+Ultima,NA,images/Ultima.png
+Shiny Ultima,NA,images/Ultima.png
+Mythic Ultima,NA,images/Ultima.png
+Shiny Mythic Ultima,NA,images/Ultima.png
 
-Cursed Guardian,4100,images/Demonic_Cursed.png
-Shiny Cursed Guardian,NA,images/Demonic_Cursed.png
+Overlord Plushie,NA,images/Overlord_Plushie.png
+Shiny Overlord Plushie,NA,images/Overlord_Plushie.png
+Mythic Overlord Plushie,NA,images/Overlord_Plushie.png
+Shiny Mythic Overlord Plushie,NA,images/Overlord_Plushie.png
 
-Ommeviathan,7450,images/Omegaa.png
-Shiny Ommeviathan,NA,images/Omegaa.png
+Release Champion,NA,images/Release_Champion.png
+Shiny Release Champion,NA,images/Release_Champion.png
+Mythic Release Champion,NA,images/Release_Champion.png
+Shiny Mythic Release Champion,NA,images/Release_Champion.png
 
-Primordial Sinister,12000,images/SINISTERr.png
-Shiny Primordial Sinister,NA,images/SINISTERr.png
+Release Trophy 2.0,NA,images/Release_Trophy_2.png
+Shiny Release Trophy 2.0,NA,images/Release_Trophy_2.png
+Mythic Release Trophy 2.0,NA,images/Release_Trophy_2.png
+Shiny Mythic Release Trophy 2.0,NA,images/Release_Trophy_2.png
 
-Demonic Marshmellow,2900,images/unnamed (6).png
-Shiny Demonic Marshmellow,NA,images/unnamed (6).png
+Release Shard,NA,images/Release_Shard.png
+Shiny Release Shard,NA,images/Release_Shard.png
+Mythic Release Shard,NA,images/Release_Shard.png
+Shiny Mythic Release Shard,NA,images/Release_Shard.png
 
-Supernova,3600,images/Supernova.png
-Shiny Supernova,NA,images/Supernova.png
+Release Robot,NA,images/Release_Robot.png
+Shiny Release Robot,NA,images/Release_Robot.png
+Mythic Release Robot,NA,images/Release_Robot.png
+Shiny Mythic Release Robot,NA,images/Release_Robot.png
 
-Dark Radiance,4300,images/Dark_Radiance.png
+Eternal Carrot,NA,images/Eternal_Carrot.png
+Shiny Eternal Carrot,NA,images/Eternal_Carrot.png
+Mythic Eternal Carrot,NA,images/Eternal_Carrot.png
+Shiny Mythic Eternal Carrot,NA,images/Eternal_Carrot.png
+
+Patronus,NA,images/Patronus.png
+Shiny Patronus,NA,images/Patronus.png
+Mythic Patronus,NA,images/Patronus.png
+Shiny Mythic Patronus,NA,images/Patronus.png
+
+Easter Robot,NA,images/Easter_Robot.png
+Shiny Easter Robot,NA,images/Easter_Robot.png
+Mythic Easter Robot,NA,images/Easter_Robot.png
+Shiny Mythic Easter Robot,NA,images/Easter_Robot.png
+
+Dark Radiance,NA,images/Dark_Radiance.png
 Shiny Dark Radiance,NA,images/Dark_Radiance.png
+Mythic Dark Radiance,NA,images/Dark_Radiance.png
+Shiny Mythic Dark Radiance,NA,images/Dark_Radiance.png
 
-Sinister Lord,7800,images/unnamed (4).png
-Shiny Sinister Lord,NA,images/unnamed (4).png
+Demonic One,NA,images/Demonic_One.png
+Shiny Demonic One,NA,images/Demonic_One.png
+Mythic Demonic One,NA,images/Demonic_One.png
+Shiny Mythic Demonic One,NA,images/Demonic_One.png
 
-Pyramighost,14500,images/Pyramghost.png
-Shiny Pyramighost,NA,images/Pyramghost.png
+Demonic Dogcat,NA,images/Demonic_Dogcat.png
+Shiny Demonic Dogcat,NA,images/Demonic_Dogcat.png
+Mythic Demonic Dogcat,NA,images/Demonic_Dogcat.png
+Shiny Mythic Demonic Dogcat,NA,images/Demonic_Dogcat.png
 
-Radiance,4800,images/unnamed (5).png
-Shiny Radiance,NA,images/unnamed (5).png
+Leviathan,NA,images/Leviathan.png
+Shiny Leviathan,NA,images/Leviathan.png
+Mythic Leviathan,NA,images/Leviathan.png
+Shiny Mythic Leviathan,NA,images/Leviathan.png
 
-Nocturnal Skull,22500,images/Noctur_Skull_V2-1.png
-Shiny Nocturnal Skull,NA,images/Noctur_Skull_V2-1.png
+Almighty Trophy,NA,images/Almighty_Trophy.png
+Shiny Almighty Trophy,NA,images/Almighty_Trophy.png
+Mythic Almighty Trophy,NA,images/Almighty_Trophy.png
+Shiny Mythic Almighty Trophy,NA,images/Almighty_Trophy.png
 
-Shadow Skull,22500,images/Shadow_Skull_V2-1.png
-Shiny Shadow Skull,NA,images/Shadow_Skull_V2-1.png
+Eternal Cucumber,NA,images/Eternal_Cucumber.png
+Shiny Eternal Cucumber,NA,images/Eternal_Cucumber.png
+Mythic Eternal Cucumber,NA,images/Eternal_Cucumber.png
+Shiny Mythic Eternal Cucumber,NA,images/Eternal_Cucumber.png
 
-Ying Yang Skull,22500,images/Ying_Yang_Skull-1.png
-Shiny Ying Yang Skull,NA,images/Ying_Yang_Skull-1.png
-
-Diabolical Skull,22500,images/Diabolical_Skull-1.png
-Shiny Diabolical Skull,NA,images/Diabolical_Skull-1.png
-
-Angelic Skull,22500,images/Skull_V2-1.png
-Shiny Angelic Skull,NA,images/Skull_V2-1.png
-
-Queen Skull,22500,images/Queen_Skull-1.png
-Shiny Queen Skull,NA,images/Queen_Skull-1.png
-
-Zombie Skull,22500,images/Zombie_Skull-1.png
-Shiny Zombie Skull,NA,images/Zombie_Skull-1.png
-
-Krakena,34000,images/Krakena-1.png
-Shiny Krakena,NA,images/Krakena-1.png
-
-Kharvoth,11500,images/Kharvoth.png
-Shiny Kharvoth,NA,images/Kharvoth.png
-
-Nythrael,11500,images/Nythrael.png
-Shiny Nythrael,NA,images/Nythrael.png
+Dragonfruit,NA,images/Dragonfruit.png
+Shiny Dragonfruit,NA,images/Dragonfruit.png
+Mythic Dragonfruit,NA,images/Dragonfruit.png
+Shiny Mythic Dragonfruit,NA,images/Dragonfruit.png
 
 `;
 
-
-/*
-====================================================
-PARSE PET LIST
-====================================================
-*/
-
 const pets = [];
+let currentSection = "";
 
 petData
-    .trim()
-    .split(/\r?\n/)
-    .map(line => line.trim())
-    .filter(line => line.length > 0)
-    .forEach(line => {
+.trim()
+.split(/\r?\n/)
+.map(line => line.trim())
+.filter(line =>
+    line.length > 0 &&
+    line !== "Limited Secrets"
+)
+.forEach(line => {
 
-        const firstComma =
-            line.indexOf(",");
+    const parts = line.split(",");
 
-        const secondComma =
-            line.indexOf(
-                ",",
-                firstComma + 1
-            );
+    if (parts.length < 3) return;
 
-        if (
-            firstComma === -1 ||
-            secondComma === -1
-        ) {
-            return;
+    const name = parts[0].trim();
+    const valueText = parts[1].trim();
+    const image = parts.slice(2).join(",").trim();
+
+    let value = 0;
+
+    if (valueText !== "NA") {
+        const number = Number(valueText);
+
+        if (Number.isFinite(number)) {
+            value = number;
         }
+    }
 
-        const name =
-            line.slice(
-                0,
-                firstComma
-            ).trim();
-
-        const valueText =
-            line.slice(
-                firstComma + 1,
-                secondComma
-            ).trim();
-
-        const image =
-            line.slice(
-                secondComma + 1
-            ).trim();
-
-        let value = 0;
-
-        /*
-        NA does NOT count as value.
-        It stays visible as NA.
-        */
-
-        if (
-            valueText !== "NA"
-        ) {
-
-            const number =
-                Number(valueText);
-
-            if (
-                Number.isFinite(number)
-            ) {
-                value = number;
-            }
-
-        }
-
-        pets.push({
-
-            name: name,
-
-            value: value,
-
-            valueText: valueText,
-
-            image: image
-
-        });
-
+    pets.push({
+        name: name,
+        value: value,
+        valueText: valueText,
+        image: image,
+        hatched: 0,
+        section: "Limited Secrets"
     });
-
-
-/*
-====================================================
-TRADE DATA
-====================================================
-*/
+});
 
 const player1Pets = [];
-
 const player2Pets = [];
 
 let total1 = 0;
-
 let total2 = 0;
 
+function openSection(section) {
 
-/*
-====================================================
-OPEN PET LIST
-====================================================
-*/
+    currentSection = section;
+
+    document.getElementById("sectionMenu").style.display = "none";
+    document.getElementById("tradeScreen").style.display = "block";
+    document.getElementById("sectionTitle").textContent = section;
+
+    createPetButtons(1);
+    createPetButtons(2);
+}
+
+function goBack() {
+
+    document.getElementById("tradeScreen").style.display = "none";
+    document.getElementById("sectionMenu").style.display = "grid";
+
+    document.getElementById("petList1").style.display = "none";
+    document.getElementById("petList2").style.display = "none";
+}
 
 function openPetList(player) {
 
     const list =
-        document.getElementById(
-            "petList" + player
-        );
+        document.getElementById("petList" + player);
 
-    if (
-        list.style.display === "block"
-    ) {
+    if (list.style.display === "block") {
 
-        list.style.display =
-            "none";
+        list.style.display = "none";
 
     } else {
 
-        list.style.display =
-            "block";
-
+        list.style.display = "block";
         createPetButtons(player);
 
     }
-
 }
-
-
-/*
-====================================================
-CREATE PET BUTTONS
-====================================================
-*/
 
 function createPetButtons(player) {
 
     const container =
-        document.getElementById(
-            "players" + player
-        );
+        document.getElementById("players" + player);
 
     container.innerHTML = "";
 
+    pets
+    .filter(pet => pet.section === currentSection)
+    .forEach(pet => {
 
-    pets.forEach(
-        function(pet, index) {
+        const button =
+            document.createElement("button");
 
-            const button =
-                document.createElement(
-                    "button"
-                );
+        button.type = "button";
+        button.className = "player-option";
 
-            button.type =
-                "button";
+        button.dataset.name =
+            pet.name.toLowerCase();
 
-            button.className =
-                "player-option";
+        const image =
+            document.createElement("img");
 
-            button.dataset.petIndex =
-                index;
+        image.className = "player-image";
+        image.src = pet.image;
+        image.alt = pet.name;
 
-            button.dataset.name =
-                pet.name.toLowerCase();
+        const name =
+            document.createElement("div");
 
+        name.className = "player-name";
+        name.textContent = pet.name;
 
-            const image =
-                document.createElement(
-                    "img"
-                );
+        const value =
+            document.createElement("div");
 
-            image.className =
-                "player-image";
+        value.className = "player-value";
+        value.textContent =
+            "Value: " + pet.valueText;
 
-            image.src =
-                pet.image;
+        const hatched =
+            document.createElement("div");
 
-            image.alt =
-                pet.name;
+        hatched.className = "player-hatched";
+        hatched.textContent =
+            "Hatched: " + pet.hatched;
 
+        button.appendChild(image);
+        button.appendChild(name);
+        button.appendChild(value);
+        button.appendChild(hatched);
 
-            const info =
-                document.createElement(
-                    "div"
-                );
+        button.onclick = function() {
+            addPet(player, pet);
+        };
 
-            info.className =
-                "player-info";
-
-
-            const name =
-                document.createElement(
-                    "div"
-                );
-
-            name.className =
-                "player-name";
-
-            name.textContent =
-                pet.name;
-
-
-            const value =
-                document.createElement(
-                    "div"
-                );
-
-            value.className =
-                "player-value";
-
-            value.textContent =
-                pet.valueText;
-
-
-            info.appendChild(name);
-            info.appendChild(value);
-
-            button.appendChild(image);
-            button.appendChild(info);
-
-
-            button.onclick =
-                function() {
-
-                    addPet(
-                        player,
-                        pet
-                    );
-
-                };
-
-
-            container.appendChild(
-                button
-            );
-
-        }
-    );
-
+        container.appendChild(button);
+    });
 }
-
-
-/*
-====================================================
-SEARCH
-====================================================
-*/
 
 function searchPets(player) {
 
     const search =
-        document.getElementById(
-            "search" + player
-        );
+        document.getElementById("search" + player);
 
     const text =
-        search.value
-            .toLowerCase()
-            .trim();
-
+        search.value.toLowerCase().trim();
 
     const buttons =
         document
-            .getElementById(
-                "players" + player
-            )
-            .querySelectorAll(
-                ".player-option"
-            );
+        .getElementById("players" + player)
+        .querySelectorAll(".player-option");
 
+    buttons.forEach(button => {
 
-    buttons.forEach(
-        function(button) {
+        button.style.display =
+            button.dataset.name.includes(text)
+            ? "flex"
+            : "none";
 
-            const name =
-                button.dataset.name;
-
-
-            button.style.display =
-                name.includes(text)
-                    ? "flex"
-                    : "none";
-
-        }
-    );
-
+    });
 }
-
-
-/*
-====================================================
-ADD PET
-====================================================
-*/
 
 function addPet(player, pet) {
 
@@ -731,244 +644,101 @@ function addPet(player, pet) {
 
         image:
             pet.image
-
     };
 
-
-    if (
-        player === 1
-    ) {
-
-        player1Pets.push(
-            tradePet
-        );
-
+    if (player === 1) {
+        player1Pets.push(tradePet);
     } else {
-
-        player2Pets.push(
-            tradePet
-        );
-
+        player2Pets.push(tradePet);
     }
 
-
     updateTrade();
-
 }
-
-
-/*
-====================================================
-REMOVE PET
-====================================================
-*/
 
 function removePet(player, petId) {
 
     const list =
         player === 1
-            ? player1Pets
-            : player2Pets;
-
+        ? player1Pets
+        : player2Pets;
 
     const index =
         list.findIndex(
-            pet =>
-                pet.id === petId
+            pet => pet.id === petId
         );
 
-
-    if (
-        index !== -1
-    ) {
-
-        list.splice(
-            index,
-            1
-        );
-
+    if (index !== -1) {
+        list.splice(index, 1);
     }
 
-
     updateTrade();
-
 }
-
-
-/*
-====================================================
-UPDATE TRADE
-====================================================
-*/
 
 function updateTrade() {
 
-    total1 =
-        calculateTotal(
-            player1Pets
-        );
+    total1 = calculateTotal(player1Pets);
+    total2 = calculateTotal(player2Pets);
 
-    total2 =
-        calculateTotal(
-            player2Pets
-        );
+    document.getElementById("total1").textContent = total1;
+    document.getElementById("total2").textContent = total2;
 
-
-    document.getElementById(
-        "total1"
-    ).textContent =
-        total1;
-
-
-    document.getElementById(
-        "total2"
-    ).textContent =
-        total2;
-
-
-    renderTradePets(
-        1,
-        player1Pets
-    );
-
-
-    renderTradePets(
-        2,
-        player2Pets
-    );
-
+    renderTradePets(1, player1Pets);
+    renderTradePets(2, player2Pets);
 
     checkTrade();
-
 }
-
-
-/*
-====================================================
-CALCULATE TOTAL
-====================================================
-*/
 
 function calculateTotal(list) {
 
     return list.reduce(
-        function(total, pet) {
-
-            return total +
-                pet.value;
-
-        },
+        (total, pet) => total + pet.value,
         0
     );
-
 }
-
-
-/*
-====================================================
-SHOW PETS IN TRADE
-====================================================
-*/
 
 function renderTradePets(player, list) {
 
     const history =
-        document.getElementById(
-            "history" + player
-        );
-
+        document.getElementById("history" + player);
 
     history.innerHTML = "";
 
+    list.forEach(pet => {
 
-    list.forEach(
-        function(pet) {
+        const button =
+            document.createElement("button");
 
-            const button =
-                document.createElement(
-                    "button"
-                );
+        button.type = "button";
+        button.className = "history-item";
 
-            button.type =
-                "button";
+        const image =
+            document.createElement("img");
 
-            button.className =
-                "history-item";
+        image.className = "history-image";
+        image.src = pet.image;
+        image.alt = pet.name;
 
+        const text =
+            document.createElement("span");
 
-            const image =
-                document.createElement(
-                    "img"
-                );
+        text.textContent =
+            pet.name + " +" + pet.valueText;
 
-            image.className =
-                "history-image";
+        button.appendChild(image);
+        button.appendChild(text);
 
-            image.src =
-                pet.image;
+        button.onclick = function() {
+            removePet(player, pet.id);
+        };
 
-            image.alt =
-                pet.name;
-
-
-            const text =
-                document.createElement(
-                    "span"
-                );
-
-            text.textContent =
-                pet.name +
-                " +" +
-                pet.valueText;
-
-
-            button.appendChild(
-                image
-            );
-
-            button.appendChild(
-                text
-            );
-
-
-            /*
-            Tap pet = remove pet
-            */
-
-            button.onclick =
-                function() {
-
-                    removePet(
-                        player,
-                        pet.id
-                    );
-
-                };
-
-
-            history.appendChild(
-                button
-            );
-
-        }
-    );
-
+        history.appendChild(button);
+    });
 }
-
-
-/*
-====================================================
-W / L SYSTEM
-====================================================
-*/
 
 function checkTrade() {
 
     const result =
-        document.getElementById(
-            "result"
-        );
-
+        document.getElementById("result");
 
     if (
         player1Pets.length === 0 &&
@@ -979,136 +749,54 @@ function checkTrade() {
             "Waiting for players...";
 
         return;
-
     }
 
-
-    /*
-    Player 2 offers more.
-    Player 1 wins.
-    */
-
-    if (
-        total2 > total1
-    ) {
-
-        const difference =
-            total2 - total1;
-
+    if (total2 > total1) {
 
         result.textContent =
             "You win " +
-            difference +
+            (total2 - total1) +
             " value! [W Trade]";
 
         return;
-
     }
 
-
-    /*
-    Player 1 offers more.
-    Player 1 loses.
-    */
-
-    if (
-        total1 > total2
-    ) {
-
-        const difference =
-            total1 - total2;
-
+    if (total1 > total2) {
 
         result.textContent =
             "You are losing " +
-            difference +
+            (total1 - total2) +
             " value! [L Trade]";
 
         return;
-
     }
-
-
-    /*
-    Equal value.
-    */
 
     result.textContent =
         "Balanced Trade! [B Trade]";
-
 }
-
-
-/*
-====================================================
-RESET
-====================================================
-*/
 
 function resetGame() {
 
     player1Pets.length = 0;
-
     player2Pets.length = 0;
 
     total1 = 0;
-
     total2 = 0;
 
+    document.getElementById("total1").textContent = "0";
+    document.getElementById("total2").textContent = "0";
 
-    document.getElementById(
-        "total1"
-    ).textContent =
-        "0";
+    document.getElementById("history1").innerHTML = "";
+    document.getElementById("history2").innerHTML = "";
 
-
-    document.getElementById(
-        "total2"
-    ).textContent =
-        "0";
-
-
-    document.getElementById(
-        "history1"
-    ).innerHTML =
-        "";
-
-
-    document.getElementById(
-        "history2"
-    ).innerHTML =
-        "";
-
-
-    document.getElementById(
-        "result"
-    ).textContent =
+    document.getElementById("result").textContent =
         "Waiting for players...";
 
+    document.getElementById("petList1").style.display = "none";
+    document.getElementById("petList2").style.display = "none";
 
-    document.getElementById(
-        "petList1"
-    ).style.display =
-        "none";
-
-
-    document.getElementById(
-        "petList2"
-    ).style.display =
-        "none";
-
-
-    document.getElementById(
-        "search1"
-    ).value =
-        "";
-
-
-    document.getElementById(
-        "search2"
-    ).value =
-        "";
-
+    document.getElementById("search1").value = "";
+    document.getElementById("search2").value = "";
 }
 
 </script>
